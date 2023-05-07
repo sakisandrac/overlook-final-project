@@ -51,6 +51,46 @@ nav {
 
 /* MAIN */
 
+main {
+  padding: 50px;
+}
+
 h1 {
   text-align: center;
+}
+
+.bookings-display {
+  margin-bottom: 40px;
+}
+
+.card {
+  border: 2px solid black;
+  height: 350px;
+  width: 300px;
+}
+
+.card-img {
+  width: 300px;
+  height: 200;
+}
+
+.card-text-wrapper {
+  padding: 10px;
+}
+
+.card-past {
+  display: flex;
+  border: 2px solid black;
+  height: 200px;
+  width: 300px;
+  padding: 10px;
+}
+
+.card-past-img {
+  height: 200px;
+  width: 150px;
+}
+
+.card-past-text-wrapper {
+  padding: 5px;
 }
