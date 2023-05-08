@@ -49,14 +49,23 @@ nav {
   padding: 15px;
 }
 
-/* MAIN */
+label:hover {
+  cursor: pointer;
+}
+
+/* DASHBOARD VIEW */
 
 main {
-  padding: 50px;
+  padding: 10px 50px;
 }
 
 h1 {
   text-align: center;
+  font-size: 1.75rem;
+}
+
+h2 {
+  font-size: 1.3rem;
 }
 
 .bookings-display {
@@ -93,4 +102,26 @@ h1 {
 
 .card-past-text-wrapper {
   padding: 5px;
+}
+
+.hidden {
+  display: none;
+}
+
+/* BOOKINGS VIEW */
+
+#searchDates {
+  border-radius: 20px;
+  height: 20px;
+  width: 150px;
+}
+
+#searchBtn {
+  border-radius: 20px;
+}
+
+/* BOOKINGS PAGE */
+
+.card-booking-text {
+  margin: 5px;
 }

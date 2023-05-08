@@ -14,11 +14,11 @@
     <div class="nav-flexbox">
       <div class="icon-flexbox">
         <img class= "icon" src="./images/home.png" alt="icon to view bookings">
-        <label for="my bookings">My Bookings</label>
+        <label for="my bookings" id="dashboardNav">My Dashboard</label>
       </div>
       <div class="icon-flexbox">
         <img class= "icon" src="./images/search.png" alt="icon to search bookings">
-        <label for="new booking">New Booking</label>
+        <label for="new booking" id="newBooking">New Booking</label>
       </div>
       <div class="icon-flexbox">
         <img class= "icon" src="./images/heart-logo.png" alt="icon to view finances">
@@ -31,32 +31,40 @@
     </div>
   </nav>
   <main>
-    <h1>Welcome to your Dashboard!</h1>
-    <section class="bookings-display">
-      <h2>Current Bookings</h2>
-      <article class="card">
-        <img src="./images/room1.jpg" class="card-img">
-        <div class="card-text-wrapper">
-          <p class="card-text">Room</p>
-          <p class="card-text">Cost</p>
-          <p class="card-text">Dates</p>
-        </div>
-      </article>
-    </section>  
-    <section class="bookings-display">
-      <h2>Past Bookings</h2>
-      <article class="card-past">
-        <img src="./images/room1.jpg" class="card-past-img">
-        <div class="card-past-text-wrapper">
-          <p>Dates</p>
-          <p>Cost</p>
-        </div>
-      </article>
+    <section id="dashboardView">
+      <h1>Welcome to your Dashboard!</h1>
+      <section class="bookings-display">
+        <h2>Current Bookings</h2>
+        <article class="card">
+          <img src="./images/room1.jpg" class="card-img">
+          <div class="card-text-wrapper">
+            <p class="card-text">Room</p>
+            <p class="card-text">Cost</p>
+            <p class="card-text">Dates</p>
+          </div>
+        </article>
+      </section>
+      <section class="bookings-display">
+        <h2>Past Bookings</h2>
+        <article class="card-past">
+          <img src="./images/room1.jpg" class="card-past-img">
+          <div class="card-past-text-wrapper">
+            <p>Dates</p>
+            <p>Cost</p>
+          </div>
+        </article>
+      </section>
+    </section>
+    <section id="newBookingsView" class="hidden">
+      <h1>Book A New Room</h1>
+      <label for="date input">Search Dates : </label>
+      <input type="date" placeholder="search for dates" id="searchDates">
+      <button id="searchBtn">Submit</button>
+      <section id="results">
+        <!-- results will go here -->
+      </section>
     </section>
   </main>
-  
-  <!-- Do not include the scripts.js or class files here - it is done by the webpack server -->
   <script src="bundle.js"></script>
-
 </body>
 </html>
