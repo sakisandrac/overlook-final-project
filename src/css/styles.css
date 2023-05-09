@@ -76,11 +76,12 @@ h2 {
   border: 2px solid black;
   height: 350px;
   width: 300px;
+  margin: 20px;
 }
 
 .card-img {
   width: 300px;
-  height: 200;
+  height: 200px;
 }
 
 .card-text-wrapper {
@@ -93,6 +94,7 @@ h2 {
   height: 200px;
   width: 300px;
   padding: 10px;
+  margin: 20px;
 }
 
 .card-past-img {
@@ -122,6 +124,16 @@ h2 {
 
 /* BOOKINGS PAGE */
 
+#results {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
 .card-booking-text {
   margin: 5px;
+}
+
+button:hover {
+  cursor: pointer;
 }
