@@ -33,16 +33,6 @@ const getRooms = () => {
   .catch(err => console.log(err));
 }
 
-
-const getCustomers = () => {
-  fetch('http://localhost:3001/api/v1/customers')
-  .then(res => res.json())
-  .then(data => {
-    console.log(data);
-  })
-  .catch(err => console.log(err));
-}
-
 // DOM
 const newBookingNav = document.querySelector('#newBooking');
 const dashboardNav = document.querySelector('#dashboardNav');
@@ -51,9 +41,11 @@ const newBookingsView = document.querySelector('#newBookingsView');
 const searchDates = document.querySelector('#searchDates');
 const searchBtn =  document.querySelector('#searchBtn');
 const results = document.querySelector('#results');
+const resultsMsg = document.querySelector('#resultsMsg');
 
 // EVENT HANDLERS
 const newBooking = () => {
+  clearView(results);
   toggleHidden('add', [dashboardView]);
   toggleHidden('remove', [newBookingsView]);
 }
@@ -68,12 +60,11 @@ const searchBookings = () => {
   if(date) {
     getBookings(date);
   } else {
-    results.innerHTML = `<h2>Please select a date to search!</h2>`
+    results.innerHTML = `<h2>Enter a valid date!</h2>`
   }
 }
 
 const matchRooms = (bookedRooms) => {
-  // let availableRooms = []
   let availableRooms = getRooms().then((res) => {
     bookedRooms.forEach((booking) => {
       for (let i=0; i< res.rooms.length; i++) {
@@ -82,41 +73,47 @@ const matchRooms = (bookedRooms) => {
         }
       }
     })
-    //DELETE BELOW
-    // res.rooms.forEach((room) => {
-    //   availableRooms.push(room)
-    // })
-    // console.log('available here', availableRooms)
-    // let newRooms = [...availableRooms]
-    // console.log('new', newRooms)
-    // return newRooms
     return res.rooms;
   })
-  // console.log('here in matchRooms', availableRooms)
   console.log(availableRooms)
   return availableRooms;
-  // return availableRooms
 }
 
+const renderCards = (bookings) => {
+  bookings.forEach((booking) => {
+    // resultsMsg.innerText = `There are ${bookings.length} rooms available:`
+    results.innerHTML += `<article class="card">
+    <img src="./images/${booking.roomType}.jpg" class="card-img">
+    <div class="card-text-wrapper">
+      <p class="card-booking-text">Room Number: ${booking.number}</p>
+      <p class="card-booking-text">Cost: $${booking.costPerNight}</p>
+      <p class="card-booking-text">Room Type: ${booking.roomType}</p>
+      <p class="card-booking-text">Beds: ${booking.numBeds} ${booking.bedSize} sized bed</p>
+      <button class="bookBtn">Book Now!</button>
+    </div>
+  </article>` 
+  })
+}
+const searchResultsMsg = (results) => {
+  if (results.length > 0){
+    return `There are ${results.length} rooms available:`
+  } else {
+    return 'We are so sorry! There are no rooms avaiable for this date, please select a different date.'
+  }
+} 
+
 const renderBookings = (dates) => {
-    results.innerHTML = '';
+    clearView(results);
     console.log('dates in renderBookings', dates)
     matchRooms(dates).then((res) => {
-      console.log('in renderBookings - avail rooms', res)
-      res.forEach((booking) => {
-
-        results.innerHTML += `<article class="card">
-        <img src="./images/${booking.roomType}.jpg" class="card-img">
-        <div class="card-text-wrapper">
-          <p class="card-booking-text">Room Number: ${booking.number}</p>
-          <p class="card-booking-text">Cost: $${booking.costPerNight
-          }</p>
-          <p class="card-booking-text">Room Type: ${booking.roomType}</p>
-          <p class="card-booking-text">Beds: ${booking.numBeds} ${booking.bedSize} sized bed</p>
-        </div>
-      </article>` 
-      })
-      
+      resultsMsg.innerText = searchResultsMsg(res)
+      renderCards(res);
+      // if (res.length > 0){
+      // console.log('in renderBookings - avail rooms', res)
+      // renderCards(res);
+      // } else {
+      //   resultsMsg.innerText = 'We are so sorry! There are no rooms avaiable for this date, please select a different date.'
+      // }
     })
 }
 
@@ -126,8 +123,14 @@ dashboardNav.addEventListener('click', toDashboard);
 searchBtn.addEventListener('click', searchBookings)
 
 //FUNCTIONS
-const toggleHidden= (type, views) => {
+const toggleHidden = (type, views) => {
   views.forEach((view) => {
-    view.classList[type]('hidden')
+    view.classList[type]('hidden');
   })
 }
+
+const clearView = (view) => {
+  view.innerHTML = '';
+}
+
+export { searchBookings }
