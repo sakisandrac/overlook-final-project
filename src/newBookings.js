@@ -19,6 +19,7 @@ const getBookings = (searchDate) => {
   return fetch('http://localhost:3001/api/v1/bookings')
   .then(res => res.json())
   .then(data => {
+    console.log(data)
     return filterBookings(data, searchDate)
   })
   .catch(err => console.log(err));
@@ -62,4 +63,4 @@ const searchResultsMsg = (results) => {
   }
 } 
 
-export {matchRooms, getBookings, searchResultsMsg, getRooms}
+export {matchRooms, getBookings, searchResultsMsg, getRooms, filterBookings}
