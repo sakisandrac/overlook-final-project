@@ -9,13 +9,17 @@ import './images/residential suite.jpg';
 import './images/junior suite.jpg';
 
 // FUNCTIONS
+const filterBookings = (data, searchDate) => {
+    return data.bookings.filter((booking) => {
+      return booking.date === searchDate;
+    })
+}
+
 const getBookings = (searchDate) => {
   return fetch('http://localhost:3001/api/v1/bookings')
   .then(res => res.json())
   .then(data => {
-    return data.bookings.filter((booking) => {
-      return booking.date === searchDate;
-    })
+    return filterBookings(data, searchDate)
   })
   .catch(err => console.log(err));
 }
