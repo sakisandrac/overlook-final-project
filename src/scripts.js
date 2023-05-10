@@ -1,37 +1,6 @@
 // IMPORT
 import './css/styles.css';
-import './images/user.png';
-import './images/home.png';
-import './images/heart-logo.png';
-import './images/search.png';
-import './images/single room.jpg';
-import './images/suite.jpg';
-import './images/residential suite.jpg';
-import './images/junior suite.jpg';
-
-const getBookings = (searchDate) => {
-  fetch('http://localhost:3001/api/v1/bookings')
-  .then(res => res.json())
-  .then(data => {
-    let dates = data.bookings.filter((booking) => {
-      return booking.date === searchDate;
-    })
-    renderBookings(dates);
-  })
-  .catch(err => console.log(err));
-}
-
-// getBookings('2022/02/20');
-
-const getRooms = () => {
-  return fetch('http://localhost:3001/api/v1/rooms')
-  .then(res => res.json())
-  .then(data => {
-    console.log('all rooms in getRooms', data)
-    return data;
-  })
-  .catch(err => console.log(err));
-}
+import {matchRooms, searchResultsMsg, getBookings, getRooms} from './newBookings'
 
 // DOM
 const newBookingNav = document.querySelector('#newBooking');
@@ -55,33 +24,36 @@ const toDashboard = () => {
   toggleHidden('add', [newBookingsView]);
 }
 
-const searchBookings = () => {
-  let date = searchDates.value.replaceAll('-', '/');
-  if(date) {
-    getBookings(date);
-  } else {
-    results.innerHTML = `<h2>Enter a valid date!</h2>`
-  }
+// DOM FUNCTIONS
+const clearView = (view) => {
+  view.innerHTML = '';
 }
 
-const matchRooms = (bookedRooms) => {
-  let availableRooms = getRooms().then((res) => {
-    bookedRooms.forEach((booking) => {
-      for (let i=0; i< res.rooms.length; i++) {
-        if (booking.roomNumber === res.rooms[i].number){
-          res.rooms.splice(i, 1)
-        }
-      }
-    })
-    return res.rooms;
+const toggleHidden = (type, views) => {
+  views.forEach((view) => {
+    view.classList[type]('hidden');
   })
-  console.log(availableRooms)
-  return availableRooms;
+}
+
+const displayResultsText = (text) => {
+  resultsMsg.innerText = text
+}
+
+const renderBookings = (dates) => {
+  clearView(results);
+  console.log('dates in renderBookings', dates)
+  getRooms().then((allRooms) => {
+    matchRooms(dates, allRooms).then((res) => {
+      let resultsMsg = searchResultsMsg(res)
+      displayResultsText(resultsMsg)
+      renderCards(res);
+    })
+  })
+
 }
 
 const renderCards = (bookings) => {
   bookings.forEach((booking) => {
-    // resultsMsg.innerText = `There are ${bookings.length} rooms available:`
     results.innerHTML += `<article class="card">
     <img src="./images/${booking.roomType}.jpg" class="card-img">
     <div class="card-text-wrapper">
@@ -94,43 +66,26 @@ const renderCards = (bookings) => {
   </article>` 
   })
 }
-const searchResultsMsg = (results) => {
-  if (results.length > 0){
-    return `There are ${results.length} rooms available:`
-  } else {
-    return 'We are so sorry! There are no rooms avaiable for this date, please select a different date.'
-  }
-} 
 
-const renderBookings = (dates) => {
-    clearView(results);
-    console.log('dates in renderBookings', dates)
-    matchRooms(dates).then((res) => {
-      resultsMsg.innerText = searchResultsMsg(res)
-      renderCards(res);
-      // if (res.length > 0){
-      // console.log('in renderBookings - avail rooms', res)
-      // renderCards(res);
-      // } else {
-      //   resultsMsg.innerText = 'We are so sorry! There are no rooms avaiable for this date, please select a different date.'
-      // }
+const searchBookings = () => {
+  let date = searchDates.value.replaceAll('-', '/');
+  if(date) {
+    getBookings(date).then((data) => {
+    renderBookings(data);
     })
+  } else {
+    displayResultsText(searchResultsMsg())
+  }
 }
 
 // EVENT LISTENERS
 newBookingNav.addEventListener('click', newBooking);
 dashboardNav.addEventListener('click', toDashboard);
-searchBtn.addEventListener('click', searchBookings)
+searchBtn.addEventListener('click', searchBookings);
 
-//FUNCTIONS
-const toggleHidden = (type, views) => {
-  views.forEach((view) => {
-    view.classList[type]('hidden');
-  })
-}
+export {clearView, displayResultsText}
 
-const clearView = (view) => {
-  view.innerHTML = '';
-}
 
-export { searchBookings }
+
+
+
