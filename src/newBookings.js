@@ -19,13 +19,10 @@ const getBookings = (searchDate) => {
   return fetch('http://localhost:3001/api/v1/bookings')
   .then(res => res.json())
   .then(data => {
-    console.log(data)
     return filterBookings(data, searchDate)
   })
   .catch(err => console.log(err));
 }
-
-// // getBookings('2022/02/20');
 
 const getRooms = () => {
   return fetch('http://localhost:3001/api/v1/rooms')
@@ -37,21 +34,46 @@ const getRooms = () => {
   .catch(err => console.log(err));
 }
 
+const getAvailableRooms = (bookedRooms, data) =>{
+  bookedRooms.forEach((booking) => {
+    for (let i=0; i< data.rooms.length; i++) {
+      if (booking.roomNumber === data.rooms[i].number){
+        data.rooms.splice(i, 1)
+      }
+    }
+  })
+  return data.rooms;
+}
 
 const matchRooms = (bookedRooms) => {
-  let availableRooms = getRooms().then((res) => {
-    bookedRooms.forEach((booking) => {
-      for (let i=0; i< res.rooms.length; i++) {
-        if (booking.roomNumber === res.rooms[i].number){
-          res.rooms.splice(i, 1)
-        }
-      }
-    })
-    return res.rooms;
+  let availableRooms = getRooms().then((data) => {
+    // bookedRooms.forEach((booking) => {
+    //   for (let i=0; i< data.rooms.length; i++) {
+    //     if (booking.roomNumber === data.rooms[i].number){
+    //       data.rooms.splice(i, 1)
+    //     }
+    //   }
+    // })
+    // return data.rooms;
+    return getAvailableRooms(bookedRooms, data)
   })
-  console.log(availableRooms)
   return availableRooms;
 }
+
+// const getAvailableRooms = (bookedRooms, data) =>{
+//   bookedRooms.forEach((booking) => {
+//     return data.rooms.filter((room) => {
+//       return booking.roomNumber === room.number
+//     })
+//     // for (let i=0; i< data.rooms.length; i++) {
+//     //   if (booking.roomNumber === data.rooms[i].number){
+//     //     data.rooms.splice(i, 1)
+//     //   }
+//     // }
+//   })
+//   // return data.rooms;
+// }
+
 
 const searchResultsMsg = (results) => {
   if(!results) {
@@ -63,4 +85,4 @@ const searchResultsMsg = (results) => {
   }
 } 
 
-export {matchRooms, getBookings, searchResultsMsg, getRooms, filterBookings}
+export {matchRooms, getBookings, searchResultsMsg, getRooms, filterBookings, getAvailableRooms}

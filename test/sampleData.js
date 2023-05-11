@@ -15,12 +15,13 @@ const bookingData = {
 { 
   date: "2023/03/22",
   id: "1gvvbn0i7k55hl6hh",
-  roomNumber: 10,
+  roomNumber: 5,
   userID: 6
 }]
 }
 
-const roomData = [
+const roomData = {
+  rooms: [
 { 
   number: 1, 
   roomType: 'residential suite', 
@@ -54,42 +55,8 @@ const roomData = [
   bidet: true, 
   bedSize: 'queen', 
   numBeds: 2
-},
-{
-  number: 6,
-  roomType: 'junior suite',
-  bidet: true,
-  bedSize: 'queen',
-  numBeds: 1
-},
-{
-  number: 7, 
-  roomType: 'single room', 
-  bidet: false, 
-  bedSize: 'queen', 
-  numBeds: 2
-},
-{
-  number: 8, 
-  roomType: 'junior suite', 
-  bidet: false, 
-  bedSize: 'king', 
-  numBeds: 1
-},
-{
-  number: 9, 
-  roomType: 'single room', 
-  bidet: true, 
-  bedSize: 'queen', 
-  numBeds: 1
-},
-{
-  number: 10, 
-  roomType: 'suite', 
-  bidet: false, 
-  bedSize: 'twin', 
-  numBeds: 1
 }
-]
+  ]
+}
 
 export {bookingData, roomData}
