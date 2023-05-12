@@ -45,35 +45,27 @@ const getAvailableRooms = (bookedRooms, data) =>{
   return data.rooms;
 }
 
-const matchRooms = (bookedRooms) => {
-  let availableRooms = getRooms().then((data) => {
-    // bookedRooms.forEach((booking) => {
-    //   for (let i=0; i< data.rooms.length; i++) {
-    //     if (booking.roomNumber === data.rooms[i].number){
-    //       data.rooms.splice(i, 1)
-    //     }
-    //   }
-    // })
-    // return data.rooms;
-    return getAvailableRooms(bookedRooms, data)
-  })
-  return availableRooms;
-}
 
 // const getAvailableRooms = (bookedRooms, data) =>{
-//   bookedRooms.forEach((booking) => {
-//     return data.rooms.filter((room) => {
-//       return booking.roomNumber === room.number
+//     const rooms = []
+//     for (let booking of bookedRooms) {
+//     let bookings = data.rooms.filter((room) => {
+//       return booking.roomNumber !== room.number
 //     })
-//     // for (let i=0; i< data.rooms.length; i++) {
-//     //   if (booking.roomNumber === data.rooms[i].number){
-//     //     data.rooms.splice(i, 1)
-//     //   }
-//     // }
-//   })
-//   // return data.rooms;
+//     bookings.forEach((booking) => {
+//       rooms.push(booking)
+//     })
+//     console.log(bookings)
+//     return rooms
+//   }
 // }
 
+
+const matchRooms = (bookedRooms) => {
+  return getRooms().then((data) => {
+    return getAvailableRooms(bookedRooms, data)
+  })
+}
 
 const searchResultsMsg = (results) => {
   if(!results) {
