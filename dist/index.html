@@ -32,16 +32,18 @@
   </nav>
   <main>
     <section id="dashboardView">
+      <img src="./images/page-logo.png" id="pageLogo">
       <section id="logInView">
+        <h1 id="loginMsg">Please Log In To Continue</h1>
           <form>
-            <label for="log-in">Please Log-In:</label>
-            <input type="text" id="usernameInput" placeholder="enter username"></input>
-            <input type="password" id="passwordInput"  placeholder="enter password">
+            <input class="login-input" type="text" id="usernameInput" placeholder="enter username"></input>
+            <input class="login-input" type="password" id="passwordInput"  placeholder="enter password">
+            <button id="loginBtn">Submit</button>
           </form>
       </section>
-      <h1>Welcome to your Dashboard!</h1>
+      <h1 id="welcomeMsg" class="hidden">Welcome to your Dashboard!</h1>
       <h2 id="totalSpent"></h2>
-      <section class="bookings-display">
+      <section class="bookings-display hidden">
         <h2>Current Bookings</h2>
         <article class="card">
           <img src="./images/single room.jpg" class="card-img">
@@ -52,7 +54,7 @@
           </div>
         </article>
       </section>
-      <section class="bookings-display">
+      <section class="bookings-display hidden">
         <h2>Past Bookings</h2>
         <article class="card-past">
           <img src="./images/single room.jpg" class="card-past-img">

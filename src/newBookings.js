@@ -1,37 +1,12 @@
-// IMPORT
-import './images/user.png';
-import './images/home.png';
-import './images/heart-logo.png';
-import './images/search.png';
-import './images/single room.jpg';
-import './images/suite.jpg';
-import './images/residential suite.jpg';
-import './images/junior suite.jpg';
+import { getRooms } from "./apiCalls"
 
-// FUNCTIONS
 const filterBookings = (data, searchDate) => {
-    return data.bookings.filter((booking) => {
+  console.log('add', data.bookings, searchDate)
+    let dah = data.bookings.filter((booking) => {
       return booking.date === searchDate;
     })
-}
-
-const getBookings = (searchDate) => {
-  return fetch('http://localhost:3001/api/v1/bookings')
-  .then(res => res.json())
-  .then(data => {
-    return filterBookings(data, searchDate)
-  })
-  .catch(err => console.log(err));
-}
-
-const getRooms = () => {
-  return fetch('http://localhost:3001/api/v1/rooms')
-  .then(res => res.json())
-  .then(data => {
-    console.log('all rooms in getRooms', data)
-    return data;
-  })
-  .catch(err => console.log(err));
+    console.log('in filter', dah)
+    return dah
 }
 
 const getAvailableRooms = (bookedRooms, data) =>{
@@ -46,37 +21,13 @@ const getAvailableRooms = (bookedRooms, data) =>{
   return data.rooms;
 }
 
-
-// const getAvailableRooms = (bookedRooms, data) =>{
-//   console.log('data in getavailrooms', data)
-//     for (let booking of bookedRooms) {
-//     let bookings = data.rooms.filter((room) => {
-//       return booking.roomNumber !== room.number
-//     })
-//     console.log('bookings in getavail', bookings)
-//     return bookings
-//   }
-// }
-
-// const getAvailableRooms = (bookedRooms, data) =>{
-//   return data.rooms.filter((room) => {
-//     for (let booking of bookedRooms) {
-//       if (booking.roomNumber !== room.number) {
-//         return true
-//       }
-//     }
-//   })
-// }
-
-
 const matchRooms = (bookedRooms) => {
   return getRooms().then((data) => {
-
-    let book=  getAvailableRooms(bookedRooms, data)
+    let book =  getAvailableRooms(bookedRooms, data)
     console.log('book', book)
     return book
   })
-}
+};
 
 const searchResultsMsg = (results) => {
   if(!results) {
@@ -88,4 +39,4 @@ const searchResultsMsg = (results) => {
   }
 } 
 
-export {matchRooms, getBookings, searchResultsMsg, getRooms, filterBookings, getAvailableRooms}
+export {matchRooms, searchResultsMsg, filterBookings, getAvailableRooms}
