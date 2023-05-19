@@ -17,7 +17,20 @@ const bookingData = {
   id: "1gvvbn0i7k55hl6hh",
   roomNumber: 5,
   userID: 6
-}]
+},
+{ 
+  date: "2023/03/22",
+  id: "1gvv0i7k55hl6b89h",
+  roomNumber: 4,
+  userID: 6
+},
+{ 
+  date: "2023/03/22",
+  id: "1gvyhg767k55hl6hh",
+  roomNumber: 3,
+  userID: 6
+}
+]
 }
 
 const roomData = {
@@ -51,6 +64,27 @@ const roomData = {
 },
 {
   number: 5, 
+  roomType: 'single room', 
+  bidet: true, 
+  bedSize: 'queen', 
+  numBeds: 2
+},
+{
+  number: 6, 
+  roomType: 'single room', 
+  bidet: true, 
+  bedSize: 'queen', 
+  numBeds: 2
+},
+{
+  number: 7, 
+  roomType: 'single room', 
+  bidet: true, 
+  bedSize: 'queen', 
+  numBeds: 2
+},
+{
+  number: 8, 
   roomType: 'single room', 
   bidet: true, 
   bedSize: 'queen', 

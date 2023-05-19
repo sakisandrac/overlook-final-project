@@ -68,6 +68,11 @@ h2 {
   font-size: 1.3rem;
 }
 
+#logInView {
+  display: flex;
+  justify-content: center;
+}
+
 .bookings-display {
   margin-bottom: 40px;
 }

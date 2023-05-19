@@ -42,28 +42,39 @@ const getAvailableRooms = (bookedRooms, data) =>{
       }
     }
   })
+  console.log('splice data', data.rooms)
   return data.rooms;
 }
 
 
 // const getAvailableRooms = (bookedRooms, data) =>{
-//     const rooms = []
+//   console.log('data in getavailrooms', data)
 //     for (let booking of bookedRooms) {
 //     let bookings = data.rooms.filter((room) => {
 //       return booking.roomNumber !== room.number
 //     })
-//     bookings.forEach((booking) => {
-//       rooms.push(booking)
-//     })
-//     console.log(bookings)
-//     return rooms
+//     console.log('bookings in getavail', bookings)
+//     return bookings
 //   }
+// }
+
+// const getAvailableRooms = (bookedRooms, data) =>{
+//   return data.rooms.filter((room) => {
+//     for (let booking of bookedRooms) {
+//       if (booking.roomNumber !== room.number) {
+//         return true
+//       }
+//     }
+//   })
 // }
 
 
 const matchRooms = (bookedRooms) => {
   return getRooms().then((data) => {
-    return getAvailableRooms(bookedRooms, data)
+
+    let book=  getAvailableRooms(bookedRooms, data)
+    console.log('book', book)
+    return book
   })
 }
 

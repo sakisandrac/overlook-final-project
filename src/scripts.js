@@ -41,15 +41,14 @@ const displayResultsText = (text) => {
 
 const renderBookings = (dates) => {
   clearView(results);
-  console.log('dates in renderBookings', dates)
+  // console.log('dates in renderBookings', dates)
   getRooms().then((allRooms) => {
     matchRooms(dates, allRooms).then((res) => {
-      let resultsMsg = searchResultsMsg(res)
-      displayResultsText(resultsMsg)
+      console.log('this is the data', res)
+      displayResultsText(searchResultsMsg(res))
       renderCards(res);
     })
   })
-
 }
 
 const renderCards = (bookings) => {
@@ -71,6 +70,7 @@ const searchBookings = () => {
   let date = searchDates.value.replaceAll('-', '/');
   if(date) {
     getBookings(date).then((data) => {
+      // console.log('getbookingsdata', data)
     renderBookings(data);
     })
   } else {
