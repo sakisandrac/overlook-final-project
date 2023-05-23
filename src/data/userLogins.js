@@ -1,5 +1,8 @@
 const userLogins = {
-  customer50: 'overlook2021',
+  customer50: {
+    username: 'customer50',
+    password: 'overlook2021',
+  },
 }
 
 export { userLogins }
