@@ -1,12 +1,7 @@
-import { getRooms } from "./apiCalls"
-
 const filterBookings = (data, searchDate) => {
-  console.log('add', data.bookings, searchDate)
-    let dah = data.bookings.filter((booking) => {
+  return data.bookings.filter((booking) => {
       return booking.date === searchDate;
     })
-    console.log('in filter', dah)
-    return dah
 }
 
 const getAvailableRooms = (bookedRooms, data) =>{
@@ -21,14 +16,6 @@ const getAvailableRooms = (bookedRooms, data) =>{
   return data.rooms;
 }
 
-const matchRooms = (bookedRooms) => {
-  return getRooms().then((data) => {
-    let book =  getAvailableRooms(bookedRooms, data)
-    console.log('book', book)
-    return book
-  })
-};
-
 const searchResultsMsg = (results) => {
   if(!results) {
     return 'Enter a valid date!'
@@ -39,4 +26,4 @@ const searchResultsMsg = (results) => {
   }
 } 
 
-export {matchRooms, searchResultsMsg, filterBookings, getAvailableRooms}
+export { searchResultsMsg, filterBookings, getAvailableRooms}

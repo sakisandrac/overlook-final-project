@@ -15,19 +15,49 @@ const bookingData = {
 { 
   date: "2023/03/22",
   id: "1gvvbn0i7k55hl6hh",
-  roomNumber: 5,
+  roomNumber: 1,
   userID: 6
 },
 { 
   date: "2023/03/22",
   id: "1gvv0i7k55hl6b89h",
-  roomNumber: 4,
+  roomNumber: 2,
   userID: 6
 },
 { 
   date: "2023/03/22",
   id: "1gvyhg767k55hl6hh",
   roomNumber: 3,
+  userID: 6
+},
+{ 
+  date: "2023/03/22",
+  id: "1gvyhg767k55hl6hh",
+  roomNumber: 4,
+  userID: 6
+},
+{ 
+  date: "2023/03/22",
+  id: "1gvyhg767k55hl6hh",
+  roomNumber: 5,
+  userID: 6
+},
+{ 
+  date: "2023/03/22",
+  id: "1gvyhg767k55hl6hh",
+  roomNumber: 6,
+  userID: 6
+},
+{ 
+  date: "2023/03/22",
+  id: "1gvyhg767k55hl6hh",
+  roomNumber: 7,
+  userID: 6
+},
+{ 
+  date: "2023/03/22",
+  id: "1gvyhg767k55hl6hh",
+  roomNumber: 8,
   userID: 6
 }
 ]

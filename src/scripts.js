@@ -26,17 +26,18 @@ const logInView = document.querySelector('#logInView');
 const usernameInput = document.querySelector('#usernameInput');
 const passwordInput = document.querySelector('#passwordInput');
 const loginMsg = document.querySelector('#loginMsg');
+const userMsg = document.querySelector('#userMsg');
 
 // GLOBAL VARIABLES
 let currentUser;
-let bookings;
+let allBookings;
 let allRooms;
 
 const start = () => {
   Promise.all([getBookings(), getRooms()])
   .then((data) => {
     console.log(data)
-    bookings = data[0]
+    allBookings = data[0]
     allRooms = data[1]
   })
 }
@@ -45,16 +46,19 @@ window.addEventListener('load', start)
 // EVENT LISTENERS
 newBookingNav.addEventListener('click', newBooking);
 dashboardNav.addEventListener('click', toDashboard);
-searchBtn.addEventListener('click', searchBookings);
+searchBtn.addEventListener('click', () => {
+  searchBookings(allBookings, allRooms)
+});
 loginBtn.addEventListener('click', (e) => {
-  loginHandler(e, )
+  loginHandler(e, currentUser)
 })
 
 getCustomerInfo(50).then((data)=>{
-  console.log(data)
+  currentUser = data
+  console.log(data.name)
 })
 
-export { clearView, displayResultsText, dashboardView, newBookingsView, searchDates,results, resultsMsg, logInView, usernameInput, passwordInput, loginMsg }
+export { clearView, displayResultsText, dashboardView, newBookingsView, searchDates,results, resultsMsg, logInView, usernameInput, passwordInput, loginMsg, allBookings, userMsg, }
 
 
 
