@@ -11,7 +11,7 @@
 </head>
 <body>
   <nav>
-    <div class="nav-flexbox">
+    <div id="navBox" class="nav-flexbox hidden">
       <div class="icon-flexbox">
         <img class= "icon" src="./images/home.png" alt="icon to view bookings">
         <label for="my bookings" id="dashboardNav">My Dashboard</label>
@@ -20,10 +20,10 @@
         <img class= "icon" src="./images/search.png" alt="icon to search bookings">
         <label for="new booking" id="newBooking">New Booking</label>
       </div>
-      <div class="icon-flexbox">
+      <!-- <div class="icon-flexbox hidden">
         <img class= "icon" src="./images/heart-logo.png" alt="icon to view finances">
         <label for="Financial">Financial</label>
-      </div>
+      </div> -->
     </div>
     <div class="user-flexbox">
       <img src="./images/user.png" alt="user icon" class= "userLogo">
@@ -43,29 +43,19 @@
       </section>
     </div>
     <section id="dashboardView" class="hidden">
-      <h1 id="welcomeMsg" class="">Welcome to your Dashboard!</h1>
+      <h1 id="welcomeMsg">Welcome to your Dashboard!</h1>
       <h2 id="totalSpent"></h2>
+      <h2>Current Bookings</h2>
         <section class="bookings-display">
-          <h2>Current Bookings</h2>
-          <article class="card">
-            <img src="./images/single room.jpg" class="card-img">
-            <div class="card-text-wrapper">
-              <p class="card-text">Room</p>
-              <p class="card-text">Cost</p>
-              <p class="card-text">Dates</p>
-            </div>
-          </article>
+          <section id="currentBookingsContainer" class="card-container">
+            <!-- CURRENT BOOKINGS WILL GO HERE -->
+          </section>
         </section>
+      <h2>Past Bookings</h2>
       <section class="bookings-display">
-        <h2>Past Bookings</h2>
-        <article class="card-past">
-          <img src="./images/single room.jpg" class="card-past-img">
-          <div class="card-past-text-wrapper">
-            <p>Dates</p>
-            <p>Cost</p>
-          </div>
-        </article>
-      </section>
+        <section id="pastBookingsContainer" class="scroll"></section>
+          <!-- PAST BOOKINGS WILL GO HERE -->
+        </section>
     </section>
     <section id="newBookingsView" class="hidden">
       <h1>Book A New Room</h1>
@@ -73,7 +63,7 @@
         <input type="date" placeholder="search for dates" id="searchDates">
         <button id="searchBtn">Submit</button>
       <h2 id="resultsMsg">Please select a date to search</h2>
-      <section id="results">
+      <section id="results" class="card-container">
         <!-- results will go here -->
       </section>
     </section>

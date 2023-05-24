@@ -27,6 +27,9 @@ const usernameInput = document.querySelector('#usernameInput');
 const passwordInput = document.querySelector('#passwordInput');
 const loginMsg = document.querySelector('#loginMsg');
 const userMsg = document.querySelector('#userMsg');
+const currentBookingsContainer = document.querySelector('#currentBookingsContainer');
+const navBox = document.querySelector("#navBox");
+const pastBookingsContainer = document.querySelector('#pastBookingsContainer');
 
 // GLOBAL VARIABLES
 let currentUser;
@@ -50,7 +53,7 @@ searchBtn.addEventListener('click', () => {
   searchBookings(allBookings, allRooms)
 });
 loginBtn.addEventListener('click', (e) => {
-  loginHandler(e, currentUser)
+  loginHandler(e, currentUser, allBookings, allRooms)
 })
 
 getCustomerInfo(50).then((data)=>{
@@ -58,7 +61,7 @@ getCustomerInfo(50).then((data)=>{
   console.log(data.name)
 })
 
-export { clearView, displayResultsText, dashboardView, newBookingsView, searchDates,results, resultsMsg, logInView, usernameInput, passwordInput, loginMsg, allBookings, userMsg, }
+export { clearView, displayResultsText, dashboardView, newBookingsView, searchDates,results, resultsMsg, logInView, usernameInput, passwordInput, loginMsg, allBookings, userMsg, currentBookingsContainer, navBox, pastBookingsContainer}
 
 
 
