@@ -6,7 +6,7 @@ body {
   background-color: #f8f2e9;
   margin: 0;
   height: 100%;
-  font-family: 'Inter', sans-serif;
+  font-family: 'Raleway', sans-serif;
 }
 
 nav {
@@ -33,7 +33,12 @@ nav {
   justify-content: flex-start;
   align-items: center;
   padding: 5px;
-  /* border: 2px solid red; */
+}
+
+.icon-background {
+  background-color: #f5cac3;
+  border-radius: 50%;
+  margin: 10px;
 }
 
 .icon {
@@ -52,16 +57,22 @@ nav {
   justify-content: flex-start;
   align-items: flex-end;
   padding: 15px;
+  margin: 10px;
 }
 
-label:hover {
+.nav-text:hover {
   cursor: pointer;
 }
 
-/* LOGIN VIDEO */
+/* LOGIN PAGE */
+
+#logInView {
+  height: 600px;
+}
+
 #pageLogo {
   height: 300px;
-  margin: 50px;
+  margin: 0 50px;
 }
 
 .login {
@@ -80,6 +91,7 @@ label:hover {
 
 #loginMsg {
   margin-top: 0;
+  font-size: 1.75rem;
 }
 
 form {
@@ -106,7 +118,7 @@ main {
 
 h1 {
   text-align: center;
-  font-size: 1.75rem;
+  font-size: 2rem;
 }
 
 h2 {

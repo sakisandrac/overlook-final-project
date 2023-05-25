@@ -45,7 +45,7 @@ const loginSuccess = (loginResults, currentUser) => {
     toggleHidden('add', [logInView]);
     toggleHidden('remove', [dashboardView, navBox]);
     console.log('login', currentUser)
-    userMsg.innerHTML = `${currentUser.name} - Logout`
+    userMsg.innerHTML = `${currentUser.name}`
     } else {
       checkPassowrdMsg(loginResults);
   }
