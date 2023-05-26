@@ -1,7 +1,12 @@
 import { searchResultsMsg, getAvailableRooms, filterBookings,  } from './newBookings'
 import {matchUserBookedRooms} from './user-bookings'
-import {dashboardView, newBookingsView, searchDates,results, resultsMsg, logInView, usernameInput, passwordInput, loginMsg, userMsg, currentBookingsContainer, navBox, pastBookingsContainer} from './scripts'
+import {dashboardView, newBookingsView, searchDates,results, resultsMsg, logInView, usernameInput, passwordInput, loginMsg, userMsg, currentBookingsContainer, navBox, pastBookingsContainer, totalSpent} from './scripts';
 import { checkCredentials } from './login';
+import { calculateSpending } from './calculations';
+
+// GLOBAL VARIABLES
+let userBookings;
+// do i add this to user data?
 
 // EVENT HANDLERS
 const newBooking = () => {
@@ -44,7 +49,6 @@ const loginSuccess = (loginResults, currentUser) => {
   if(loginResults !== 'Username not found' && loginResults !== undefined) {
     toggleHidden('add', [logInView]);
     toggleHidden('remove', [dashboardView, navBox]);
-    console.log('login', currentUser)
     userMsg.innerHTML = `${currentUser.name}`
     } else {
       checkPassowrdMsg(loginResults);
@@ -52,9 +56,9 @@ const loginSuccess = (loginResults, currentUser) => {
 }
 
 const renderUserBookings = (currentUser, allBookings, allRooms) => {
-  let bookings = matchUserBookedRooms(currentUser, allBookings, allRooms)
+  userBookings = matchUserBookedRooms(currentUser, allBookings, allRooms)
   //sort bookings by date?
-  bookings.forEach((booking) => {
+  userBookings.forEach((booking) => {
     pastBookingsContainer.innerHTML += `<article class="card">
     <img src="./images/${booking.room.roomType}.jpg" class="card-img">
     <div class="card-text-wrapper">
@@ -74,7 +78,8 @@ const loginHandler = (e, currentUser, allBookings, allRooms) => {
     loginMsg.innerHTML = 'Enter a Username and Password';
   } else {
     loginSuccess(loginResults, currentUser);
-    renderUserBookings(currentUser, allBookings, allRooms)
+    renderUserBookings(currentUser, allBookings, allRooms);
+    totalSpent.innerHTML = `Total Spent on Bookings: $${calculateSpending(userBookings)}`;
   }
 }
 // DOM FUNCTIONS

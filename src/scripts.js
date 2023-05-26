@@ -30,6 +30,7 @@ const userMsg = document.querySelector('#userMsg');
 const currentBookingsContainer = document.querySelector('#currentBookingsContainer');
 const navBox = document.querySelector("#navBox");
 const pastBookingsContainer = document.querySelector('#pastBookingsContainer');
+const totalSpent = document.querySelector('#totalSpent');
 
 // GLOBAL VARIABLES
 let currentUser;
@@ -61,7 +62,7 @@ getCustomerInfo(50).then((data)=>{
   console.log(data.name)
 })
 
-export { clearView, displayResultsText, dashboardView, newBookingsView, searchDates,results, resultsMsg, logInView, usernameInput, passwordInput, loginMsg, allBookings, userMsg, currentBookingsContainer, navBox, pastBookingsContainer}
+export { clearView, displayResultsText, dashboardView, newBookingsView, searchDates,results, resultsMsg, logInView, usernameInput, passwordInput, loginMsg, allBookings, userMsg, currentBookingsContainer, navBox, pastBookingsContainer, totalSpent}
 
 
 

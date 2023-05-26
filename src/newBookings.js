@@ -4,19 +4,6 @@ const filterBookings = (data, searchDate) => {
     })
 }
 
-// const getAvailableRooms = (bookedRooms, data) =>{
-//   bookedRooms.forEach((booking) => {
-//     for (let i=0; i< data.rooms.length; i++) {
-//       if (booking.roomNumber === data.rooms[i].number){
-//         data.rooms.splice(i, 1)
-//       }
-//     }
-//   })
-//   // console.log('splice data', data.rooms)
-//   return data.rooms;
-// }
-
-
 const getAvailableRooms = (bookedRooms, data) => {
   let rooms = bookedRooms.map((booking) => {
     return booking.roomNumber
