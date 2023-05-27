@@ -1,16 +1,3 @@
-import { filterBookings } from "./newBookings";
-
-// const getBookings = (searchDate) => {
-//   return fetch('http://localhost:3001/api/v1/bookings')
-//   .then(res => res.json())
-//   .then(data => {
-//     return filterBookings(data, searchDate)
-//     // return data;
-//   })
-//   .catch(err => console.log(err));
-// }
-
-
 const getBookings = () => {
   return fetch('http://localhost:3001/api/v1/bookings')
   .then(res => res.json())
@@ -35,9 +22,39 @@ const getCustomerInfo = (id) => {
     return res.json()
   })
   .then((data) =>{
-    console.log(data)
-    return data
+    return data;
   })
+  .catch(err => console.log(err));
 }
 
-export { getBookings, getRooms, getCustomerInfo }
+const createPostData = (userID, date, roomNumber) => {
+  return { 
+    userID,
+    date,
+    roomNumber: parseInt(roomNumber)
+  }
+}
+
+const postNewBooking = (data) => {
+  fetch('http://localhost:3001/api/v1/bookings', {
+    method: 'POST',
+    body: JSON.stringify(data),
+    headers: {
+      'Content-Type': 'application/json'
+    }
+  })
+    .then((response) => {
+      return response.json()
+    })
+    .then((json) => {
+      console.log(json)
+    })
+    .catch((err) => {
+      console.log(err)
+    });
+  
+}
+
+
+
+export { getBookings, getRooms, getCustomerInfo, createPostData, postNewBooking }

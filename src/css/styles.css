@@ -247,12 +247,12 @@ button:hover, li:hover {
   display: flex;
 }
 
-#roomType {
+.roomType {
   text-align: center;
   font-size: 1.4rem;
 }
 
-#roomCost {
+.roomCost {
   margin-bottom: 20px;
 }
 

@@ -13,7 +13,7 @@ import './images/room1.jpg'
 import './images/room2.jpg'
 
 import  { newBooking, toDashboard, clearView, displayResultsText, searchBookings, loginHandler, renderFilteredResults, bookNowHandler } from './domUpdates'
-import { getCustomerInfo, getBookings, getRooms } from './apiCalls'
+import { getCustomerInfo, getBookings, getRooms, createPostData, postNewBooking } from './apiCalls'
 
 // DOM
 const newBookingNav = document.querySelector('#newBooking');
@@ -37,10 +37,10 @@ const totalSpent = document.querySelector('#totalSpent');
 const filterButtons = document.querySelector('#filterButtons');
 const individualBookingView = document.querySelector('#individualBookingView');
 const singleImg = document.querySelector('.single-img');
-const roomNumber = document.querySelector('#roomNumber');
-const roomType = document.querySelector('#roomType');
-const roomCost = document.querySelector('#roomCost');
-const roomBeds = document.querySelector('#roomBeds');
+const roomNumber = document.querySelector('.roomNumber');
+const roomType = document.querySelector('.roomType');
+const roomCost = document.querySelector('.roomCost');
+const reserveBtn = document.querySelector('.reserve');
 
 // GLOBAL VARIABLES
 let currentUser;
@@ -60,7 +60,7 @@ const start = () => {
 newBookingNav.addEventListener('click', newBooking);
 dashboardNav.addEventListener('click', toDashboard);
 searchBtn.addEventListener('click', () => {
-  searchBookings(allBookings, allRooms)
+  searchBookings(allBookings, allRooms, currentUser)
 });
 filterButtons.addEventListener('click', (e) => {
   renderFilteredResults(e, allBookings, allRooms)
@@ -72,6 +72,10 @@ loginBtn.addEventListener('click', (e) => {
 newBookingsView.addEventListener('click', (e) => {
   bookNowHandler(e, allRooms)
 })
+reserveBtn.addEventListener('click', (e) => {
+  let data = createPostData(currentUser.id, currentUser.searchDate, e.target.previousElementSibling.id)
+  postNewBooking(data)
+});
 window.addEventListener('load', start);
 
 getCustomerInfo(50).then((data)=>{
@@ -79,7 +83,7 @@ getCustomerInfo(50).then((data)=>{
 });
 
 
-export { clearView, displayResultsText, dashboardView, newBookingsView, searchDates,results, resultsMsg, logInView, usernameInput, passwordInput, loginMsg, allBookings, userMsg, currentBookingsContainer, navBox, pastBookingsContainer, totalSpent, filterButtons, individualBookingView, singleImg,roomNumber, roomType, roomCost, roomBeds }
+export { clearView, displayResultsText, dashboardView, newBookingsView, searchDates,results, resultsMsg, logInView, usernameInput, passwordInput, loginMsg, allBookings, userMsg, currentBookingsContainer, navBox, pastBookingsContainer, totalSpent, filterButtons, individualBookingView, singleImg,roomNumber, roomType, roomCost }
 
 
 

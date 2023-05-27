@@ -94,12 +94,12 @@ const displayResultsText = (text) => {
   resultsMsg.innerText = text
 }
 
-const searchBookings = (bookings, allRooms) => {
-  let date = searchDates.value.replaceAll('-', '/');
+const searchBookings = (bookings, allRooms, currentUser) => {
+  currentUser.searchDate = searchDates.value.replaceAll('-', '/');
   toggleHidden('add', [individualBookingView]);
-  if(date) {
+  if(currentUser.searchDate ) {
     toggleHidden('remove', [filterButtons]);
-    let bookedRooms = filterBookings(bookings, date);
+    let bookedRooms = filterBookings(bookings, currentUser.searchDate);
     renderBookings(bookedRooms, allRooms);
     return bookedRooms;
     } else {
@@ -122,11 +122,13 @@ const renderFilteredResults = (e, allBookings, allRooms) => {
 }
 
 const renderIndividualBooking = (selectedRoom) => {
+  // console.log(selectedRoom)
   toggleHidden('remove', [individualBookingView])
   singleImg.src = `./images/${selectedRoom.roomType}.jpg`;
   roomNumber.innerText = `Room Number: ${selectedRoom.number}`;
-  roomCost.innerText = `Cost Per Night: $${selectedRoom.costPerNight}`
-  roomType.innerText = `${selectedRoom.roomType[0].toUpperCase()}${selectedRoom.roomType.substring(1)} with ${selectedRoom.numBeds} ${selectedRoom.bedSize} sized beds`
+  roomType.innerText = `${selectedRoom.roomType[0].toUpperCase()}${selectedRoom.roomType.substring(1)} with ${selectedRoom.numBeds} ${selectedRoom.bedSize} sized beds`;
+  roomCost.innerText = `Cost Per Night: $${selectedRoom.costPerNight}`;
+  roomCost.setAttribute('id', `${selectedRoom.number}`);
 }
 
 const bookNowHandler = (e, allRooms) => {
