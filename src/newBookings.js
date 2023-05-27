@@ -4,11 +4,11 @@ const filterBookings = (data, searchDate) => {
     })
 }
 
-const getAvailableRooms = (bookedRooms, data) => {
+const getAvailableRooms = (bookedRooms, allRooms) => {
   let rooms = bookedRooms.map((booking) => {
     return booking.roomNumber
   })
-  return data.rooms.filter((room) => {
+  return allRooms.rooms.filter((room) => {
     return !rooms.includes(room.number)
   });
 }

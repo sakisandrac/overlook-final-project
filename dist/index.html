@@ -67,9 +67,21 @@
       <label for="date input">Search Dates : </label>
         <input type="date" placeholder="search for dates" id="searchDates">
         <button id="searchBtn">Submit</button>
-      <h2 id="resultsMsg">Please select a date to search</h2>
+      <h2 id="resultsMsg">
+        <!-- RESULTS MSG WILL GO HERE -->
+      </h2>
+        <ul id="filterButtons" class="hidden">
+          <div class="filter-flex">
+            <label for="filterButtons">Filter By Room Type:</label>
+            <li id="singleroom">Single Room</li>
+            <li id="juniorsuite">Junior Suite</li>
+            <li id="residentialsuite">Residential Suite</li>
+            <li id="suite">Suite</li>
+          </div>
+        </ul>
+      </div>
       <section id="results" class="card-container">
-        <!-- results will go here -->
+        <!-- RESULTS WILL GO HERE -->
       </section>
     </section>
   </main>

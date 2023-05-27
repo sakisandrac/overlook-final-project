@@ -3,10 +3,8 @@ import {matchUserBookedRooms} from './user-bookings'
 import {dashboardView, newBookingsView, searchDates,results, resultsMsg, logInView, usernameInput, passwordInput, loginMsg, userMsg, currentBookingsContainer, navBox, pastBookingsContainer, totalSpent} from './scripts';
 import { checkCredentials } from './login';
 import { calculateSpending } from './calculations';
-
-// GLOBAL VARIABLES
-let userBookings;
-// do i add this to user data?
+import { getCustomerInfo } from './apiCalls';
+import {filterByRoomType} from './filter-bookings'
 
 // EVENT HANDLERS
 const newBooking = () => {
@@ -56,9 +54,9 @@ const loginSuccess = (loginResults, currentUser) => {
 }
 
 const renderUserBookings = (currentUser, allBookings, allRooms) => {
-  userBookings = matchUserBookedRooms(currentUser, allBookings, allRooms)
+  currentUser.userBookings = matchUserBookedRooms(currentUser, allBookings, allRooms)
   //sort bookings by date?
-  userBookings.forEach((booking) => {
+  currentUser.userBookings.forEach((booking) => {
     pastBookingsContainer.innerHTML += `<article class="card">
     <img src="./images/${booking.room.roomType}.jpg" class="card-img">
     <div class="card-text-wrapper">
@@ -79,7 +77,7 @@ const loginHandler = (e, currentUser, allBookings, allRooms) => {
   } else {
     loginSuccess(loginResults, currentUser);
     renderUserBookings(currentUser, allBookings, allRooms);
-    totalSpent.innerHTML = `Total Spent on Bookings: $${calculateSpending(userBookings)}`;
+    totalSpent.innerHTML = `Total Spent on Bookings: $${calculateSpending(currentUser.userBookings)}`;
   }
 }
 // DOM FUNCTIONS
@@ -99,9 +97,9 @@ const displayResultsText = (text) => {
   resultsMsg.innerText = text
 }
 
-const renderBookings = (data, allRooms) => {
+const renderBookings = (bookedRooms, allRooms) => {
   clearView([results]);
-    let res = getAvailableRooms(data, allRooms)
+    let res = getAvailableRooms(bookedRooms, allRooms)
       displayResultsText(searchResultsMsg(res))
       renderCards(res);
 }
@@ -109,12 +107,19 @@ const renderBookings = (data, allRooms) => {
 const searchBookings = (bookings, allRooms) => {
   let date = searchDates.value.replaceAll('-', '/');
   if(date) {
-    let data = filterBookings(bookings, date)
-    console.log(data)
-    renderBookings(data, allRooms);
+    toggleHidden('remove', [filterButtons]);
+    let bookedRooms = filterBookings(bookings, date);
+    renderBookings(bookedRooms, allRooms);
+    return bookedRooms;
     } else {
-    displayResultsText(searchResultsMsg())
+    displayResultsText(searchResultsMsg());
   }
 }
 
-export { newBooking, toDashboard, clearView, toggleHidden, displayResultsText, renderBookings, renderCards, searchBookings, loginHandler }
+const renderFilteredResults = (e, allBookings, allRooms) => {
+  let search = filterByRoomType(allBookings, allRooms, e.target.id)
+  clearView([results]);
+  renderCards(search, allRooms);
+}
+
+export { newBooking, toDashboard, clearView, toggleHidden, displayResultsText, renderBookings, renderCards, searchBookings, loginHandler, renderFilteredResults }
