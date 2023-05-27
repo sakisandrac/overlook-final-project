@@ -1,6 +1,6 @@
 import { searchResultsMsg, getAvailableRooms, filterBookings,  } from './newBookings'
 import {matchUserBookedRooms} from './user-bookings'
-import {dashboardView, newBookingsView, searchDates,results, resultsMsg, logInView, usernameInput, passwordInput, loginMsg, userMsg, currentBookingsContainer, navBox, pastBookingsContainer, totalSpent} from './scripts';
+import {dashboardView, newBookingsView, searchDates,results, resultsMsg, logInView, usernameInput, passwordInput, loginMsg, userMsg, currentBookingsContainer, navBox, pastBookingsContainer, totalSpent, filterButtons, individualBookingView } from './scripts';
 import { checkCredentials } from './login';
 import { calculateSpending } from './calculations';
 import { getCustomerInfo } from './apiCalls';
@@ -25,11 +25,11 @@ const renderCards = (bookings) => {
     results.innerHTML += `<article class="card">
     <img src="./images/${booking.roomType}.jpg" class="card-img">
     <div class="card-text-wrapper">
-      <p class="card-booking-text">Room Number: ${booking.number}</p>
+      <button class="bookBtn">Book Now!</button>
+      <p class="card-booking-text" id="${booking.number}">Room Number: ${booking.number}</p>
       <p class="card-booking-text">Cost: $${booking.costPerNight}</p>
       <p class="card-booking-text">Room Type: ${booking.roomType}</p>
       <p class="card-booking-text">Beds: ${booking.numBeds} ${booking.bedSize} sized bed</p>
-      <button class="bookBtn">Book Now!</button>
     </div>
   </article>` 
   })
@@ -63,6 +63,7 @@ const renderUserBookings = (currentUser, allBookings, allRooms) => {
       <p class="card-booking-text">Room Number: ${booking.room.number}</p>
       <p class="card-booking-text">Cost: $${booking.room.costPerNight}</p>
       <p class="card-booking-text">Date: ${booking.booking}</p>
+
     </div>
   </article>` 
   })
@@ -106,6 +107,7 @@ const renderBookings = (bookedRooms, allRooms) => {
 
 const searchBookings = (bookings, allRooms) => {
   let date = searchDates.value.replaceAll('-', '/');
+  toggleHidden('add', [individualBookingView]);
   if(date) {
     toggleHidden('remove', [filterButtons]);
     let bookedRooms = filterBookings(bookings, date);
@@ -122,4 +124,28 @@ const renderFilteredResults = (e, allBookings, allRooms) => {
   renderCards(search, allRooms);
 }
 
-export { newBooking, toDashboard, clearView, toggleHidden, displayResultsText, renderBookings, renderCards, searchBookings, loginHandler, renderFilteredResults }
+const renderIndividualBooking = (selectedRoom) => {
+  individualBookingView.innerHTML += `
+  <article class="individual-booking">
+    <img src="./images/${selectedRoom.roomType}.jpg" class="single-img">
+    <div class="single-card-text-wrapper">
+      <p class="card-booking-text">Room Number: ${selectedRoom.number}</p>
+      <p class="card-booking-text">Cost Per Night: $${selectedRoom.costPerNight}</p>
+      <p class="card-booking-text">Room Type: ${selectedRoom.roomType}</p>
+      <p class="card-booking-text">Beds: ${selectedRoom.numBeds} ${selectedRoom.bedSize} sized bed</p>
+    </div>
+  </article>` 
+}
+
+const bookNowHandler = (e, allRooms) => {
+  if(e.target.className === 'bookBtn') {
+    clearView([results, resultsMsg, filterButtons]);
+    toggleHidden('remove', [individualBookingView]);
+    let selectedRoom = allRooms.rooms.filter((room)=> {
+      return room.number === parseInt(e.target.nextElementSibling.id);
+    });
+    renderIndividualBooking(selectedRoom[0]);
+  }
+}
+
+export { newBooking, toDashboard, clearView, toggleHidden, displayResultsText, renderBookings, renderCards, searchBookings, loginHandler, renderFilteredResults, bookNowHandler }

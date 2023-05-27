@@ -9,7 +9,7 @@ import './images/suite.jpg';
 import './images/residential suite.jpg';
 import './images/junior suite.jpg';
 import './images/page-logo.png'
-import  { newBooking, toDashboard, clearView, displayResultsText, searchBookings, loginHandler, renderFilteredResults } from './domUpdates'
+import  { newBooking, toDashboard, clearView, displayResultsText, searchBookings, loginHandler, renderFilteredResults, bookNowHandler } from './domUpdates'
 import { getCustomerInfo, getBookings, getRooms } from './apiCalls'
 import {filterByRoomType} from './filter-bookings';
 
@@ -33,6 +33,7 @@ const navBox = document.querySelector("#navBox");
 const pastBookingsContainer = document.querySelector('#pastBookingsContainer');
 const totalSpent = document.querySelector('#totalSpent');
 const filterButtons = document.querySelector('#filterButtons');
+const individualBookingView = document.querySelector('#individualBookingView');
 
 // GLOBAL VARIABLES
 let currentUser;
@@ -61,6 +62,9 @@ filterButtons.addEventListener('click', (e) => {
 loginBtn.addEventListener('click', (e) => {
   loginHandler(e, currentUser, allBookings, allRooms)
 });
+newBookingsView.addEventListener('click', (e) => {
+  bookNowHandler(e, allRooms)
+})
 window.addEventListener('load', start);
 
 getCustomerInfo(50).then((data)=>{
@@ -68,7 +72,7 @@ getCustomerInfo(50).then((data)=>{
 });
 
 
-export { clearView, displayResultsText, dashboardView, newBookingsView, searchDates,results, resultsMsg, logInView, usernameInput, passwordInput, loginMsg, allBookings, userMsg, currentBookingsContainer, navBox, pastBookingsContainer, totalSpent, filterButtons }
+export { clearView, displayResultsText, dashboardView, newBookingsView, searchDates,results, resultsMsg, logInView, usernameInput, passwordInput, loginMsg, allBookings, userMsg, currentBookingsContainer, navBox, pastBookingsContainer, totalSpent, filterButtons, individualBookingView }
 
 
 

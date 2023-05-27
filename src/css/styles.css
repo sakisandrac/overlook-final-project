@@ -175,6 +175,11 @@ h2 {
 #searchBtn {
   border-radius: 20px;
 }
+.filter-flex {
+  display: flex;
+  justify-content: space-between;
+  /* width: 1000px; */
+}
 
 .card-container {
   display: flex;
@@ -196,8 +201,30 @@ h2 {
   white-space: nowrap;
 }
 
-button:hover {
+button:hover, li:hover {
   cursor: pointer;
+}
+
+/* INDIVIDUAL BOOKINGS */
+
+.individual-booking {
+  display: flex;
+  width: 700px;
+  height: 500px;
+  border: 2px solid black;
+}
+
+.single-img {
+  height: 500px;
+  max-width: 400px;
+  object-fit: cover;
+}
+
+.single-card-text-wrapper {
+  display: flex;
+  flex-direction: column;
+  font-size: 1.25rem;
+  align-items: center;
 }
 
 .hidden {
