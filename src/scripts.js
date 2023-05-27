@@ -9,6 +9,9 @@ import './images/suite.jpg';
 import './images/residential suite.jpg';
 import './images/junior suite.jpg';
 import './images/page-logo.png'
+import './images/room1.jpg'
+import './images/room2.jpg'
+
 import  { newBooking, toDashboard, clearView, displayResultsText, searchBookings, loginHandler, renderFilteredResults, bookNowHandler } from './domUpdates'
 import { getCustomerInfo, getBookings, getRooms } from './apiCalls'
 import {filterByRoomType} from './filter-bookings';
@@ -34,6 +37,11 @@ const pastBookingsContainer = document.querySelector('#pastBookingsContainer');
 const totalSpent = document.querySelector('#totalSpent');
 const filterButtons = document.querySelector('#filterButtons');
 const individualBookingView = document.querySelector('#individualBookingView');
+const singleImg = document.querySelector('.single-img');
+const roomNumber = document.querySelector('#roomNumber');
+const roomType = document.querySelector('#roomType');
+const roomCost = document.querySelector('#roomCost');
+const roomBeds = document.querySelector('#roomBeds');
 
 // GLOBAL VARIABLES
 let currentUser;
@@ -72,7 +80,7 @@ getCustomerInfo(50).then((data)=>{
 });
 
 
-export { clearView, displayResultsText, dashboardView, newBookingsView, searchDates,results, resultsMsg, logInView, usernameInput, passwordInput, loginMsg, allBookings, userMsg, currentBookingsContainer, navBox, pastBookingsContainer, totalSpent, filterButtons, individualBookingView }
+export { clearView, displayResultsText, dashboardView, newBookingsView, searchDates,results, resultsMsg, logInView, usernameInput, passwordInput, loginMsg, allBookings, userMsg, currentBookingsContainer, navBox, pastBookingsContainer, totalSpent, filterButtons, individualBookingView, singleImg,roomNumber, roomType, roomCost, roomBeds }
 
 
 

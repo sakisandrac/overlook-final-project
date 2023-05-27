@@ -1,6 +1,6 @@
 import { searchResultsMsg, getAvailableRooms, filterBookings,  } from './newBookings'
 import {matchUserBookedRooms} from './user-bookings'
-import {dashboardView, newBookingsView, searchDates,results, resultsMsg, logInView, usernameInput, passwordInput, loginMsg, userMsg, currentBookingsContainer, navBox, pastBookingsContainer, totalSpent, filterButtons, individualBookingView } from './scripts';
+import {dashboardView, newBookingsView, searchDates,results, resultsMsg, logInView, usernameInput, passwordInput, loginMsg, userMsg, currentBookingsContainer, navBox, pastBookingsContainer, totalSpent, filterButtons, individualBookingView, singleImg, roomNumber, roomType, roomCost, roomBeds } from './scripts';
 import { checkCredentials } from './login';
 import { calculateSpending } from './calculations';
 import { getCustomerInfo } from './apiCalls';
@@ -124,22 +124,20 @@ const renderFilteredResults = (e, allBookings, allRooms) => {
   renderCards(search, allRooms);
 }
 
+
 const renderIndividualBooking = (selectedRoom) => {
-  individualBookingView.innerHTML += `
-  <article class="individual-booking">
-    <img src="./images/${selectedRoom.roomType}.jpg" class="single-img">
-    <div class="single-card-text-wrapper">
-      <p class="card-booking-text">Room Number: ${selectedRoom.number}</p>
-      <p class="card-booking-text">Cost Per Night: $${selectedRoom.costPerNight}</p>
-      <p class="card-booking-text">Room Type: ${selectedRoom.roomType}</p>
-      <p class="card-booking-text">Beds: ${selectedRoom.numBeds} ${selectedRoom.bedSize} sized bed</p>
-    </div>
-  </article>` 
+  toggleHidden('remove', [individualBookingView])
+  singleImg.src = `./images/${selectedRoom.roomType}.jpg`;
+  roomNumber.innerText = `Room Number: ${selectedRoom.number}`;
+  roomCost.innerText = `Cost Per Night: $${selectedRoom.costPerNight}`
+  roomType.innerText = `Room Type: ${selectedRoom.roomType}`
+  roomBeds.innerText = `Beds: ${selectedRoom.numBeds} ${selectedRoom.bedSize} sized bed`
 }
 
 const bookNowHandler = (e, allRooms) => {
   if(e.target.className === 'bookBtn') {
-    clearView([results, resultsMsg, filterButtons]);
+    clearView([results, resultsMsg]);
+    toggleHidden('add', [filterButtons])
     toggleHidden('remove', [individualBookingView]);
     let selectedRoom = allRooms.rooms.filter((room)=> {
       return room.number === parseInt(e.target.nextElementSibling.id);
