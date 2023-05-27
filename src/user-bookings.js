@@ -11,10 +11,9 @@ const matchUserBookedRooms = (currentUser, allBookings, allRooms) => {
       if(booking.roomNumber === room.number){
        obj = {room, booking: booking.date}
       }
-      return obj
+      return obj;
     }, {});
   });
 }
 
-//needs testing
 export {getUserBookings, matchUserBookedRooms}
