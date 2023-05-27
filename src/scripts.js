@@ -14,7 +14,6 @@ import './images/room2.jpg'
 
 import  { newBooking, toDashboard, clearView, displayResultsText, searchBookings, loginHandler, renderFilteredResults, bookNowHandler } from './domUpdates'
 import { getCustomerInfo, getBookings, getRooms } from './apiCalls'
-import {filterByRoomType} from './filter-bookings';
 
 // DOM
 const newBookingNav = document.querySelector('#newBooking');

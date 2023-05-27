@@ -211,6 +211,7 @@ button:hover, li:hover {
   display: flex;
   width: 700px;
   height: 500px;
+  padding: 0;
   border: 2px solid black;
 }
 
@@ -220,11 +221,44 @@ button:hover, li:hover {
   object-fit: cover;
 }
 
+.single-card-main-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 300px;
+  padding-right: 5px;
+}
+
 .single-card-text-wrapper {
   display: flex;
   flex-direction: column;
-  font-size: 1.25rem;
+  font-size: 1.10rem;
   align-items: center;
+  margin-top: 15px;
+}
+
+.small-img {
+  object-fit: cover;
+  padding-left: 5px;
+  max-width: 140px;
+}
+
+.small-img-wrapper {
+  display: flex;
+}
+
+#roomType {
+  text-align: center;
+  font-size: 1.4rem;
+}
+
+#roomCost {
+  margin-bottom: 20px;
+}
+
+.bookBtn {
+  padding: 5px;
+  border-radius: 5px;
 }
 
 .hidden {

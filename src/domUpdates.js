@@ -4,13 +4,12 @@ import {dashboardView, newBookingsView, searchDates,results, resultsMsg, logInVi
 import { checkCredentials } from './login';
 import { calculateSpending } from './calculations';
 import { getCustomerInfo } from './apiCalls';
-import {filterByRoomType} from './filter-bookings'
 
-// EVENT HANDLERS
+// SWITCHING VIEWS
 const newBooking = () => {
   searchDates.value = '';
   clearView([results, resultsMsg]);
-  toggleHidden('add', [dashboardView, logInView]);
+  toggleHidden('add', [dashboardView, logInView, filterButtons, individualBookingView]);
   toggleHidden('remove', [newBookingsView]);
 }
 
@@ -19,22 +18,7 @@ const toDashboard = () => {
   toggleHidden('add', [newBookingsView]);
 }
 
-
-const renderCards = (bookings) => {
-  bookings.forEach((booking) => {
-    results.innerHTML += `<article class="card">
-    <img src="./images/${booking.roomType}.jpg" class="card-img">
-    <div class="card-text-wrapper">
-      <button class="bookBtn">Book Now!</button>
-      <p class="card-booking-text" id="${booking.number}">Room Number: ${booking.number}</p>
-      <p class="card-booking-text">Cost: $${booking.costPerNight}</p>
-      <p class="card-booking-text">Room Type: ${booking.roomType}</p>
-      <p class="card-booking-text">Beds: ${booking.numBeds} ${booking.bedSize} sized bed</p>
-    </div>
-  </article>` 
-  })
-}
-
+// LOGIN PAGE
 const checkPassowrdMsg = (loginResults) => {
   if(loginResults) {
     loginMsg.innerHTML = loginResults;
@@ -53,6 +37,35 @@ const loginSuccess = (loginResults, currentUser) => {
   }
 }
 
+const loginHandler = (e, currentUser, allBookings, allRooms) => {
+  e.preventDefault();
+  let loginResults = checkCredentials(usernameInput.value, passwordInput.value);
+
+  if(!usernameInput.value || !passwordInput.value) {
+    loginMsg.innerHTML = 'Enter a Username and Password';
+  } else {
+    loginSuccess(loginResults, currentUser);
+    renderUserBookings(currentUser, allBookings, allRooms);
+    totalSpent.innerHTML = `Total Spent on Bookings: $${calculateSpending(currentUser.userBookings)}`;
+  }
+}
+
+// DASHBOARD 
+const renderCards = (bookings) => {
+  bookings.forEach((booking) => {
+    results.innerHTML += `<article class="card">
+    <img src="./images/${booking.roomType}.jpg" class="card-img">
+    <div class="card-text-wrapper">
+      <button class="bookBtn">Book Now!</button>
+      <p class="card-booking-text" id="${booking.number}">Room Number: ${booking.number}</p>
+      <p class="card-booking-text">Cost: $${booking.costPerNight}</p>
+      <p class="card-booking-text">Room Type: ${booking.roomType}</p>
+      <p class="card-booking-text">Beds: ${booking.numBeds} ${booking.bedSize} sized bed</p>
+    </div>
+  </article>` 
+  })
+}
+
 const renderUserBookings = (currentUser, allBookings, allRooms) => {
   currentUser.userBookings = matchUserBookedRooms(currentUser, allBookings, allRooms)
   //sort bookings by date?
@@ -69,40 +82,16 @@ const renderUserBookings = (currentUser, allBookings, allRooms) => {
   })
 }
 
-const loginHandler = (e, currentUser, allBookings, allRooms) => {
-  e.preventDefault();
-  let loginResults = checkCredentials(usernameInput.value, passwordInput.value);
-
-  if(!usernameInput.value || !passwordInput.value) {
-    loginMsg.innerHTML = 'Enter a Username and Password';
-  } else {
-    loginSuccess(loginResults, currentUser);
-    renderUserBookings(currentUser, allBookings, allRooms);
-    totalSpent.innerHTML = `Total Spent on Bookings: $${calculateSpending(currentUser.userBookings)}`;
-  }
-}
-// DOM FUNCTIONS
-const clearView = (views) => {
-  views.forEach((view) => {
-    view.innerHTML = '';
-  })
-}
-
-const toggleHidden = (type, views) => {
-  views.forEach((view) => {
-    view.classList[type]('hidden');
-  })
-}
-
-const displayResultsText = (text) => {
-  resultsMsg.innerText = text
-}
-
+// BOOKINGS PAGE
 const renderBookings = (bookedRooms, allRooms) => {
   clearView([results]);
     let res = getAvailableRooms(bookedRooms, allRooms)
       displayResultsText(searchResultsMsg(res))
       renderCards(res);
+}
+
+const displayResultsText = (text) => {
+  resultsMsg.innerText = text
 }
 
 const searchBookings = (bookings, allRooms) => {
@@ -118,20 +107,26 @@ const searchBookings = (bookings, allRooms) => {
   }
 }
 
+const filterByRoomType = (bookingResults, allRooms, type) => {
+  const bookings = searchBookings(bookingResults, allRooms);
+  const rooms= getAvailableRooms(bookings, allRooms);
+  return rooms.filter((room) => {
+    return room.roomType.split(' ').join('') === type;
+  });
+}
+
 const renderFilteredResults = (e, allBookings, allRooms) => {
   let search = filterByRoomType(allBookings, allRooms, e.target.id)
   clearView([results]);
   renderCards(search, allRooms);
 }
 
-
 const renderIndividualBooking = (selectedRoom) => {
   toggleHidden('remove', [individualBookingView])
   singleImg.src = `./images/${selectedRoom.roomType}.jpg`;
   roomNumber.innerText = `Room Number: ${selectedRoom.number}`;
   roomCost.innerText = `Cost Per Night: $${selectedRoom.costPerNight}`
-  roomType.innerText = `Room Type: ${selectedRoom.roomType}`
-  roomBeds.innerText = `Beds: ${selectedRoom.numBeds} ${selectedRoom.bedSize} sized bed`
+  roomType.innerText = `${selectedRoom.roomType[0].toUpperCase()}${selectedRoom.roomType.substring(1)} with ${selectedRoom.numBeds} ${selectedRoom.bedSize} sized beds`
 }
 
 const bookNowHandler = (e, allRooms) => {
@@ -144,6 +139,19 @@ const bookNowHandler = (e, allRooms) => {
     });
     renderIndividualBooking(selectedRoom[0]);
   }
+}
+
+// DOM FUNCTIONS
+const clearView = (views) => {
+  views.forEach((view) => {
+    view.innerHTML = '';
+  })
+}
+
+const toggleHidden = (type, views) => {
+  views.forEach((view) => {
+    view.classList[type]('hidden');
+  })
 }
 
 export { newBooking, toDashboard, clearView, toggleHidden, displayResultsText, renderBookings, renderCards, searchBookings, loginHandler, renderFilteredResults, bookNowHandler }
