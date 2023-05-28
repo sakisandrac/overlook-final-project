@@ -247,7 +247,7 @@ button:hover, li:hover {
   display: flex;
 }
 
-.roomType {
+.roomTyp, .confirmation-message {
   text-align: center;
   font-size: 1.4rem;
 }

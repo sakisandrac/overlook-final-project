@@ -9,6 +9,6 @@ describe('calculateSpending', () => {
   it('should calculate total cost of rooms booked', () => {
     let bookings = matchUserBookedRooms(user, bookingData, roomData)
     
-    expect(calculateSpending(bookings)).to.equal(80)
+    expect(calculateSpending(bookings)).to.equal('80.00')
   })
 })

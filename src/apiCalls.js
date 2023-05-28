@@ -36,7 +36,7 @@ const createPostData = (userID, date, roomNumber) => {
 }
 
 const postNewBooking = (data) => {
-  fetch('http://localhost:3001/api/v1/bookings', {
+  return fetch('http://localhost:3001/api/v1/bookings', {
     method: 'POST',
     body: JSON.stringify(data),
     headers: {
@@ -47,10 +47,11 @@ const postNewBooking = (data) => {
       return response.json()
     })
     .then((json) => {
-      console.log(json)
+      return json;
     })
     .catch((err) => {
       console.log(err)
+      return err;
     });
   
 }

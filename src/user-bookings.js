@@ -16,4 +16,28 @@ const matchUserBookedRooms = (currentUser, allBookings, allRooms) => {
   });
 }
 
-export {getUserBookings, matchUserBookedRooms}
+const getPastBookings = (currentUser, date) => {
+  let bookings = currentUser.userBookings.filter((listing) => {
+    return parseInt(listing.booking.split('/').join('') - date) < 0;
+   });
+
+   if(bookings.length > 0) {
+    return bookings;
+  } else {
+    return 'No Current Bookings to Display';
+  }
+}
+
+const getCurrentBookings = (currentUser, date) => {
+  let bookings = currentUser.userBookings.filter((listing) => {
+    return parseInt(listing.booking.split('/').join('') - date) > 0;
+ });
+
+  if(bookings.length > 0) {
+    return bookings;
+  } else {
+    return 'No Current Bookings to Display';
+  }
+}
+
+export { getUserBookings, matchUserBookedRooms, getPastBookings, getCurrentBookings }

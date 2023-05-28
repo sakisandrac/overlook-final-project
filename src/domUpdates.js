@@ -1,9 +1,9 @@
-import { searchResultsMsg, getAvailableRooms, filterBookings,  } from './newBookings'
-import {matchUserBookedRooms} from './user-bookings'
-import {dashboardView, newBookingsView, searchDates,results, resultsMsg, logInView, usernameInput, passwordInput, loginMsg, userMsg, currentBookingsContainer, navBox, pastBookingsContainer, totalSpent, filterButtons, individualBookingView, singleImg, roomNumber, roomType, roomCost, roomBeds } from './scripts';
+import { searchResultsMsg, getAvailableRooms, filterBookings } from './newBookings'
+import { matchUserBookedRooms, getPastBookings, getCurrentBookings } from './user-bookings'
+import { dashboardView, newBookingsView, searchDates,results, resultsMsg, logInView, usernameInput, passwordInput, loginMsg, userMsg, currentBookingsContainer, navBox, pastBookingsContainer, totalSpent, filterButtons, individualBookingView, singleImg, roomNumber, roomType, roomCost, currentBookingsMsg,confirmationMsg } from './scripts';
 import { checkCredentials } from './login';
 import { calculateSpending } from './calculations';
-import { getCustomerInfo } from './apiCalls';
+import { getCustomerInfo, postNewBooking, createPostData } from './apiCalls';
 
 // SWITCHING VIEWS
 const newBooking = () => {
@@ -45,7 +45,7 @@ const loginHandler = (e, currentUser, allBookings, allRooms) => {
     loginMsg.innerHTML = 'Enter a Username and Password';
   } else {
     loginSuccess(loginResults, currentUser);
-    renderUserBookings(currentUser, allBookings, allRooms);
+    renderDashboardBookings(currentUser, allBookings, allRooms);
     totalSpent.innerHTML = `Total Spent on Bookings: $${calculateSpending(currentUser.userBookings)}`;
   }
 }
@@ -66,20 +66,50 @@ const renderCards = (bookings) => {
   })
 }
 
-const renderUserBookings = (currentUser, allBookings, allRooms) => {
-  currentUser.userBookings = matchUserBookedRooms(currentUser, allBookings, allRooms)
-  //sort bookings by date?
-  currentUser.userBookings.forEach((booking) => {
-    pastBookingsContainer.innerHTML += `<article class="card">
+const renderUserBookings = (bookings, view) => {
+  bookings.forEach((booking) => {
+    view.innerHTML += `<article class="card">
     <img src="./images/${booking.room.roomType}.jpg" class="card-img">
     <div class="card-text-wrapper">
       <p class="card-booking-text">Room Number: ${booking.room.number}</p>
       <p class="card-booking-text">Cost: $${booking.room.costPerNight}</p>
       <p class="card-booking-text">Date: ${booking.booking}</p>
-
     </div>
   </article>` 
   })
+}
+
+const getDate = () => {
+  let date = new Date();
+  let month;
+  let day = date.getDate();
+
+  if(date.getMonth() < 12) {
+    month = date.getMonth() + 1;
+  } else {
+    month = 1;
+  }
+
+  if (date.getMonth().toString().length < 2) {
+      month = `0${month}`;
+    } 
+  if (date.getDate().toString().length < 2) {
+      day = `0${date.getDate()}`;
+    } 
+
+  return `${date.getFullYear()}${month}${day}`;
+}
+
+const renderDashboardBookings = (currentUser, allBookings, allRooms) => {
+  currentUser.userBookings = matchUserBookedRooms(currentUser, allBookings, allRooms);
+
+  renderUserBookings(getPastBookings(currentUser, getDate()), pastBookingsContainer)
+
+  if(Array.isArray(getCurrentBookings(currentUser, getDate()))) {
+    renderUserBookings(getCurrentBookings(currentUser, getDate()), currentBookingsContainer);
+  } else {
+    currentBookingsMsg.innerText = getCurrentBookings(currentUser)
+  }
 }
 
 // BOOKINGS PAGE
@@ -122,7 +152,6 @@ const renderFilteredResults = (e, allBookings, allRooms) => {
 }
 
 const renderIndividualBooking = (selectedRoom) => {
-  // console.log(selectedRoom)
   toggleHidden('remove', [individualBookingView])
   singleImg.src = `./images/${selectedRoom.roomType}.jpg`;
   roomNumber.innerText = `Room Number: ${selectedRoom.number}`;
@@ -143,6 +172,18 @@ const bookNowHandler = (e, allRooms) => {
   }
 }
 
+const reserveNowHandler = (e, currentUser) => {
+  let data = createPostData(currentUser.id, currentUser.searchDate, e.target.previousElementSibling.id)
+  postNewBooking(data).then((data) => {
+    if(data.newBooking) {
+      confirmationMsg.innerText = `Thank you for booking! Your confirmation number is ${data.newBooking.id}`
+    } else {
+      confirmationMsg.innerText = data.message
+    }
+    
+  });
+}
+
 // DOM FUNCTIONS
 const clearView = (views) => {
   views.forEach((view) => {
@@ -156,4 +197,4 @@ const toggleHidden = (type, views) => {
   })
 }
 
-export { newBooking, toDashboard, clearView, toggleHidden, displayResultsText, renderBookings, renderCards, searchBookings, loginHandler, renderFilteredResults, bookNowHandler }
+export { newBooking, toDashboard, clearView, toggleHidden, displayResultsText, renderBookings, renderCards, searchBookings, loginHandler, renderFilteredResults, bookNowHandler, getDate,reserveNowHandler }

@@ -12,7 +12,7 @@ import './images/page-logo.png'
 import './images/room1.jpg'
 import './images/room2.jpg'
 
-import  { newBooking, toDashboard, clearView, displayResultsText, searchBookings, loginHandler, renderFilteredResults, bookNowHandler } from './domUpdates'
+import  { newBooking, toDashboard, clearView, displayResultsText, searchBookings, loginHandler, renderFilteredResults, bookNowHandler, getDate, reserveNowHandler } from './domUpdates'
 import { getCustomerInfo, getBookings, getRooms, createPostData, postNewBooking } from './apiCalls'
 
 // DOM
@@ -31,6 +31,7 @@ const passwordInput = document.querySelector('#passwordInput');
 const loginMsg = document.querySelector('#loginMsg');
 const userMsg = document.querySelector('#userMsg');
 const currentBookingsContainer = document.querySelector('#currentBookingsContainer');
+const currentBookingsMsg = document.querySelector('#currentBookingsMsg');
 const navBox = document.querySelector("#navBox");
 const pastBookingsContainer = document.querySelector('#pastBookingsContainer');
 const totalSpent = document.querySelector('#totalSpent');
@@ -41,6 +42,7 @@ const roomNumber = document.querySelector('.roomNumber');
 const roomType = document.querySelector('.roomType');
 const roomCost = document.querySelector('.roomCost');
 const reserveBtn = document.querySelector('.reserve');
+const confirmationMsg = document.querySelector('.confirmation-message');
 
 // GLOBAL VARIABLES
 let currentUser;
@@ -73,8 +75,7 @@ newBookingsView.addEventListener('click', (e) => {
   bookNowHandler(e, allRooms)
 })
 reserveBtn.addEventListener('click', (e) => {
-  let data = createPostData(currentUser.id, currentUser.searchDate, e.target.previousElementSibling.id)
-  postNewBooking(data)
+  reserveNowHandler(e, currentUser);
 });
 window.addEventListener('load', start);
 
@@ -83,7 +84,7 @@ getCustomerInfo(50).then((data)=>{
 });
 
 
-export { clearView, displayResultsText, dashboardView, newBookingsView, searchDates,results, resultsMsg, logInView, usernameInput, passwordInput, loginMsg, allBookings, userMsg, currentBookingsContainer, navBox, pastBookingsContainer, totalSpent, filterButtons, individualBookingView, singleImg,roomNumber, roomType, roomCost }
+export { clearView, displayResultsText, dashboardView, newBookingsView, searchDates,results, resultsMsg, logInView, usernameInput, passwordInput, loginMsg, allBookings, userMsg, currentBookingsContainer, navBox, pastBookingsContainer, totalSpent, filterButtons, individualBookingView, singleImg,roomNumber, roomType, roomCost, currentBookingsMsg, confirmationMsg }
 
 
 
