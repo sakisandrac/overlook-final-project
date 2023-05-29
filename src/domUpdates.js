@@ -74,7 +74,7 @@ const renderCost = () => {
 const renderCards = (bookings) => {
   bookings.forEach((booking) => {
     results.innerHTML += `<article class="card">
-    <img src="./images/${booking.roomType}.jpg" class="card-img">
+    <img src="./images/${booking.roomType}.jpg" class="card-img" alt="image of hotel room">
     <div class="card-text-wrapper">
       <button class="bookBtn">Book Now!</button>
       <p class="card-booking-text" id="${booking.number}">Room Number: ${booking.number}</p>
@@ -89,7 +89,7 @@ const renderCards = (bookings) => {
 const renderUserBookings = (bookings, view) => {
   bookings.forEach((booking) => {
     view.innerHTML += `<article class="card">
-    <img src="./images/${booking.room.roomType}.jpg" class="card-img">
+    <img src="./images/${booking.room.roomType}.jpg" class="card-img" alt="image of hotel room">
     <div class="card-text-wrapper">
       <p class="card-booking-text">Room Number: ${booking.room.number}</p>
       <p class="card-booking-text">Cost: $${booking.room.costPerNight}</p>

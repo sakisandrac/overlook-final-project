@@ -36,21 +36,22 @@
   </nav>
   <main>
     <div class="login" id="logInView">
-      <img src="./images/page-logo.png" id="pageLogo">
+      <img src="./images/page-logo.png" id="pageLogo" alt="logo for Overlook Hotel">
       <section class="login">
         <h1 id="loginMsg">Please Log In To Continue</h1>
         <form>
-          <input class="login-input" type="text" id="usernameInput" placeholder="enter username"></input>
-          <input class="login-input" type="password" id="passwordInput" placeholder="enter password">
+          <label for="usernameInput" class="hidden">Username</label>
+            <input class="login-input" type="text" id="usernameInput" placeholder="enter username"></input>
+          <label for="passwordInput" class="hidden">Password</label>
+            <input class="login-input" type="password" id="passwordInput" placeholder="enter password">
           <button id="loginBtn">Submit</button>
         </form>
       </section>
     </div>
     <section id="dashboardView" class="hidden">
       <h1 id="welcomeMsg">Welcome to your Dashboard!</h1>
-        <h2 id="totalSpent"></h2>
-        <h2>Current Bookings</h2>
-          <h3 id="currentBookingsMsg"></h3>
+        <h2 id="totalSpent">Total Spent:</h2>
+          <h2 id="currentBookingsMsg">Current Bookings:</h2>
         <section class="bookings-display">
           <section id="currentBookingsContainer" class="scroll">
             <!-- CURRENT BOOKINGS WILL GO HERE -->
@@ -64,12 +65,10 @@
     </section>
     <section id="newBookingsView" class="hidden">
       <h1>Book A New Room</h1>
-      <label for="date input">Search Dates : </label>
+      <label for="searchDates">Search Dates : </label>
         <input type="date" placeholder="search for dates" id="searchDates">
         <button id="searchBtn">Submit</button>
-      <h2 id="resultsMsg">
-        <!-- RESULTS MSG WILL GO HERE -->
-      </h2>
+      <p id="resultsMsg">Please enter a date to search</p>
         <ul id="filterButtons" class="hidden">
           <div class="filter-flex">
             <label for="filterButtons">Filter By Room Type:</label>
@@ -82,11 +81,11 @@
       </div>
       <section id="individualBookingView" class="hidden">
         <article class="individual-booking">
-          <img class="single-img">
+          <img class="single-img" alt="image of hotel room">
           <div class="single-card-main-wrapper">
             <div class="small-img-wrapper"> 
-              <img src="./images/room1.jpg" class="small-img">
-              <img src="./images/room2.jpg" class="small-img">
+              <img src="./images/room1.jpg" class="small-img" alt="image of hotel brunch">
+              <img src="./images/room2.jpg" class="small-img" alt="image of hotel bathrooom">
             </div>
             <div class="single-card-text-wrapper">
               <p class="card-booking-text">YOU'RE BOOKING THE:</p>
