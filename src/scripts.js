@@ -8,12 +8,11 @@ import './images/single room.jpg';
 import './images/suite.jpg';
 import './images/residential suite.jpg';
 import './images/junior suite.jpg';
-import './images/page-logo.png'
-import './images/room1.jpg'
-import './images/room2.jpg'
-
-import  { newBooking, toDashboard, clearView, displayResultsText, searchBookings, loginHandler, renderFilteredResults, bookNowHandler, getDate, reserveNowHandler } from './domUpdates'
-import { getCustomerInfo, getBookings, getRooms, createPostData, postNewBooking } from './apiCalls'
+import './images/page-logo.png';
+import './images/room1.jpg';
+import './images/room2.jpg';
+import  { newBooking, toDashboard, clearView, displayResultsText, searchBookingsHandler, loginHandler, renderFilteredResults, bookNowHandler, reserveNowHandler } from './domUpdates';
+import { getBookings, getRooms } from './apiCalls';
 
 // DOM
 const newBookingNav = document.querySelector('#newBooking');
@@ -45,7 +44,6 @@ const reserveBtn = document.querySelector('.reserve');
 const confirmationMsg = document.querySelector('.confirmation-message');
 
 // GLOBAL VARIABLES
-let currentUser;
 let allBookings;
 let allRooms;
 
@@ -60,31 +58,27 @@ const start = () => {
 
 // EVENT LISTENERS
 newBookingNav.addEventListener('click', newBooking);
-dashboardNav.addEventListener('click', toDashboard);
+dashboardNav.addEventListener('click', () => {
+  toDashboard(allBookings, allRooms);
+});
 searchBtn.addEventListener('click', () => {
-  searchBookings(allBookings, allRooms, currentUser)
+  searchBookingsHandler(allBookings, allRooms);
 });
 filterButtons.addEventListener('click', (e) => {
   renderFilteredResults(e, allBookings, allRooms)
 });
-
 loginBtn.addEventListener('click', (e) => {
-  loginHandler(e, currentUser, allBookings, allRooms)
+  loginHandler(e, allBookings, allRooms)
 });
 newBookingsView.addEventListener('click', (e) => {
   bookNowHandler(e, allRooms)
 })
 reserveBtn.addEventListener('click', (e) => {
-  reserveNowHandler(e, currentUser);
+  reserveNowHandler(e);
 });
 window.addEventListener('load', start);
 
-getCustomerInfo(50).then((data)=>{
-  currentUser = data
-});
-
-
-export { clearView, displayResultsText, dashboardView, newBookingsView, searchDates,results, resultsMsg, logInView, usernameInput, passwordInput, loginMsg, allBookings, userMsg, currentBookingsContainer, navBox, pastBookingsContainer, totalSpent, filterButtons, individualBookingView, singleImg,roomNumber, roomType, roomCost, currentBookingsMsg, confirmationMsg }
+export { clearView, displayResultsText, dashboardView, newBookingsView, searchDates,results, resultsMsg, logInView, usernameInput, passwordInput, loginMsg, allBookings, userMsg, currentBookingsContainer, navBox, pastBookingsContainer, totalSpent, filterButtons, individualBookingView, singleImg,roomNumber, roomType, roomCost, currentBookingsMsg, confirmationMsg}
 
 
 

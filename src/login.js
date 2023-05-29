@@ -22,5 +22,9 @@ const matchPassword = (username, password) => {
   } 
 }
 
-export { checkCredentials, matchPassword, matchUser }
+const getUserId = (username) => {
+  return userLogins[username].id;
+}
+
+export { checkCredentials, matchPassword, matchUser, getUserId }
 
