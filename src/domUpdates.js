@@ -20,9 +20,13 @@ const newBooking = () => {
 const toDashboard = (allBookings, allRooms) => {
   toggleHidden('remove', [dashboardView]);
   toggleHidden('add', [newBookingsView]);
-  renderDashboardBookings(currentUser, allBookings, allRooms);
-  renderCost();
+  getCustomerInfo(getUserId(usernameInput.value)).then((data) => {
+    currentUser = data;
+    console.log('toDashboard', data)
+    updateUserBookings(currentUser, allBookings, allRooms);
+  })
 }
+//potentially could work: refactor so that the data is called upon user login, NOT page load. user login, check user login-> if success, then also call to Dashboard where the promise all is stored.
 
 // LOGIN PAGE
 const checkPassowrdMsg = (loginResults) => {
@@ -45,7 +49,20 @@ const checkLogin = (loginResults, currentUser) => {
 
 const updateUserBookings = (currentUser, allBookings, allRooms) => {
   currentUser.userBookings = matchUserBookedRooms(currentUser, allBookings, allRooms);
-} //is this testable? if so move it to userbookings?
+  console.log('updated userbookigs', currentUser.userBookings)
+  renderDashboardBookings(currentUser);
+  renderCost();
+}
+
+const loginSuccess = (loginResults, allBookings, allRooms) => {
+
+  getCustomerInfo(getUserId(usernameInput.value)).then((data) => {
+    currentUser = data;
+    checkLogin(loginResults, currentUser);
+    updateUserBookings(currentUser, allBookings, allRooms);
+  })
+  // return loginResults
+}
 
 const loginHandler = (e, allBookings, allRooms) => {
   e.preventDefault();
@@ -54,13 +71,7 @@ const loginHandler = (e, allBookings, allRooms) => {
   if(!usernameInput.value || !passwordInput.value) {
     loginMsg.innerHTML = 'Enter a Username and Password';
   } else if (loginResults !== 'Username not found') {
-    getCustomerInfo(getUserId(usernameInput.value)).then((data)=>{
-      currentUser = data;
-      checkLogin(loginResults, currentUser);
-      updateUserBookings(currentUser, allBookings, allRooms);
-      renderDashboardBookings(currentUser);
-      renderCost();
-    })
+    loginSuccess(loginResults, allBookings, allRooms);
   } else {
     checkLogin(loginResults, currentUser);
   }
@@ -68,6 +79,7 @@ const loginHandler = (e, allBookings, allRooms) => {
 
 // DASHBOARD 
 const renderCost = () => {
+  clearView[totalSpent];
   totalSpent.innerHTML = `Total Spent on Bookings: $${calculateSpending(currentUser.userBookings)}`;
 }
 
@@ -99,18 +111,23 @@ const renderUserBookings = (bookings, view) => {
   });
 }
 
+const checkCurrentBookings = (userCurrentBookings, currentBookingsContainer) => {
+  if(Array.isArray(userCurrentBookings)) {
+    renderUserBookings(userCurrentBookings, currentBookingsContainer);
+  } else {
+    currentBookingsMsg.innerText = getCurrentBookings(currentUser);
+  };
+}
+
 const renderDashboardBookings = (currentUser) => {
+  clearView[currentBookingsContainer, pastBookingsContainer];
+
   const dateToday = new Date();
   const userCurrentBookings = getCurrentBookings(currentUser, getDate(dateToday));
   const userPastBookings = getPastBookings(currentUser, getDate(dateToday));
 
   renderUserBookings(userPastBookings, pastBookingsContainer);
-
-  if(Array.isArray(userCurrentBookings)) {
-    renderUserBookings(userCurrentBookings, currentBookingsContainer);
-  } else {
-    currentBookingsMsg.innerText = getCurrentBookings(currentUser)
-  }
+  checkCurrentBookings(userCurrentBookings, currentBookingsContainer);
 }
 
 // BOOKINGS PAGE

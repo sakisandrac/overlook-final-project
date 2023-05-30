@@ -59,6 +59,7 @@ const start = () => {
 // EVENT LISTENERS
 newBookingNav.addEventListener('click', newBooking);
 dashboardNav.addEventListener('click', () => {
+  // start();
   toDashboard(allBookings, allRooms);
 });
 searchBtn.addEventListener('click', () => {
