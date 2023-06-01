@@ -131,33 +131,24 @@ h2 {
 }
 
 .card {
-  border: 2px solid black;
+  /* border: 2px solid black;
   height: 350px;
-  width: 300px;
+  width: 300px; */
+  background: #FAFAF5;
+  border: 2px solid #E6E6E6;
+  border-radius: 24px;
   margin: 20px;
 }
 
 .card-img {
   width: 300px;
   height: 200px;
+  border-top-right-radius: 24px;
+  border-top-left-radius: 24px;
 }
 
 .card-text-wrapper {
   padding: 10px;
-}
-
-.card-past {
-  display: flex;
-  border: 2px solid black;
-  height: 200px;
-  width: 300px;
-  padding: 10px;
-  margin: 20px;
-}
-
-.card-past-img {
-  height: 200px;
-  width: 150px;
 }
 
 .card-past-text-wrapper {
@@ -175,10 +166,24 @@ h2 {
 #searchBtn {
   border-radius: 20px;
 }
+
+ul {
+  list-style: none;
+}
+
 .filter-flex {
   display: flex;
   justify-content: space-between;
   /* width: 1000px; */
+}
+
+.filter-btn {
+  border: 2px solid #E6E6E6;
+  border-radius: 24px;
+  width: 150px;
+  padding: 10px;
+  background-color: #FAFAF5;
+  text-align: center;
 }
 
 .card-container {
