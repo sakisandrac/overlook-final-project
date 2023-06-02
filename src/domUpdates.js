@@ -6,12 +6,6 @@ import { calculateSpending } from './calculations';
 import { getDate } from './get-dates';
 import { getCustomerInfo, postNewBooking, createPostData } from './apiCalls';
 
-// GLOBAL VARIABLES
-// let currentUser;
-// console.log(allBookings, allRooms)
-
-
-
 // SWITCHING VIEWS
 const newBooking = () => {
   searchDates.value = '';
@@ -25,13 +19,19 @@ const toDashboard = (allBookings, allRooms, currentUser) => {
   toggleHidden('add', [newBookingsView]);
   getCustomerInfo(getUserId(usernameInput.value)).then((data) => {
     currentUser = data;
-    console.log('toDashboard', data)
     updateUserBookings(currentUser, allBookings, allRooms);
   })
 }
 //potentially could work: refactor so that the data is called upon user login, NOT page load. user login, check user login-> if success, then also call to Dashboard where the promise all is stored.
 
 // LOGIN PAGE
+const checkInputValues = () => {
+  if(!usernameInput.value || !passwordInput.value) {
+    loginMsg.innerHTML = 'Enter a Username and Password';
+    return true
+  }
+}
+
 const checkPassowrdMsg = (loginResults) => {
   if(loginResults) {
     loginMsg.innerHTML = loginResults;
@@ -51,34 +51,9 @@ const checkLogin = (loginResults, currentUser) => {
 }
 
 const updateUserBookings = (currentUser, allBookings, allRooms) => {
-  console.log(allBookings)
   currentUser.userBookings = matchUserBookedRooms(currentUser, allBookings, allRooms);
-  console.log('updated userbookigs', currentUser.userBookings)
   renderDashboardBookings(currentUser);
   renderCost(currentUser);
-}
-
-// const loginSuccess = (loginResults, allBookings, allRooms) => {
-
-//   getCustomerInfo(getUserId(usernameInput.value)).then((data) => {
-//     currentUser = data;
-//     checkLogin(loginResults, currentUser);
-//     updateUserBookings(currentUser, allBookings, allRooms);
-//   })
-//   // return loginResults
-// }
-
-const loginHandler = (e, allBookings, allRooms, currentUser) => {
-  e.preventDefault();
-  let loginResults = checkCredentials(usernameInput.value, passwordInput.value);
-
-  if(!usernameInput.value || !passwordInput.value) {
-    loginMsg.innerHTML = 'Enter a Username and Password';
-  } else if (loginResults !== 'Username not found') {
-    loginSuccess(loginResults, allBookings, allRooms);
-  } else {
-    checkLogin(loginResults, currentUser);
-  }
 }
 
 // DASHBOARD 
@@ -149,7 +124,7 @@ const displayResultsText = (text) => {
 const searchBookingsHandler = (bookings, allRooms, currentUser) => {
   currentUser.searchDate = searchDates.value.replaceAll('-', '/');
   toggleHidden('add', [individualBookingView]);
-console.log(bookings)
+
   if(currentUser.searchDate) {
     toggleHidden('remove', [filterButtons]);
     let bookedRooms = filterBookings(bookings, currentUser.searchDate);
@@ -219,4 +194,4 @@ const toggleHidden = (type, views) => {
   })
 }
 
-export { newBooking, toDashboard, clearView, toggleHidden, displayResultsText, renderBookings, renderCards, searchBookingsHandler, loginHandler, renderFilteredResults, bookNowHandler, getDate,reserveNowHandler, checkLogin, updateUserBookings  }
+export { newBooking, toDashboard, clearView, toggleHidden, displayResultsText, renderBookings, renderCards, searchBookingsHandler, renderFilteredResults, bookNowHandler, getDate,reserveNowHandler, checkLogin, updateUserBookings, checkInputValues }
