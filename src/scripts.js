@@ -82,6 +82,7 @@ dashboardNav.addEventListener('click', () => {
   toDashboard(allBookings, allRooms, currentUser);
 });
 searchBtn.addEventListener('click', () => {
+  // getAllData();
   searchBookingsHandler(allBookings, allRooms, currentUser);
 });
 filterButtons.addEventListener('click', (e) => {

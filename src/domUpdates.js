@@ -17,12 +17,6 @@ const newBooking = () => {
 const toDashboard = (allBookings, allRooms, currentUser) => {
   toggleHidden('remove', [dashboardView]);
   toggleHidden('add', [newBookingsView]);
-  // getCustomerInfo(getUserId(usernameInput.value)).then((data) => {
-  //   currentUser = data;
-  //   console.log(data)
-  //   updateUserBookings(currentUser, allBookings, allRooms);
-  // })
-  // getAllData()
   updateUserBookings(currentUser, allBookings, allRooms);
 }
 
@@ -181,9 +175,11 @@ const reserveNowHandler = (e, currentUser) => {
   postNewBooking(data).then((data) => {
     if(data.newBooking) {
       confirmationMsg.innerText = `Thank you for booking! Your confirmation number is ${data.newBooking.id}`
+       getAllData();
     } else {
       confirmationMsg.innerText = data;
     }
+   
   });
 }
 
