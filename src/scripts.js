@@ -11,7 +11,7 @@ import './images/junior suite.jpg';
 import './images/page-logo.png';
 import './images/room1.jpg';
 import './images/room2.jpg';
-import  { newBooking, toDashboard, searchBookingsHandler, renderFilteredResults, bookNowHandler, reserveNowHandler, checkLogin, updateUserBookings, checkInputValues } from './domUpdates';
+import  { newBooking, toDashboard, searchBookingsHandler, renderFilteredResults, bookNowHandler, reserveNowHandler, checkLoginSuccess, updateUserBookings, checkInputValues, checkPassowrdMsg, checkLoginResults } from './domUpdates';
 import { getBookings, getRooms, getCustomerInfo } from './apiCalls';
 import  { getUserId, checkCredentials,  } from './login'
 
@@ -43,20 +43,19 @@ const roomType = document.querySelector('.roomType');
 const roomCost = document.querySelector('.roomCost');
 const reserveBtn = document.querySelector('.reserve');
 const confirmationMsg = document.querySelector('.confirmation-message');
+const loadingPage = document.querySelector('#loadingPage')
 
 // GLOBAL VARIABLES
 let allBookings;
 let allRooms;
 let currentUser;
 
-const loginSuccess = (loginResults) => {
+const getAllData = () => {
     Promise.all([getBookings(), getRooms(), getCustomerInfo(getUserId(usernameInput.value))])
     .then((data) => {
       allBookings = data[0]
       allRooms = data[1]
       currentUser = data[2];
-      checkLogin(loginResults, currentUser);
-      updateUserBookings(currentUser, allBookings, allRooms);
     })
 }
 
@@ -65,10 +64,17 @@ loginBtn.addEventListener('click', (e) => {
   e.preventDefault();
   let loginResults = checkCredentials(usernameInput.value, passwordInput.value);
 
-  if (!checkInputValues() && loginResults !== 'Username not found') {
-    loginSuccess(loginResults);
+  if (!checkInputValues() && checkLoginResults(loginResults)) {
+    getAllData();
+    loadingPage.classList.remove('hidden')
+    logInView.classList.add('hidden')
+    setTimeout(() => {
+      loadingPage.classList.add('hidden')
+      checkLoginSuccess(loginResults, currentUser);
+      updateUserBookings(currentUser, allBookings, allRooms);
+    }, 2000)
   } else {
-    checkLogin(loginResults, currentUser);
+    checkPassowrdMsg(loginResults);
   }
 });
 newBookingNav.addEventListener('click', newBooking);
@@ -88,7 +94,7 @@ reserveBtn.addEventListener('click', (e) => {
   reserveNowHandler(e, currentUser);
 });
 
-export { dashboardView, newBookingsView, searchDates,results, resultsMsg, logInView, usernameInput, passwordInput, loginMsg, allBookings, userMsg, currentBookingsContainer, navBox, pastBookingsContainer, totalSpent, filterButtons, individualBookingView, singleImg,roomNumber, roomType, roomCost, currentBookingsMsg, confirmationMsg, allRooms, loginSuccess}
+export { dashboardView, newBookingsView, searchDates,results, resultsMsg, logInView, usernameInput, passwordInput, loginMsg, allBookings, userMsg, currentBookingsContainer, navBox, pastBookingsContainer, totalSpent, filterButtons, individualBookingView, singleImg,roomNumber, roomType, roomCost, currentBookingsMsg, confirmationMsg, allRooms, getAllData}
 
 
 

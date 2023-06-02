@@ -1,7 +1,7 @@
 import { searchResultsMsg, getAvailableRooms, filterBookings } from './newBookings';
 import { matchUserBookedRooms, getPastBookings, getCurrentBookings } from './user-bookings';
-import { dashboardView, newBookingsView, searchDates,results, resultsMsg, logInView, usernameInput, passwordInput, loginMsg, userMsg, currentBookingsContainer, navBox, pastBookingsContainer, totalSpent, filterButtons, individualBookingView, singleImg, roomNumber, roomType, roomCost, currentBookingsMsg, confirmationMsg, loginSuccess} from './scripts';
-import { checkCredentials, getUserId } from './login';
+import { dashboardView, newBookingsView, searchDates,results, resultsMsg, logInView, usernameInput, passwordInput, loginMsg, userMsg, currentBookingsContainer, navBox, pastBookingsContainer, totalSpent, filterButtons, individualBookingView, singleImg, roomNumber, roomType, roomCost, currentBookingsMsg, confirmationMsg, getAllData } from './scripts';
+import { getUserId } from './login';
 import { calculateSpending } from './calculations';
 import { getDate } from './get-dates';
 import { getCustomerInfo, postNewBooking, createPostData } from './apiCalls';
@@ -17,12 +17,14 @@ const newBooking = () => {
 const toDashboard = (allBookings, allRooms, currentUser) => {
   toggleHidden('remove', [dashboardView]);
   toggleHidden('add', [newBookingsView]);
-  getCustomerInfo(getUserId(usernameInput.value)).then((data) => {
-    currentUser = data;
-    updateUserBookings(currentUser, allBookings, allRooms);
-  })
+  // getCustomerInfo(getUserId(usernameInput.value)).then((data) => {
+  //   currentUser = data;
+  //   console.log(data)
+  //   updateUserBookings(currentUser, allBookings, allRooms);
+  // })
+  // getAllData()
+  updateUserBookings(currentUser, allBookings, allRooms);
 }
-//potentially could work: refactor so that the data is called upon user login, NOT page load. user login, check user login-> if success, then also call to Dashboard where the promise all is stored.
 
 // LOGIN PAGE
 const checkInputValues = () => {
@@ -39,14 +41,18 @@ const checkPassowrdMsg = (loginResults) => {
     loginMsg.innerHTML = 'Incorrect Password';
   }
 }
-
-const checkLogin = (loginResults, currentUser) => {
+const checkLoginResults = (loginResults) => {
   if(loginResults !== 'Username not found' && loginResults !== undefined) {
+    return true
+  }
+}
+
+const checkLoginSuccess = (loginResults, currentUser) => {
+  console.log(currentUser)
+  if(checkLoginResults(loginResults)) {
     toggleHidden('add', [logInView]);
     toggleHidden('remove', [dashboardView, navBox]);
     userMsg.innerHTML = `${currentUser.name}`;
-    } else {
-      checkPassowrdMsg(loginResults);
   }
 }
 
@@ -58,7 +64,7 @@ const updateUserBookings = (currentUser, allBookings, allRooms) => {
 
 // DASHBOARD 
 const renderCost = (currentUser) => {
-  clearView[totalSpent];
+  clearView([totalSpent]);
   totalSpent.innerHTML = `Total Spent on Bookings: $${calculateSpending(currentUser.userBookings)}`;
 }
 
@@ -99,7 +105,7 @@ const checkCurrentBookings = (userCurrentBookings, currentBookingsContainer, cur
 }
 
 const renderDashboardBookings = (currentUser) => {
-  clearView[currentBookingsContainer, pastBookingsContainer];
+  clearView([currentBookingsContainer, pastBookingsContainer]);
 
   const dateToday = new Date();
   const userCurrentBookings = getCurrentBookings(currentUser, getDate(dateToday));
@@ -160,7 +166,7 @@ const renderIndividualBooking = (selectedRoom) => {
 
 const bookNowHandler = (e, allRooms) => {
   if(e.target.className === 'bookBtn') {
-    clearView([results, resultsMsg]);
+    clearView([results, resultsMsg, confirmationMsg]);
     toggleHidden('add', [filterButtons])
     toggleHidden('remove', [individualBookingView]);
     let selectedRoom = allRooms.rooms.filter((room)=> {
@@ -194,4 +200,4 @@ const toggleHidden = (type, views) => {
   })
 }
 
-export { newBooking, toDashboard, clearView, toggleHidden, displayResultsText, renderBookings, renderCards, searchBookingsHandler, renderFilteredResults, bookNowHandler, getDate,reserveNowHandler, checkLogin, updateUserBookings, checkInputValues }
+export { newBooking, toDashboard, clearView, toggleHidden, displayResultsText, renderBookings, renderCards, searchBookingsHandler, renderFilteredResults, bookNowHandler, getDate,reserveNowHandler, checkLoginSuccess, updateUserBookings, checkInputValues, checkPassowrdMsg, checkLoginResults }
