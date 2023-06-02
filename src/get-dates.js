@@ -16,7 +16,7 @@ const setMonth = (today) => {
 
 const setDay = (today) => {
   if (today.getDate().toString().length < 2) {
-    return `0${date.getDate()}`;
+    return `0${today.getDate()}`;
   } else {
     return today.getDate();
   }

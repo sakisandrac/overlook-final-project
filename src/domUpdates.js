@@ -1,13 +1,16 @@
 import { searchResultsMsg, getAvailableRooms, filterBookings } from './newBookings';
 import { matchUserBookedRooms, getPastBookings, getCurrentBookings } from './user-bookings';
-import { dashboardView, newBookingsView, searchDates,results, resultsMsg, logInView, usernameInput, passwordInput, loginMsg, userMsg, currentBookingsContainer, navBox, pastBookingsContainer, totalSpent, filterButtons, individualBookingView, singleImg, roomNumber, roomType, roomCost, currentBookingsMsg,confirmationMsg} from './scripts';
+import { dashboardView, newBookingsView, searchDates,results, resultsMsg, logInView, usernameInput, passwordInput, loginMsg, userMsg, currentBookingsContainer, navBox, pastBookingsContainer, totalSpent, filterButtons, individualBookingView, singleImg, roomNumber, roomType, roomCost, currentBookingsMsg, confirmationMsg, loginSuccess} from './scripts';
 import { checkCredentials, getUserId } from './login';
 import { calculateSpending } from './calculations';
 import { getDate } from './get-dates';
 import { getCustomerInfo, postNewBooking, createPostData } from './apiCalls';
 
 // GLOBAL VARIABLES
-let currentUser;
+// let currentUser;
+// console.log(allBookings, allRooms)
+
+
 
 // SWITCHING VIEWS
 const newBooking = () => {
@@ -17,7 +20,7 @@ const newBooking = () => {
   toggleHidden('remove', [newBookingsView]);
 }
 
-const toDashboard = (allBookings, allRooms) => {
+const toDashboard = (allBookings, allRooms, currentUser) => {
   toggleHidden('remove', [dashboardView]);
   toggleHidden('add', [newBookingsView]);
   getCustomerInfo(getUserId(usernameInput.value)).then((data) => {
@@ -48,23 +51,24 @@ const checkLogin = (loginResults, currentUser) => {
 }
 
 const updateUserBookings = (currentUser, allBookings, allRooms) => {
+  console.log(allBookings)
   currentUser.userBookings = matchUserBookedRooms(currentUser, allBookings, allRooms);
   console.log('updated userbookigs', currentUser.userBookings)
   renderDashboardBookings(currentUser);
-  renderCost();
+  renderCost(currentUser);
 }
 
-const loginSuccess = (loginResults, allBookings, allRooms) => {
+// const loginSuccess = (loginResults, allBookings, allRooms) => {
 
-  getCustomerInfo(getUserId(usernameInput.value)).then((data) => {
-    currentUser = data;
-    checkLogin(loginResults, currentUser);
-    updateUserBookings(currentUser, allBookings, allRooms);
-  })
-  // return loginResults
-}
+//   getCustomerInfo(getUserId(usernameInput.value)).then((data) => {
+//     currentUser = data;
+//     checkLogin(loginResults, currentUser);
+//     updateUserBookings(currentUser, allBookings, allRooms);
+//   })
+//   // return loginResults
+// }
 
-const loginHandler = (e, allBookings, allRooms) => {
+const loginHandler = (e, allBookings, allRooms, currentUser) => {
   e.preventDefault();
   let loginResults = checkCredentials(usernameInput.value, passwordInput.value);
 
@@ -78,7 +82,7 @@ const loginHandler = (e, allBookings, allRooms) => {
 }
 
 // DASHBOARD 
-const renderCost = () => {
+const renderCost = (currentUser) => {
   clearView[totalSpent];
   totalSpent.innerHTML = `Total Spent on Bookings: $${calculateSpending(currentUser.userBookings)}`;
 }
@@ -111,7 +115,7 @@ const renderUserBookings = (bookings, view) => {
   });
 }
 
-const checkCurrentBookings = (userCurrentBookings, currentBookingsContainer) => {
+const checkCurrentBookings = (userCurrentBookings, currentBookingsContainer, currentUser) => {
   if(Array.isArray(userCurrentBookings)) {
     renderUserBookings(userCurrentBookings, currentBookingsContainer);
   } else {
@@ -127,7 +131,7 @@ const renderDashboardBookings = (currentUser) => {
   const userPastBookings = getPastBookings(currentUser, getDate(dateToday));
 
   renderUserBookings(userPastBookings, pastBookingsContainer);
-  checkCurrentBookings(userCurrentBookings, currentBookingsContainer);
+  checkCurrentBookings(userCurrentBookings, currentBookingsContainer, currentUser);
 }
 
 // BOOKINGS PAGE
@@ -142,10 +146,10 @@ const displayResultsText = (text) => {
   resultsMsg.innerText = text;
 }
 
-const searchBookingsHandler = (bookings, allRooms) => {
+const searchBookingsHandler = (bookings, allRooms, currentUser) => {
   currentUser.searchDate = searchDates.value.replaceAll('-', '/');
   toggleHidden('add', [individualBookingView]);
-
+console.log(bookings)
   if(currentUser.searchDate) {
     toggleHidden('remove', [filterButtons]);
     let bookedRooms = filterBookings(bookings, currentUser.searchDate);
@@ -164,7 +168,7 @@ const filterByRoomType = (bookingResults, allRooms, type, currentUser) => {
   });
 } //potentially refactor to test lines 145-147 
 
-const renderFilteredResults = (e, allBookings, allRooms) => {
+const renderFilteredResults = (e, allBookings, allRooms, currentUser) => {
   let search = filterByRoomType(allBookings, allRooms, e.target.id, currentUser)
   clearView([results]);
   renderCards(search, allRooms);
@@ -191,7 +195,7 @@ const bookNowHandler = (e, allRooms) => {
   }
 }
 
-const reserveNowHandler = (e) => {
+const reserveNowHandler = (e, currentUser) => {
   let data = createPostData(currentUser.id, currentUser.searchDate, e.target.previousElementSibling.id)
   postNewBooking(data).then((data) => {
     if(data.newBooking) {
@@ -215,4 +219,4 @@ const toggleHidden = (type, views) => {
   })
 }
 
-export { newBooking, toDashboard, clearView, toggleHidden, displayResultsText, renderBookings, renderCards, searchBookingsHandler, loginHandler, renderFilteredResults, bookNowHandler, getDate,reserveNowHandler }
+export { newBooking, toDashboard, clearView, toggleHidden, displayResultsText, renderBookings, renderCards, searchBookingsHandler, loginHandler, renderFilteredResults, bookNowHandler, getDate,reserveNowHandler, checkLogin, updateUserBookings  }

@@ -11,10 +11,11 @@ import './images/junior suite.jpg';
 import './images/page-logo.png';
 import './images/room1.jpg';
 import './images/room2.jpg';
-import  { newBooking, toDashboard, clearView, displayResultsText, searchBookingsHandler, loginHandler, renderFilteredResults, bookNowHandler, reserveNowHandler } from './domUpdates';
-import { getBookings, getRooms } from './apiCalls';
+import  { newBooking, toDashboard, searchBookingsHandler, loginHandler, renderFilteredResults, bookNowHandler, reserveNowHandler, checkLogin, updateUserBookings } from './domUpdates';
+import { getBookings, getRooms, getCustomerInfo } from './apiCalls';
+import  { getUserId } from './login'
 
-// DOM
+// QUERY SELECTORS
 const newBookingNav = document.querySelector('#newBooking');
 const dashboardNav = document.querySelector('#dashboardNav');
 const dashboardView = document.querySelector('#dashboardView');
@@ -46,40 +47,68 @@ const confirmationMsg = document.querySelector('.confirmation-message');
 // GLOBAL VARIABLES
 let allBookings;
 let allRooms;
+let currentUser;
 
-const start = () => {
-  Promise.all([getBookings(), getRooms()])
-  .then((data) => {
-    console.log(data)
-    allBookings = data[0]
-    allRooms = data[1]
-  })
+// const start = () => {
+//   Promise.all([getBookings(), getRooms()])
+//   .then((data) => {
+//     console.log(data)
+//     allBookings = data[0]
+//     allRooms = data[1]
+//   })
+// }
+
+const loginSuccess = (loginResults, allBookings, allRooms) => {
+    Promise.all([getBookings(), getRooms(), getCustomerInfo(getUserId(usernameInput.value))])
+    .then((data) => {
+      console.log(data)
+      allBookings = data[0]
+      allRooms = data[1]
+      currentUser = data[2];
+      checkLogin(loginResults, currentUser);
+      updateUserBookings(currentUser, allBookings, allRooms);
+      console.log('bookigns', allBookings)
+    })
 }
+
+// const loginHandler = (e, allBookings, allRooms) => {
+//   e.preventDefault();
+//   let loginResults = checkCredentials(usernameInput.value, passwordInput.value);
+
+//   if(!usernameInput.value || !passwordInput.value) {
+//     loginMsg.innerHTML = 'Enter a Username and Password';
+//   } else if (loginResults !== 'Username not found') {
+//     loginSuccess(loginResults, allBookings, allRooms);
+//   } else {
+//     checkLogin(loginResults, currentUser);
+//   }
+// }
 
 // EVENT LISTENERS
 newBookingNav.addEventListener('click', newBooking);
 dashboardNav.addEventListener('click', () => {
-  // start();
-  toDashboard(allBookings, allRooms);
+  console.log(allBookings, allRooms, currentUser)
+  toDashboard(allBookings, allRooms, currentUser);
 });
 searchBtn.addEventListener('click', () => {
-  searchBookingsHandler(allBookings, allRooms);
+  console.log(allBookings)
+  searchBookingsHandler(allBookings, allRooms, currentUser);
 });
 filterButtons.addEventListener('click', (e) => {
-  renderFilteredResults(e, allBookings, allRooms)
+  renderFilteredResults(e, allBookings, allRooms, currentUser)
 });
 loginBtn.addEventListener('click', (e) => {
-  loginHandler(e, allBookings, allRooms)
+  loginHandler(e, allBookings, allRooms, currentUser)
 });
 newBookingsView.addEventListener('click', (e) => {
   bookNowHandler(e, allRooms)
 })
 reserveBtn.addEventListener('click', (e) => {
-  reserveNowHandler(e);
+  reserveNowHandler(e, currentUser);
 });
-window.addEventListener('load', start);
+// window.addEventListener('load', start);
 
-export { clearView, displayResultsText, dashboardView, newBookingsView, searchDates,results, resultsMsg, logInView, usernameInput, passwordInput, loginMsg, allBookings, userMsg, currentBookingsContainer, navBox, pastBookingsContainer, totalSpent, filterButtons, individualBookingView, singleImg,roomNumber, roomType, roomCost, currentBookingsMsg, confirmationMsg}
+export { dashboardView, newBookingsView, searchDates,results, resultsMsg, logInView, usernameInput, passwordInput, loginMsg, allBookings, userMsg, currentBookingsContainer, navBox, pastBookingsContainer, totalSpent, filterButtons, individualBookingView, singleImg,roomNumber, roomType, roomCost, currentBookingsMsg, confirmationMsg, allRooms, loginSuccess}
 
 
 
