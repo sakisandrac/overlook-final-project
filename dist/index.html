@@ -23,11 +23,8 @@
           <img class= "icon" src="./images/search.png" alt="icon to search bookings">
         </div>
         <span for="new booking" id="newBooking" class="nav-text">New Booking</span>
+        <p id="errorMsg"><!-- error message will go here if any --></p>
       </div>
-      <!-- <div class="icon-flexbox hidden">
-        <img class= "icon" src="./images/heart-logo.png" alt="icon to view finances">
-        <label for="Financial">Financial</label>
-      </div> -->
     </div>
     <div class="user-flexbox">
       <img src="./images/user.png" alt="user icon" class= "userLogo">
@@ -47,9 +44,10 @@
       </section>
     </div>
     <div>
-      <section class="hidden" id="loadingPage">
+      <section class="card-container hidden" id="loadingPage">
         <p>Thank you for logging in!</p>
         <p>Re-directing you to your dashboard</p>
+        <img src="./images/loading.gif" alt="loading image">
       </section>
     </div>
     <section id="dashboardView" class="hidden">

@@ -11,6 +11,7 @@ import './images/junior suite.jpg';
 import './images/page-logo.png';
 import './images/room1.jpg';
 import './images/room2.jpg';
+import './images/loading.gif'
 import  { newBooking, toDashboard, searchBookingsHandler, renderFilteredResults, bookNowHandler, reserveNowHandler, checkLoginSuccess, updateUserBookings, checkInputValues, checkPassowrdMsg, checkLoginResults } from './domUpdates';
 import { getBookings, getRooms, getCustomerInfo } from './apiCalls';
 import  { getUserId, checkCredentials,  } from './login'
@@ -82,7 +83,6 @@ dashboardNav.addEventListener('click', () => {
   toDashboard(allBookings, allRooms, currentUser);
 });
 searchBtn.addEventListener('click', () => {
-  // getAllData();
   searchBookingsHandler(allBookings, allRooms, currentUser);
 });
 filterButtons.addEventListener('click', (e) => {
