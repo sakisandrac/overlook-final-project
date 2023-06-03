@@ -1,10 +1,9 @@
 import { searchResultsMsg, getAvailableRooms, filterBookings } from './newBookings';
 import { matchUserBookedRooms, getPastBookings, getCurrentBookings } from './user-bookings';
 import { dashboardView, newBookingsView, searchDates,results, resultsMsg, logInView, usernameInput, passwordInput, loginMsg, userMsg, currentBookingsContainer, navBox, pastBookingsContainer, totalSpent, filterButtons, individualBookingView, singleImg, roomNumber, roomType, roomCost, currentBookingsMsg, confirmationMsg, getAllData } from './scripts';
-import { getUserId } from './login';
 import { calculateSpending } from './calculations';
 import { getDate } from './get-dates';
-import { getCustomerInfo, postNewBooking, createPostData } from './apiCalls';
+import { postNewBooking, createPostData } from './apiCalls';
 
 // SWITCHING VIEWS
 const newBooking = () => {
@@ -144,9 +143,11 @@ const filterByRoomType = (bookingResults, allRooms, type, currentUser) => {
 } //potentially refactor to test lines 145-147 
 
 const renderFilteredResults = (e, allBookings, allRooms, currentUser) => {
-  let search = filterByRoomType(allBookings, allRooms, e.target.id, currentUser)
-  clearView([results]);
-  renderCards(search, allRooms);
+  if(e.target.classList.contains('filter-btn')) {
+    let search = filterByRoomType(allBookings, allRooms, e.target.id, currentUser)
+    clearView([results]);
+    renderCards(search, allRooms);
+  }
 }
 
 const renderIndividualBooking = (selectedRoom) => {

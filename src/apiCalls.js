@@ -1,19 +1,19 @@
 const getBookings = () => {
   return fetch('http://localhost:3001/api/v1/bookings')
   .then(res => res.json())
-  .then(data => {
-    return data
-  })
-  .catch(err => console.log(err));
+  .catch((err) => {
+    console.log(err)
+    return document.querySelector('#errorMsg').innerText = `Error please try refreshing page`;
+  });
 }
 
 const getRooms = () => {
   return fetch('http://localhost:3001/api/v1/rooms')
   .then(res => res.json())
-  .then(data => {
-    return data;
-  })
-  .catch(err => console.log(err));
+  .catch((err) => {
+    console.log(err)
+    return document.querySelector('#errorMsg').innerText = `Error please try refreshing page`;
+  });
 }
 
 const getCustomerInfo = (id) => {
@@ -24,7 +24,10 @@ const getCustomerInfo = (id) => {
   .then((data) =>{
     return data;
   })
-  .catch(err => console.log(err));
+  .catch((err) => {
+    console.log(err)
+    return document.querySelector('#errorMsg').innerText = `Error please try refreshing page`;
+  });
 }
 
 const createPostData = (userID, date, roomNumber) => {
@@ -44,15 +47,16 @@ const postNewBooking = (data) => {
     }
   })
     .then((response) => {
-      return response.json()
+      return response.json();
     })
-    .then((json) => {
+    .then((json) => { 
       return json;
     })
     .catch((err) => {
-      console.log(err)
-      return err;
-    });
+      console.log(err);
+      return document.querySelector('#errorMsg').innerText = `Error please try refreshing page`;
+    })
+    
   
 }
 
