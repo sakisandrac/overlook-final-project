@@ -4,6 +4,7 @@ import { dashboardView, newBookingsView, searchDates,results, resultsMsg, logInV
 import { calculateSpending } from './calculations';
 import { getDate } from './get-dates';
 import { postNewBooking, createPostData } from './apiCalls';
+import { checkCredentials } from './login';
 
 // SWITCHING VIEWS
 const newBooking = () => {
@@ -20,10 +21,20 @@ const toDashboard = (allBookings, allRooms, currentUser) => {
 }
 
 // LOGIN PAGE
+const loginHandler = () => {
+  let loginResults = checkCredentials(usernameInput.value, passwordInput.value);
+
+  if (!checkInputValues() && checkLoginResults(loginResults)) {
+    getAllData(loginResults);
+  } else {
+    checkPassowrdMsg(loginResults);
+  };
+}
+
 const checkInputValues = () => {
   if(!usernameInput.value || !passwordInput.value) {
     loginMsg.innerHTML = 'Enter a Username and Password';
-    return true
+    return true;
   }
 }
 
@@ -36,17 +47,16 @@ const checkPassowrdMsg = (loginResults) => {
 }
 const checkLoginResults = (loginResults) => {
   if(loginResults !== 'Username not found' && loginResults !== undefined) {
-    return true
+    return true;
   }
 }
 
 const checkLoginSuccess = (loginResults, currentUser) => {
-  console.log(currentUser)
   if(checkLoginResults(loginResults)) {
     toggleHidden('add', [logInView]);
     toggleHidden('remove', [dashboardView, navBox]);
     userMsg.innerHTML = `${currentUser.name}`;
-  }
+  };
 }
 
 const updateUserBookings = (currentUser, allBookings, allRooms) => {
@@ -56,6 +66,13 @@ const updateUserBookings = (currentUser, allBookings, allRooms) => {
 }
 
 // DASHBOARD 
+const loadDashboard = (loginResults, currentUser, allBookings, allRooms) => {
+  if(loginResults) {
+    checkLoginSuccess(loginResults, currentUser);
+    updateUserBookings(currentUser, allBookings, allRooms);
+  };
+}
+
 const renderCost = (currentUser) => {
   clearView([totalSpent]);
   totalSpent.innerHTML = `Total Spent on Bookings: $${calculateSpending(currentUser.userBookings)}`;
@@ -140,7 +157,7 @@ const filterByRoomType = (bookingResults, allRooms, type, currentUser) => {
   return rooms.filter((room) => {
     return room.roomType.split(' ').join('') === type;
   });
-} //potentially refactor to test lines 145-147 
+}
 
 const renderFilteredResults = (e, allBookings, allRooms, currentUser) => {
   if(e.target.classList.contains('filter-btn')) {
@@ -162,9 +179,9 @@ const renderIndividualBooking = (selectedRoom) => {
 const bookNowHandler = (e, allRooms) => {
   if(e.target.className === 'bookBtn') {
     clearView([results, resultsMsg, confirmationMsg]);
-    toggleHidden('add', [filterButtons])
+    toggleHidden('add', [filterButtons]);
     toggleHidden('remove', [individualBookingView]);
-    let selectedRoom = allRooms.rooms.filter((room)=> {
+    let selectedRoom = allRooms.rooms.filter((room) => {
       return room.number === parseInt(e.target.nextElementSibling.id);
     });
     renderIndividualBooking(selectedRoom[0]);
@@ -172,15 +189,15 @@ const bookNowHandler = (e, allRooms) => {
 }
 
 const reserveNowHandler = (e, currentUser) => {
-  let data = createPostData(currentUser.id, currentUser.searchDate, e.target.previousElementSibling.id)
+  let data = createPostData(currentUser.id, currentUser.searchDate, e.target.previousElementSibling.id);
+
   postNewBooking(data).then((data) => {
     if(data.newBooking) {
       confirmationMsg.innerText = `Thank you for booking! Your confirmation number is ${data.newBooking.id}`
-       getAllData();
+      getAllData();
     } else {
       confirmationMsg.innerText = data;
     }
-   
   });
 }
 
@@ -197,4 +214,4 @@ const toggleHidden = (type, views) => {
   })
 }
 
-export { newBooking, toDashboard, clearView, toggleHidden, displayResultsText, renderBookings, renderCards, searchBookingsHandler, renderFilteredResults, bookNowHandler, getDate,reserveNowHandler, checkLoginSuccess, updateUserBookings, checkInputValues, checkPassowrdMsg, checkLoginResults }
+export { newBooking, toDashboard, clearView, toggleHidden, displayResultsText, renderBookings, renderCards, searchBookingsHandler, renderFilteredResults, bookNowHandler, getDate,reserveNowHandler, checkLoginSuccess, updateUserBookings, checkInputValues, checkPassowrdMsg, checkLoginResults, loadDashboard, loginHandler }

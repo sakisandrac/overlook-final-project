@@ -12,9 +12,9 @@ import './images/page-logo.png';
 import './images/room1.jpg';
 import './images/room2.jpg';
 import './images/loading.gif'
-import  { newBooking, toDashboard, searchBookingsHandler, renderFilteredResults, bookNowHandler, reserveNowHandler, checkLoginSuccess, updateUserBookings, checkInputValues, checkPassowrdMsg, checkLoginResults } from './domUpdates';
+import  { newBooking, toDashboard, searchBookingsHandler, renderFilteredResults, bookNowHandler, reserveNowHandler, loadDashboard, loginHandler } from './domUpdates';
 import { getBookings, getRooms, getCustomerInfo } from './apiCalls';
-import  { getUserId, checkCredentials,  } from './login'
+import  { getUserId } from './login'
 
 // QUERY SELECTORS
 const newBookingNav = document.querySelector('#newBooking');
@@ -44,39 +44,28 @@ const roomType = document.querySelector('.roomType');
 const roomCost = document.querySelector('.roomCost');
 const reserveBtn = document.querySelector('.reserve');
 const confirmationMsg = document.querySelector('.confirmation-message');
-const loadingPage = document.querySelector('#loadingPage')
 
 // GLOBAL VARIABLES
 let allBookings;
 let allRooms;
 let currentUser;
 
-const getAllData = () => {
+// START FUNCTION
+const getAllData = (loginResults) => {
     Promise.all([getBookings(), getRooms(), getCustomerInfo(getUserId(usernameInput.value))])
     .then((data) => {
-      allBookings = data[0]
-      allRooms = data[1]
+      allBookings = data[0];
+      allRooms = data[1];
       currentUser = data[2];
-    })
+
+      loadDashboard(loginResults, currentUser, allBookings, allRooms);
+    });
 }
 
 // EVENT LISTENERS
 loginBtn.addEventListener('click', (e) => {
   e.preventDefault();
-  let loginResults = checkCredentials(usernameInput.value, passwordInput.value);
-
-  if (!checkInputValues() && checkLoginResults(loginResults)) {
-    getAllData();
-    loadingPage.classList.remove('hidden')
-    logInView.classList.add('hidden')
-    setTimeout(() => {
-      loadingPage.classList.add('hidden')
-      checkLoginSuccess(loginResults, currentUser);
-      updateUserBookings(currentUser, allBookings, allRooms);
-    }, 2000)
-  } else {
-    checkPassowrdMsg(loginResults);
-  }
+  loginHandler();
 });
 newBookingNav.addEventListener('click', newBooking);
 dashboardNav.addEventListener('click', () => {

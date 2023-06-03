@@ -22,5 +22,4 @@ describe('Get Dates', () => {
       expect(getDate(today).length).to.equal(8);
     });
   });
-
  })

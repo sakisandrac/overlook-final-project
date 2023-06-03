@@ -1,26 +1,26 @@
 const filterBookings = (data, searchDate) => {
   return data.bookings.filter((booking) => {
-      return booking.date === searchDate;
-    })
+    return booking.date === searchDate;
+  });
 }
 
 const getAvailableRooms = (bookedRooms, allRooms) => {
   let rooms = bookedRooms.map((booking) => {
-    return booking.roomNumber
+    return booking.roomNumber;
   })
   return allRooms.rooms.filter((room) => {
-    return !rooms.includes(room.number)
+    return !rooms.includes(room.number);
   });
 }
 
 const searchResultsMsg = (results) => {
   if(!results) {
-    return 'Enter a valid date!'
+    return 'Enter a valid date!';
   } else if (results.length > 0){
-    return `There are ${results.length} rooms available:`
+    return `There are ${results.length} rooms available:`;
   } else {
-    return 'We are so sorry! There are no rooms avaiable for this date, please select a different date.'
+    return 'We are so sorry! There are no rooms avaiable for this date, please select a different date.';
   };
 }
 
-export { searchResultsMsg, filterBookings, getAvailableRooms, }
+export { searchResultsMsg, filterBookings, getAvailableRooms }

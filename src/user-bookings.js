@@ -25,7 +25,7 @@ const getPastBookings = (currentUser, date) => {
     return bookings;
   } else {
     return 'No Current Bookings to Display';
-  }
+  };
 }
 
 const getCurrentBookings = (currentUser, date) => {
@@ -37,7 +37,7 @@ const getCurrentBookings = (currentUser, date) => {
     return bookings;
   } else {
     return 'No Current Bookings to Display';
-  }
+  };
 }
 
 export { getUserBookings, matchUserBookedRooms, getPastBookings, getCurrentBookings }

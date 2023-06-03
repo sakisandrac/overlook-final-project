@@ -3,10 +3,10 @@ import { getUserBookings, matchUserBookedRooms, getPastBookings, getCurrentBooki
 import { bookingData, roomData } from './sampleData';
 
 describe('User Bookings', () => {
-  const today = 20230301
-  const currentUser = { id: 4, name: 'Rachel' }
-  const currentUser2 = { id: 10, name: 'Ross' }
-  const currentUser3 =  { 
+  const today = 20230301;
+  const currentUser = { id: 4, name: 'Rachel' };
+  const currentUser2 = { id: 10, name: 'Ross' };
+  const currentUser3 = { 
     id: 6, 
     name: 'Monica', 
     userBookings: [{booking: "2022/01/10"}, {booking: "2024/01/10"} ] 
@@ -47,7 +47,6 @@ describe('User Bookings', () => {
     it('should say if there are no bookings before todays date', () => {
       expect(getPastBookings(currentUser3, 20200301)).to.equal('No Current Bookings to Display');
     });
-
   });
   
   describe('getCurrentBookings', () => {
@@ -60,6 +59,5 @@ describe('User Bookings', () => {
     it('should say if there are no current bookings', () => {
       expect(getCurrentBookings(currentUser3, 20290301)).to.equal('No Current Bookings to Display');
     });
-
   });
 })

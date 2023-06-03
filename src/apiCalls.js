@@ -18,12 +18,8 @@ const getRooms = () => {
 
 const getCustomerInfo = (id) => {
   return fetch(`http://localhost:3001/api/v1/customers/${id}`)
-  .then((res) => {
-    return res.json()
-  })
-  .then((data) =>{
-    return data;
-  })
+  .then((res) => res.json())
+  .then((data) => data)
   .catch((err) => {
     console.log(err)
     return document.querySelector('#errorMsg').innerText = `Error please try refreshing page`;
@@ -46,18 +42,12 @@ const postNewBooking = (data) => {
       'Content-Type': 'application/json'
     }
   })
-    .then((response) => {
-      return response.json();
-    })
-    .then((json) => { 
-      return json;
-    })
+    .then((response) => response.json())
+    .then((json) => json)
     .catch((err) => {
       console.log(err);
       return document.querySelector('#errorMsg').innerText = `Error please try refreshing page`;
-    })
-    
-  
+    });
 }
 
 
