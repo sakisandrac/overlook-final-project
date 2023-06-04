@@ -2,12 +2,13 @@ import { searchResultsMsg, getAvailableRooms, filterBookings } from './newBookin
 import { matchUserBookedRooms, getPastBookings, getCurrentBookings } from './user-bookings';
 import { dashboardView, newBookingsView, searchDates,results, resultsMsg, logInView, usernameInput, passwordInput, loginMsg, userMsg, currentBookingsContainer, navBox, pastBookingsContainer, totalSpent, filterButtons, individualBookingView, singleImg, roomNumber, roomType, roomCost, currentBookingsMsg, confirmationMsg, getAllData } from './scripts';
 import { calculateSpending } from './calculations';
-import { getDate } from './get-dates';
+import { getDate, setMonth, setDay } from './get-dates';
 import { postNewBooking, createPostData } from './apiCalls';
 import { checkCredentials } from './login';
 
 // SWITCHING VIEWS
 const newBooking = () => {
+  disablePreviousDates();
   searchDates.value = '';
   clearView([results, resultsMsg]);
   toggleHidden('add', [dashboardView, logInView, filterButtons, individualBookingView]);
@@ -135,6 +136,12 @@ const renderBookings = (bookedRooms, allRooms) => {
 
 const displayResultsText = (text) => {
   resultsMsg.innerText = text;
+}
+
+const disablePreviousDates = () => {
+  const today = new Date();
+  const min = `${today.getFullYear()}-${setMonth(today)}-${setDay(today)}`;
+  searchDates.setAttribute('min', min);
 }
 
 const searchBookingsHandler = (bookings, allRooms, currentUser) => {
