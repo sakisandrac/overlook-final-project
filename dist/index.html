@@ -4,13 +4,76 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Webpack Starter Kit</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@200&display=swap" rel="stylesheet">
+  <title>Overlook</title>
 </head>
 <body>
-  <img src="./images/turing-logo.png" alt="turing logo">
-  
-  <!-- Do not include the scripts.js or class files here - it is done by the webpack server -->
+  <nav>
+    <div class="nav-flexbox">
+      <div class="icon-flexbox">
+        <img class= "icon" src="./images/home.png" alt="icon to view bookings">
+        <label for="my bookings" id="dashboardNav">My Dashboard</label>
+      </div>
+      <div class="icon-flexbox">
+        <img class= "icon" src="./images/search.png" alt="icon to search bookings">
+        <label for="new booking" id="newBooking">New Booking</label>
+      </div>
+      <div class="icon-flexbox">
+        <img class= "icon" src="./images/heart-logo.png" alt="icon to view finances">
+        <label for="Financial">Financial</label>
+      </div>
+    </div>
+    <div class="user-flexbox">
+      <img src="./images/user.png" alt="user icon" class= "userLogo">
+      <label for="username">Please Log-In</label>
+    </div>
+  </nav>
+  <main>
+    <section id="dashboardView">
+      <section id="logInView">
+          <form>
+            <label for="log-in">Please Log-In:</label>
+            <input type="text" id="usernameInput" placeholder="enter username"></input>
+            <input type="password" id="passwordInput"  placeholder="enter password">
+          </form>
+      </section>
+      <h1>Welcome to your Dashboard!</h1>
+      <h2 id="totalSpent"></h2>
+      <section class="bookings-display">
+        <h2>Current Bookings</h2>
+        <article class="card">
+          <img src="./images/single room.jpg" class="card-img">
+          <div class="card-text-wrapper">
+            <p class="card-text">Room</p>
+            <p class="card-text">Cost</p>
+            <p class="card-text">Dates</p>
+          </div>
+        </article>
+      </section>
+      <section class="bookings-display">
+        <h2>Past Bookings</h2>
+        <article class="card-past">
+          <img src="./images/single room.jpg" class="card-past-img">
+          <div class="card-past-text-wrapper">
+            <p>Dates</p>
+            <p>Cost</p>
+          </div>
+        </article>
+      </section>
+    </section>
+    <section id="newBookingsView" class="hidden">
+      <h1>Book A New Room</h1>
+      <label for="date input">Search Dates : </label>
+        <input type="date" placeholder="search for dates" id="searchDates">
+        <button id="searchBtn">Submit</button>
+      <h2 id="resultsMsg">Please select a date to search</h2>
+      <section id="results">
+        <!-- results will go here -->
+      </section>
+    </section>
+  </main>
   <script src="bundle.js"></script>
-
 </body>
 </html>
