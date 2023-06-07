@@ -1,4 +1,4 @@
-import { searchResultsMsg, getAvailableRooms, filterBookings } from './newBookings';
+import { searchResultsMsg, getAvailableRooms, filterBookings, matchIndividualRoom } from './newBookings';
 import { matchUserBookedRooms, getPastBookings, getCurrentBookings } from './user-bookings';
 import { dashboardView, newBookingsView, searchDates,results, resultsMsg, logInView, usernameInput, passwordInput, loginMsg, userMsg, currentBookingsContainer, navBox, pastBookingsContainer, totalSpent, filterButtons, individualBookingView, currentBookingsMsg, confirmationMsg, getAllData } from './scripts';
 import { calculateSpending } from './calculations';
@@ -202,29 +202,20 @@ const bookNowHandler = (e, allRooms) => {
     clearView([results, resultsMsg, confirmationMsg]);
     toggleHidden('add', [filterButtons]);
     toggleHidden('remove', [individualBookingView]);
-    let selectedRoom = allRooms.rooms.filter((room) => {
-      return room.number === parseInt(e.target.nextElementSibling.id);
-    });
-    console.log('need this', selectedRoom[0])
-    renderIndividualBooking(selectedRoom[0]);
-  }
-}
 
-const getIndividualRoom = (roomNumber, allRooms) => {
-  return allRooms.rooms.filter((room) => {
-    return room.number === roomNumber;
-  });
+    const selectedRoom = matchIndividualRoom(e.target.nextElementSibling.id, allRooms);
+    renderIndividualBooking(selectedRoom[0]);
+  };
 }
 
 const reserveNowHandler = (e, currentUser, allRooms) => {
-  console.dir(e.target)
   if (e.target.classList.contains('reserve')) {
     let data = createPostData(currentUser.id, currentUser.searchDate, e.target.previousElementSibling.id);
 
     postNewBooking(data).then((data) => {
       if (data.newBooking) {
-        const selectedRoom = getIndividualRoom(data.newBooking.roomNumber, allRooms)[0];
-        const message = `<p>Thank you for booking! Your confirmation number is ${data.newBooking.id}</p>`;
+        const selectedRoom = matchIndividualRoom(data.newBooking.roomNumber, allRooms)[0];
+        const message = `Thank you for booking! Your confirmation number is ${data.newBooking.id}`;
         renderIndividualBooking(selectedRoom, message);
         getAllData();
       } else {
