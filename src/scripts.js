@@ -42,7 +42,6 @@ const singleImg = document.querySelector('.single-img');
 const roomNumber = document.querySelector('.roomNumber');
 const roomType = document.querySelector('.roomType');
 const roomCost = document.querySelector('.roomCost');
-const reserveBtn = document.querySelector('.reserve');
 const confirmationMsg = document.querySelector('.confirmation-message');
 
 // GLOBAL VARIABLES
@@ -80,8 +79,8 @@ filterButtons.addEventListener('click', (e) => {
 newBookingsView.addEventListener('click', (e) => {
   bookNowHandler(e, allRooms);
 });
-reserveBtn.addEventListener('click', (e) => {
-  reserveNowHandler(e, currentUser);
+individualBookingView.addEventListener('click', (e) => {
+  reserveNowHandler(e, currentUser, allRooms);
 });
 
 export { dashboardView, newBookingsView, searchDates,results, resultsMsg, logInView, usernameInput, passwordInput, loginMsg, allBookings, userMsg, currentBookingsContainer, navBox, pastBookingsContainer, totalSpent, filterButtons, individualBookingView, singleImg,roomNumber, roomType, roomCost, currentBookingsMsg, confirmationMsg, allRooms, getAllData}
