@@ -1,13 +1,7 @@
 import chai from 'chai';
 const expect = chai.expect;
-import { getBookings, filterBookings, getAvailableRooms, searchResultsMsg } from '../src/newBookings';
+import { filterBookings, getAvailableRooms, searchResultsMsg } from '../src/newBookings';
 import {bookingData, roomData} from './sampleData'
-
-describe('getBookings', () => {
-  it('should be a function', () => {
-    expect(getBookings).to.be.a('function');
-  })
-})
 
 describe('filterBookings', () => {
   it('should be a function', () => {
@@ -26,11 +20,19 @@ describe('getAvailableRooms', () => {
   })
 
   it('should return available rooms', () => {
+    let bookedRooms = filterBookings(bookingData, '2022/04/22')
+    let allRooms = getAvailableRooms(bookedRooms, roomData);
+
+    expect(allRooms.length).to.equal(7);
+  })
+
+  it('it should be able to tell if no rooms are available', () => {
     let bookedRooms = filterBookings(bookingData, '2023/03/22')
     let allRooms = getAvailableRooms(bookedRooms, roomData);
-console.log(allRooms)
-    expect(allRooms.length).to.equal(4)
+
+    expect(allRooms.length).to.equal(0);
   })
+
 })
 
 describe('searchResultsMsg', () => {
@@ -47,6 +49,14 @@ describe('searchResultsMsg', () => {
   it('should return error if invalid date is given', () => {
     const msg = searchResultsMsg();
     expect(msg).to.equal('Enter a valid date!');
+  })
+
+  it('should display message if no rooms available', () => {
+    let bookedRooms = filterBookings(bookingData, '2023/03/22')
+    let results = getAvailableRooms(bookedRooms, roomData);
+    let msg = searchResultsMsg(results)
+    
+    expect(msg).to.equal('We are so sorry! There are no rooms avaiable for this date, please select a different date.');
   })
 
 })

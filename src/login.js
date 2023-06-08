@@ -9,7 +9,7 @@ const checkCredentials = (username, password) => {
 }
 
 const matchUser = (username, password) => {
-  console.log(username, password)
+  // console.log(username, password)
   if (userLogins[username]) {
   return matchPassword(username, password)
   } else {

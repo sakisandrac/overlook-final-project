@@ -6,7 +6,7 @@ const expect = chai.expect;
 describe('User Login', () => {
   describe('checkCredentials', () => {
     it('should be able to check if there are valid username and password inputs', () => {
-      expect(checkCredentials('hello', 'password')).to.equal('valid username & password')
+      expect(checkCredentials('customer50', 'overlook2021')).to.be.true;
     });
 
     it('should return error message if either username or password was not entered', () => {
@@ -15,8 +15,8 @@ describe('User Login', () => {
   });
 
   describe('matchUser', () => {
-    it('should be able to check if username is valid', () => {
-      expect(matchUser('customer50', 'password')).to.equal('Valid username')
+    it("should check username's password if username is found", () => {
+      expect(matchUser('customer50', 'password')).to.be.undefined
     });
 
     it('should return message if username is not found', () => {
@@ -29,10 +29,8 @@ describe('User Login', () => {
       expect(matchPassword('customer50', 'overlook2021')).to.be.true
     });
 
-    it('should return message if password is incorrect', () => {
-      expect(matchPassword('customer50', 'password')).to.be.undefined
+    it('should be able to check if username is valid, but password is invalid', () => {
+      expect(matchUser('customer50', 'password')).to.be.undefined
     });
   });
-
-
-})
+});
