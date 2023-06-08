@@ -11,7 +11,6 @@ import './images/junior suite.jpg';
 import './images/page-logo.png';
 import './images/room1.jpg';
 import './images/room2.jpg';
-import './images/loading.gif'
 import  { newBooking, toDashboard, searchBookingsHandler, renderFilteredResults, bookNowHandler, reserveNowHandler, loadDashboard, loginHandler,closeButtonHandler } from './domUpdates';
 import { getBookings, getRooms, getCustomerInfo } from './apiCalls';
 import  { getUserId } from './login'
