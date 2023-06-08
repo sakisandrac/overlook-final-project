@@ -12,7 +12,7 @@ import './images/page-logo.png';
 import './images/room1.jpg';
 import './images/room2.jpg';
 import './images/loading.gif'
-import  { newBooking, toDashboard, searchBookingsHandler, renderFilteredResults, bookNowHandler, reserveNowHandler, loadDashboard, loginHandler } from './domUpdates';
+import  { newBooking, toDashboard, searchBookingsHandler, renderFilteredResults, bookNowHandler, reserveNowHandler, loadDashboard, loginHandler,closeButtonHandler } from './domUpdates';
 import { getBookings, getRooms, getCustomerInfo } from './apiCalls';
 import  { getUserId } from './login'
 
@@ -81,6 +81,7 @@ newBookingsView.addEventListener('click', (e) => {
 });
 individualBookingView.addEventListener('click', (e) => {
   reserveNowHandler(e, currentUser, allRooms);
+  closeButtonHandler(e, allBookings, allRooms, currentUser);
 });
 
 export { dashboardView, newBookingsView, searchDates,results, resultsMsg, logInView, usernameInput, passwordInput, loginMsg, allBookings, userMsg, currentBookingsContainer, navBox, pastBookingsContainer, totalSpent, filterButtons, individualBookingView, singleImg,roomNumber, roomType, roomCost, currentBookingsMsg, confirmationMsg, allRooms, getAllData}

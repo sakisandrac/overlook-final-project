@@ -215,7 +215,6 @@ ul {
   width: 700px;
   height: 550px;
   padding: 0;
-  border: 2px solid black;
 }
 
 .single-img {
@@ -258,7 +257,7 @@ ul {
 
 .confirmation-message {
   font-size: 1.3rem;
-  margin-bottom: 15px;
+  margin-bottom: 9px;
 }
 .roomCost {
   margin-bottom: 20px;
@@ -269,6 +268,13 @@ ul {
   border: none;
   border-radius: 24px;
   background-color: #f5cac3;
+}
+
+.close {
+  padding: 5px;
+  border: none;
+  border-radius: 24px;
+  background-color: #dfdfdf;
 }
 
 .hidden {

@@ -147,6 +147,7 @@ const disablePreviousDates = () => {
 const searchBookingsHandler = (bookings, allRooms, currentUser) => {
   currentUser.searchDate = searchDates.value.replaceAll('-', '/');
   toggleHidden('add', [individualBookingView]);
+  toggleHidden('remove', [results, resultsMsg]);
 
   if(currentUser.searchDate) {
     toggleHidden('remove', [filterButtons]);
@@ -176,6 +177,7 @@ const renderFilteredResults = (e, allBookings, allRooms, currentUser) => {
 
 const renderIndividualBooking = (selectedRoom, message) => {
   toggleHidden('remove', [individualBookingView]);
+  individualBookingView.show();
   clearView([individualBookingView]);
   individualBookingView.innerHTML += `
     <article class="individual-booking">
@@ -192,6 +194,7 @@ const renderIndividualBooking = (selectedRoom, message) => {
           <p class="card-booking-text roomCost" id="${selectedRoom.number}">Cost Per Night: $${selectedRoom.costPerNight}</p>
           <button class="reserve bookBtn" id="${selectedRoom.number}">Reserve Now</button>
           <p class="confirmation-message">${message ? message : ''}</p>
+          <button class="close">Go Back</button>
         </div>
       </div>
     </article>`;
@@ -199,8 +202,8 @@ const renderIndividualBooking = (selectedRoom, message) => {
 
 const bookNowHandler = (e, allRooms) => {
   if(e.target.className === 'bookBtn') {
-    clearView([results, resultsMsg, confirmationMsg]);
-    toggleHidden('add', [filterButtons]);
+    clearView([confirmationMsg]);
+    toggleHidden('add', [filterButtons, results, resultsMsg]);
     toggleHidden('remove', [individualBookingView]);
 
     const selectedRoom = matchIndividualRoom(e.target.nextElementSibling.id, allRooms);
@@ -225,6 +228,14 @@ const reserveNowHandler = (e, currentUser, allRooms) => {
   };
 }
 
+const closeButtonHandler = (e, allBookings, allRooms, currentUser) => {
+  if(e.target.classList.contains('close')) {
+    individualBookingView.close();
+    toggleHidden('remove', [filterButtons, results, resultsMsg]);
+    searchBookingsHandler(allBookings, allRooms, currentUser);
+  }
+}
+
 // DOM FUNCTIONS
 const clearView = (views) => {
   views.forEach((view) => {
@@ -238,4 +249,4 @@ const toggleHidden = (type, views) => {
   })
 }
 
-export { newBooking, toDashboard, clearView, toggleHidden, displayResultsText, renderBookings, renderCards, searchBookingsHandler, renderFilteredResults, bookNowHandler, getDate,reserveNowHandler, checkLoginSuccess, updateUserBookings, checkInputValues, checkPassowrdMsg, checkLoginResults, loadDashboard, loginHandler }
+export { closeButtonHandler, newBooking, toDashboard, clearView, toggleHidden, displayResultsText, renderBookings, renderCards, searchBookingsHandler, renderFilteredResults, bookNowHandler, getDate,reserveNowHandler, checkLoginSuccess, updateUserBookings, checkInputValues, checkPassowrdMsg, checkLoginResults, loadDashboard, loginHandler }
