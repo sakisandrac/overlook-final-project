@@ -8,11 +8,15 @@ import './images/single room.jpg';
 import './images/suite.jpg';
 import './images/residential suite.jpg';
 import './images/junior suite.jpg';
-import './images/page-logo.png'
-import  { newBooking, toDashboard, clearView, displayResultsText, searchBookings, loginHandler } from './domUpdates'
-import { getCustomerInfo, getBookings, getRooms } from './apiCalls'
+import './images/page-logo.png';
+import './images/room1.jpg';
+import './images/room2.jpg';
+import './images/loading.gif'
+import  { newBooking, toDashboard, searchBookingsHandler, renderFilteredResults, bookNowHandler, reserveNowHandler, loadDashboard, loginHandler } from './domUpdates';
+import { getBookings, getRooms, getCustomerInfo } from './apiCalls';
+import  { getUserId } from './login'
 
-// DOM
+// QUERY SELECTORS
 const newBookingNav = document.querySelector('#newBooking');
 const dashboardNav = document.querySelector('#dashboardNav');
 const dashboardView = document.querySelector('#dashboardView');
@@ -28,41 +32,59 @@ const passwordInput = document.querySelector('#passwordInput');
 const loginMsg = document.querySelector('#loginMsg');
 const userMsg = document.querySelector('#userMsg');
 const currentBookingsContainer = document.querySelector('#currentBookingsContainer');
+const currentBookingsMsg = document.querySelector('#currentBookingsMsg');
 const navBox = document.querySelector("#navBox");
 const pastBookingsContainer = document.querySelector('#pastBookingsContainer');
 const totalSpent = document.querySelector('#totalSpent');
+const filterButtons = document.querySelector('#filterButtons');
+const individualBookingView = document.querySelector('#individualBookingView');
+const singleImg = document.querySelector('.single-img');
+const roomNumber = document.querySelector('.roomNumber');
+const roomType = document.querySelector('.roomType');
+const roomCost = document.querySelector('.roomCost');
+const reserveBtn = document.querySelector('.reserve');
+const confirmationMsg = document.querySelector('.confirmation-message');
 
 // GLOBAL VARIABLES
-let currentUser;
 let allBookings;
 let allRooms;
+let currentUser;
 
-const start = () => {
-  Promise.all([getBookings(), getRooms()])
-  .then((data) => {
-    console.log(data)
-    allBookings = data[0]
-    allRooms = data[1]
-  })
+// START FUNCTION
+const getAllData = (loginResults) => {
+    Promise.all([getBookings(), getRooms(), getCustomerInfo(getUserId(usernameInput.value))])
+    .then((data) => {
+      allBookings = data[0];
+      allRooms = data[1];
+      currentUser = data[2];
+
+      loadDashboard(loginResults, currentUser, allBookings, allRooms);
+    });
 }
 
-window.addEventListener('load', start)
 // EVENT LISTENERS
-newBookingNav.addEventListener('click', newBooking);
-dashboardNav.addEventListener('click', toDashboard);
-searchBtn.addEventListener('click', () => {
-  searchBookings(allBookings, allRooms)
-});
 loginBtn.addEventListener('click', (e) => {
-  loginHandler(e, currentUser, allBookings, allRooms)
-})
+  e.preventDefault();
+  loginHandler();
+});
+newBookingNav.addEventListener('click', newBooking);
+dashboardNav.addEventListener('click', () => {
+  toDashboard(allBookings, allRooms, currentUser);
+});
+searchBtn.addEventListener('click', () => {
+  searchBookingsHandler(allBookings, allRooms, currentUser);
+});
+filterButtons.addEventListener('click', (e) => {
+  renderFilteredResults(e, allBookings, allRooms, currentUser)
+});
+newBookingsView.addEventListener('click', (e) => {
+  bookNowHandler(e, allRooms);
+});
+reserveBtn.addEventListener('click', (e) => {
+  reserveNowHandler(e, currentUser);
+});
 
-getCustomerInfo(50).then((data)=>{
-  currentUser = data
-  console.log(data.name)
-})
-
-export { clearView, displayResultsText, dashboardView, newBookingsView, searchDates,results, resultsMsg, logInView, usernameInput, passwordInput, loginMsg, allBookings, userMsg, currentBookingsContainer, navBox, pastBookingsContainer, totalSpent}
+export { dashboardView, newBookingsView, searchDates,results, resultsMsg, logInView, usernameInput, passwordInput, loginMsg, allBookings, userMsg, currentBookingsContainer, navBox, pastBookingsContainer, totalSpent, filterButtons, individualBookingView, singleImg,roomNumber, roomType, roomCost, currentBookingsMsg, confirmationMsg, allRooms, getAllData}
 
 
 

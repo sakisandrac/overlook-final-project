@@ -70,6 +70,7 @@ const roomData = {
   roomType: 'residential suite', 
   bidet: true, 
   bedSize: 'queen', 
+  costPerNight: 10,
   numBeds: 1
 },
 {
@@ -77,6 +78,7 @@ const roomData = {
   roomType: 'suite', 
   bidet: false, 
   bedSize: 'full', 
+  costPerNight: 10,
   numBeds: 2
 },
 {
@@ -84,18 +86,21 @@ const roomData = {
   roomType: 'single room', 
   bidet: false, 
   bedSize: 'king', 
+  costPerNight: 10,
   numBeds: 1
 },
 {
   number: 4, 
   roomType: 'single room', 
   bidet: false, 
+  costPerNight: 10,
   bedSize: 'queen', numBeds: 1
 },
 {
   number: 5, 
-  roomType: 'single room', 
+  roomType: 'suite', 
   bidet: true, 
+  costPerNight: 10,
   bedSize: 'queen', 
   numBeds: 2
 },
@@ -103,6 +108,7 @@ const roomData = {
   number: 6, 
   roomType: 'single room', 
   bidet: true, 
+  costPerNight: 10,
   bedSize: 'queen', 
   numBeds: 2
 },
@@ -111,16 +117,18 @@ const roomData = {
   roomType: 'single room', 
   bidet: true, 
   bedSize: 'queen', 
+  costPerNight: 10,
   numBeds: 2
 },
 {
   number: 8, 
   roomType: 'single room', 
   bidet: true, 
+  costPerNight: 10,
   bedSize: 'queen', 
   numBeds: 2
 }
   ]
 }
 
-export {bookingData, roomData}
+export { bookingData, roomData }

@@ -23,11 +23,8 @@
           <img class= "icon" src="./images/search.png" alt="icon to search bookings">
         </div>
         <span for="new booking" id="newBooking" class="nav-text">New Booking</span>
+        <p id="errorMsg"><!-- error message will go here if any --></p>
       </div>
-      <!-- <div class="icon-flexbox hidden">
-        <img class= "icon" src="./images/heart-logo.png" alt="icon to view finances">
-        <label for="Financial">Financial</label>
-      </div> -->
     </div>
     <div class="user-flexbox">
       <img src="./images/user.png" alt="user icon" class= "userLogo">
@@ -36,11 +33,13 @@
   </nav>
   <main>
     <div class="login" id="logInView">
-      <img src="./images/page-logo.png" id="pageLogo">
+      <img src="./images/page-logo.png" alt="logo for overlook booking website" id="pageLogo">
       <section class="login">
         <h1 id="loginMsg">Please Log In To Continue</h1>
         <form>
+          <label for="usernameInput" class="hidden">Username</label>
           <input class="login-input" type="text" id="usernameInput" placeholder="enter username"></input>
+          <label for="passwordInput" class="hidden">Password</label>
           <input class="login-input" type="password" id="passwordInput" placeholder="enter password">
           <button id="loginBtn">Submit</button>
         </form>
@@ -50,9 +49,9 @@
       <h1 id="welcomeMsg">Welcome to your Dashboard!</h1>
         <h2 id="totalSpent"></h2>
         <h2>Current Bookings</h2>
-          <h3 id="currentBookingsMsg">No Current Bookings to Display</h3>
+          <p id="currentBookingsMsg"></p>
         <section class="bookings-display">
-          <section id="currentBookingsContainer" class="card-container">
+          <section id="currentBookingsContainer" class="scroll">
             <!-- CURRENT BOOKINGS WILL GO HERE -->
           </section>
         </section>
@@ -64,12 +63,43 @@
     </section>
     <section id="newBookingsView" class="hidden">
       <h1>Book A New Room</h1>
-      <label for="date input">Search Dates : </label>
+      <label for="searchDates">Search Dates : </label>
         <input type="date" placeholder="search for dates" id="searchDates">
         <button id="searchBtn">Submit</button>
-      <h2 id="resultsMsg">Please select a date to search</h2>
+      <h2 id="resultsMsg">
+        <!-- RESULTS MSG WILL GO HERE -->
+      </h2>
+        <ul id="filterButtons" class="hidden">
+          <div class="filter-flex">
+            <label for="filterButtons">Filter By Room Type:</label>
+            <li class="filter-btn" id="singleroom">Single Room</li>
+            <li class="filter-btn"id="juniorsuite">Junior Suite</li>
+            <li class="filter-btn" id="residentialsuite">Residential Suite</li>
+            <li class="filter-btn" id="suite">Suite</li>
+          </div>
+        </ul>
+      </div>
+      <section id="individualBookingView" class="hidden">
+        <article class="individual-booking">
+          <img class="single-img" alt="hotel room image">
+          <div class="single-card-main-wrapper">
+            <div class="small-img-wrapper"> 
+              <img src="./images/room1.jpg" alt="brunch at hotel image" class="small-img">
+              <img src="./images/room2.jpg" alt="hotel bathroom image" class="small-img">
+            </div>
+            <div class="single-card-text-wrapper">
+              <p class="card-booking-text">YOU'RE BOOKING THE:</p>
+              <p class="card-booking-text roomType">/text here/</p>
+              <p class="card-booking-text roomNumber">/text here/</p>
+              <p class="card-booking-text roomCost">/text here/</p>
+              <button class="reserve bookBtn">Reserve Now</button>
+              <p class="confirmation-message"></p>
+            </div>
+          </div>
+        </article>` 
+      </section>
       <section id="results" class="card-container">
-        <!-- results will go here -->
+        <!-- RESULTS WILL GO HERE -->
       </section>
     </section>
   </main>
