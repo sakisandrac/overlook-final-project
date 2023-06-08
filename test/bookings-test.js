@@ -1,6 +1,6 @@
 import chai from 'chai';
 const expect = chai.expect;
-import { filterBookings, getAvailableRooms, searchResultsMsg } from '../src/newBookings';
+import { filterBookings, getAvailableRooms, searchResultsMsg, matchIndividualRoom } from '../src/newBookings';
 import {bookingData, roomData} from './sampleData';
 
 describe('Bookings', () => {
@@ -64,5 +64,18 @@ describe('Bookings', () => {
 
       expect(msg).to.equal('We are so sorry! There are no rooms avaiable for this date, please select a different date.');
     });
+  });
+
+  describe('matchIndividualRoom', () => {
+    it('should return an array with the individual room matched from the room number', () => {
+      const match = matchIndividualRoom(bookingData.bookings[0].roomNumber, roomData);
+      expect(match[0].number).to.equal(1);
+    });
+
+    it('should return an empty array if no room matches the room number', () => {
+      const match = matchIndividualRoom(90, roomData);
+      expect(match).to.deep.equal([]);
+    });
+
   });
 })

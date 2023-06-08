@@ -1,13 +1,14 @@
-import { searchResultsMsg, getAvailableRooms, filterBookings } from './newBookings';
+import { searchResultsMsg, getAvailableRooms, filterBookings, matchIndividualRoom } from './newBookings';
 import { matchUserBookedRooms, getPastBookings, getCurrentBookings } from './user-bookings';
-import { dashboardView, newBookingsView, searchDates,results, resultsMsg, logInView, usernameInput, passwordInput, loginMsg, userMsg, currentBookingsContainer, navBox, pastBookingsContainer, totalSpent, filterButtons, individualBookingView, singleImg, roomNumber, roomType, roomCost, currentBookingsMsg, confirmationMsg, getAllData } from './scripts';
+import { dashboardView, newBookingsView, searchDates,results, resultsMsg, logInView, usernameInput, passwordInput, loginMsg, userMsg, currentBookingsContainer, navBox, pastBookingsContainer, totalSpent, filterButtons, individualBookingView, currentBookingsMsg, confirmationMsg, getAllData } from './scripts';
 import { calculateSpending } from './calculations';
-import { getDate } from './get-dates';
+import { getDate, setMonth, setDay } from './get-dates';
 import { postNewBooking, createPostData } from './apiCalls';
 import { checkCredentials } from './login';
 
 // SWITCHING VIEWS
 const newBooking = () => {
+  disablePreviousDates();
   searchDates.value = '';
   clearView([results, resultsMsg]);
   toggleHidden('add', [dashboardView, logInView, filterButtons, individualBookingView]);
@@ -128,13 +129,19 @@ const renderDashboardBookings = (currentUser) => {
 // BOOKINGS PAGE
 const renderBookings = (bookedRooms, allRooms) => {
   clearView([results]);
-    let res = getAvailableRooms(bookedRooms, allRooms)
-      displayResultsText(searchResultsMsg(res))
+    let res = getAvailableRooms(bookedRooms, allRooms);
+      displayResultsText(searchResultsMsg(res));
       renderCards(res);
 }
 
 const displayResultsText = (text) => {
   resultsMsg.innerText = text;
+}
+
+const disablePreviousDates = () => {
+  const today = new Date();
+  const min = `${today.getFullYear()}-${setMonth(today)}-${setDay(today)}`;
+  searchDates.setAttribute('min', min);
 }
 
 const searchBookingsHandler = (bookings, allRooms, currentUser) => {
@@ -167,13 +174,27 @@ const renderFilteredResults = (e, allBookings, allRooms, currentUser) => {
   }
 }
 
-const renderIndividualBooking = (selectedRoom) => {
-  toggleHidden('remove', [individualBookingView])
-  singleImg.src = `./images/${selectedRoom.roomType}.jpg`;
-  roomNumber.innerText = `Room Number: ${selectedRoom.number}`;
-  roomType.innerText = `${selectedRoom.roomType[0].toUpperCase()}${selectedRoom.roomType.substring(1)} with ${selectedRoom.numBeds} ${selectedRoom.bedSize} sized beds`;
-  roomCost.innerText = `Cost Per Night: $${selectedRoom.costPerNight}`;
-  roomCost.setAttribute('id', `${selectedRoom.number}`);
+const renderIndividualBooking = (selectedRoom, message) => {
+  toggleHidden('remove', [individualBookingView]);
+  clearView([individualBookingView]);
+  individualBookingView.innerHTML += `
+    <article class="individual-booking">
+      <img class="single-img" src="./images/${selectedRoom.roomType}.jpg" alt="hotel room image">
+      <div class="single-card-main-wrapper">
+        <div class="small-img-wrapper"> 
+          <img src="./images/room1.jpg" alt="brunch at hotel image" class="small-img">
+          <img src="./images/room2.jpg" alt="hotel bathroom image" class="small-img">
+        </div>
+        <div class="single-card-text-wrapper">
+          <p class="card-booking-text">YOU'RE BOOKING THE:</p>
+          <p class="card-booking-text roomType">${selectedRoom.roomType[0].toUpperCase()}${selectedRoom.roomType.substring(1)} with ${selectedRoom.numBeds} ${selectedRoom.bedSize} sized beds</p>
+          <p class="card-booking-text roomNumber">Room Number: ${selectedRoom.number}</p>
+          <p class="card-booking-text roomCost" id="${selectedRoom.number}">Cost Per Night: $${selectedRoom.costPerNight}</p>
+          <button class="reserve bookBtn" id="${selectedRoom.number}">Reserve Now</button>
+          <p class="confirmation-message">${message ? message : ''}</p>
+        </div>
+      </div>
+    </article>`;
 }
 
 const bookNowHandler = (e, allRooms) => {
@@ -181,24 +202,27 @@ const bookNowHandler = (e, allRooms) => {
     clearView([results, resultsMsg, confirmationMsg]);
     toggleHidden('add', [filterButtons]);
     toggleHidden('remove', [individualBookingView]);
-    let selectedRoom = allRooms.rooms.filter((room) => {
-      return room.number === parseInt(e.target.nextElementSibling.id);
-    });
+
+    const selectedRoom = matchIndividualRoom(e.target.nextElementSibling.id, allRooms);
     renderIndividualBooking(selectedRoom[0]);
-  }
+  };
 }
 
-const reserveNowHandler = (e, currentUser) => {
-  let data = createPostData(currentUser.id, currentUser.searchDate, e.target.previousElementSibling.id);
+const reserveNowHandler = (e, currentUser, allRooms) => {
+  if (e.target.classList.contains('reserve')) {
+    let data = createPostData(currentUser.id, currentUser.searchDate, e.target.previousElementSibling.id);
 
-  postNewBooking(data).then((data) => {
-    if(data.newBooking) {
-      confirmationMsg.innerText = `Thank you for booking! Your confirmation number is ${data.newBooking.id}`
-      getAllData();
-    } else {
-      confirmationMsg.innerText = data;
-    }
-  });
+    postNewBooking(data).then((data) => {
+      if (data.newBooking) {
+        const selectedRoom = matchIndividualRoom(data.newBooking.roomNumber, allRooms)[0];
+        const message = `Thank you for booking! Your confirmation number is ${data.newBooking.id}`;
+        renderIndividualBooking(selectedRoom, message);
+        getAllData();
+      } else {
+        confirmationMsg.innerText = data;
+      };
+    });
+  };
 }
 
 // DOM FUNCTIONS

@@ -206,6 +206,10 @@ ul {
 }
 
 /* INDIVIDUAL BOOKINGS */
+#individualBookingView {
+  text-align: center;
+}
+
 .individual-booking {
   display: flex;
   width: 700px;
@@ -234,6 +238,7 @@ ul {
   font-size: 1.10rem;
   align-items: center;
   margin-top: 15px;
+  padding-bottom: 15px;
 }
 
 .small-img {
@@ -246,11 +251,15 @@ ul {
   display: flex;
 }
 
-.roomType, .confirmation-message {
+.roomType {
   text-align: center;
   font-size: 1.4rem;
 }
 
+.confirmation-message {
+  font-size: 1.3rem;
+  margin-bottom: 15px;
+}
 .roomCost {
   margin-bottom: 20px;
 }

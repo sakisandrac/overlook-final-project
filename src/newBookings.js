@@ -23,4 +23,11 @@ const searchResultsMsg = (results) => {
   };
 }
 
-export { searchResultsMsg, filterBookings, getAvailableRooms }
+const matchIndividualRoom = (roomNumber, allRooms) => {
+  return allRooms.rooms.filter((room) => {
+    return room.number === parseInt(roomNumber);
+  });
+}
+
+
+export { searchResultsMsg, filterBookings, getAvailableRooms, matchIndividualRoom }
