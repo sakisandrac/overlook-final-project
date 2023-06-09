@@ -13,16 +13,16 @@
   <nav>
     <div id="navBox" class="nav-flexbox hidden">
       <div class="icon-flexbox">
-        <div class="icon-background">
-          <img class= "icon" src="./images/home.png" alt="icon to view bookings">
-        </div>
-          <span for="my bookings" id="dashboardNav" class="nav-text">My Dashboard</span>
+          <button class="icon-button" id="dashboardBtn">
+            <img class= "icon" src="./images/home.png" alt="icon to view bookings">
+          </button>
+          <label for="my bookings" id="dashboardNav" class="nav-text selected">My Dashboard</label>
       </div>
       <div class="icon-flexbox">
-        <div class="icon-background">
+        <button class="icon-button" id="newBookingsBtn">
           <img class= "icon" src="./images/search.png" alt="icon to search bookings">
-        </div>
-        <span for="new booking" id="newBooking" class="nav-text">New Booking</span>
+        </button>
+        <label for="new booking" id="newBooking" class="nav-text">New Booking</label>
         <p id="errorMsg"><!-- error message will go here if any --></p>
       </div>
     </div>
@@ -69,14 +69,14 @@
       <h2 id="resultsMsg">
         <!-- RESULTS MSG WILL GO HERE -->
       </h2>
-        <ul id="filterButtons" class="hidden">
-          <div class="filter-flex">
+        <ul id="filterButtons">
+          <!-- <div class="filter-flex">
             <label for="filterButtons">Filter By Room Type:</label>
             <li class="filter-btn" id="singleroom">Single Room</li>
             <li class="filter-btn"id="juniorsuite">Junior Suite</li>
             <li class="filter-btn" id="residentialsuite">Residential Suite</li>
             <li class="filter-btn" id="suite">Suite</li>
-          </div>
+          </div> -->
         </ul>
       </div>
       <dialog id="individualBookingView" class="hidden">

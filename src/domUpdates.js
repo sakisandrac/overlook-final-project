@@ -1,6 +1,6 @@
 import { searchResultsMsg, getAvailableRooms, filterBookings, matchIndividualRoom } from './newBookings';
 import { matchUserBookedRooms, getPastBookings, getCurrentBookings } from './user-bookings';
-import { dashboardView, newBookingsView, searchDates,results, resultsMsg, logInView, usernameInput, passwordInput, loginMsg, userMsg, currentBookingsContainer, navBox, pastBookingsContainer, totalSpent, filterButtons, individualBookingView, currentBookingsMsg, confirmationMsg, getAllData } from './scripts';
+import { allFilterBtns, newBookingNav, dashboardNav, dashboardView, newBookingsView, searchDates,results, resultsMsg, logInView, usernameInput, passwordInput, loginMsg, userMsg, currentBookingsContainer, navBox, pastBookingsContainer, totalSpent, filterButtons, individualBookingView, currentBookingsMsg, confirmationMsg, getAllData } from './scripts';
 import { calculateSpending } from './calculations';
 import { getDate, setMonth, setDay } from './get-dates';
 import { postNewBooking, createPostData } from './apiCalls';
@@ -10,15 +10,19 @@ import { checkCredentials } from './login';
 const newBooking = () => {
   disablePreviousDates();
   searchDates.value = '';
-  clearView([results, resultsMsg]);
-  toggleHidden('add', [dashboardView, logInView, filterButtons, individualBookingView]);
+  clearView([filterButtons, results, resultsMsg]);
+  toggleHidden('add', [dashboardView, logInView, individualBookingView]);
   toggleHidden('remove', [newBookingsView]);
+  dashboardNav.classList.remove('selected');
+  newBookingNav.classList.add('selected');
 }
 
 const toDashboard = (allBookings, allRooms, currentUser) => {
   toggleHidden('remove', [dashboardView]);
   toggleHidden('add', [newBookingsView]);
   updateUserBookings(currentUser, allBookings, allRooms);
+  dashboardNav.classList.add('selected');
+  newBookingNav.classList.remove('selected');
 }
 
 // LOGIN PAGE
@@ -144,13 +148,25 @@ const disablePreviousDates = () => {
   searchDates.setAttribute('min', min);
 }
 
-const searchBookingsHandler = (bookings, allRooms, currentUser) => {
+const renderFilterButtons = (e) => {
+  clearView([filterButtons]);
+  filterButtons.innerHTML += `
+  <div class="filter-flex">
+    <label for="filterButtons">Filter By Room Type:</label>
+    <li class="filter-btn ${e.target.id === 'singleroom' ? 'filter-selected' : ''}" id="singleroom">Single Room</li>
+    <li class="filter-btn ${e.target.id === 'juniorsuite' ? 'filter-selected' : ''}"id="juniorsuite">Junior Suite</li>
+    <li class="filter-btn ${e.target.id === 'residentialsuite' ? 'filter-selected' : ''}" id="residentialsuite">Residential Suite</li>
+    <li class="filter-btn ${e.target.id === 'suite' ? 'filter-selected' : ''}" id="suite">Suite</li>
+  </div>`
+}
+
+const searchBookingsHandler = (bookings, allRooms, currentUser, e) => {
   currentUser.searchDate = searchDates.value.replaceAll('-', '/');
   toggleHidden('add', [individualBookingView]);
   toggleHidden('remove', [results, resultsMsg]);
 
   if(currentUser.searchDate) {
-    toggleHidden('remove', [filterButtons]);
+    renderFilterButtons(e);
     let bookedRooms = filterBookings(bookings, currentUser.searchDate);
     renderBookings(bookedRooms, allRooms);
     return bookedRooms;
@@ -159,17 +175,18 @@ const searchBookingsHandler = (bookings, allRooms, currentUser) => {
   }
 }
 
-const filterByRoomType = (bookingResults, allRooms, type, currentUser) => {
-  const bookings = searchBookingsHandler(bookingResults, allRooms, currentUser);
+const filterByRoomType = (bookingResults, allRooms, type, currentUser, e) => {
+  const bookings = searchBookingsHandler(bookingResults, allRooms, currentUser, e);
   const rooms = getAvailableRooms(bookings, allRooms);
   return rooms.filter((room) => {
-    return room.roomType.split(' ').join('') === type;
+    return room.roomType.split(' ').join('') === type.target.id;
   });
 }
 
 const renderFilteredResults = (e, allBookings, allRooms, currentUser) => {
   if(e.target.classList.contains('filter-btn')) {
-    let search = filterByRoomType(allBookings, allRooms, e.target.id, currentUser)
+    renderFilterButtons(e);
+    let search = filterByRoomType(allBookings, allRooms, e, currentUser, e)
     clearView([results]);
     renderCards(search, allRooms);
   }
@@ -202,8 +219,8 @@ const renderIndividualBooking = (selectedRoom, message) => {
 
 const bookNowHandler = (e, allRooms) => {
   if(e.target.className === 'bookBtn') {
-    clearView([confirmationMsg]);
-    toggleHidden('add', [filterButtons, results, resultsMsg]);
+    clearView([confirmationMsg, filterButtons]);
+    toggleHidden('add', [results, resultsMsg]);
     toggleHidden('remove', [individualBookingView]);
 
     const selectedRoom = matchIndividualRoom(e.target.nextElementSibling.id, allRooms);
@@ -231,8 +248,9 @@ const reserveNowHandler = (e, currentUser, allRooms) => {
 const closeButtonHandler = (e, allBookings, allRooms, currentUser) => {
   if(e.target.classList.contains('close')) {
     individualBookingView.close();
-    toggleHidden('remove', [filterButtons, results, resultsMsg]);
-    searchBookingsHandler(allBookings, allRooms, currentUser);
+    toggleHidden('remove', [results, resultsMsg]);
+    renderFilterButtons(e);
+    searchBookingsHandler(allBookings, allRooms, currentUser, e);
   }
 }
 

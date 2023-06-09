@@ -32,15 +32,21 @@ nav {
   padding: 5px;
 }
 
-.icon-background {
-  background-color: #f5cac3;
-  border-radius: 50%;
-  margin: 10px;
+.selected {
+  text-decoration: underline overline #f5cac3;
+  text-decoration-thickness: 5px;
 }
 
 .icon {
   width:20px;
   padding: 8px;
+}
+
+.icon-button {
+  background-color: #f5cac3;
+  border: none;
+  border-radius: 50%;
+  margin: 10px;
 }
 
 .userLogo {
@@ -183,6 +189,15 @@ ul {
   border: 2px solid #E6E6E6;
   border-radius: 24px;
   background-color: #FAFAF5;
+  text-align: center;
+}
+
+.filter-selected {
+  width: 150px;
+  padding: 10px;
+  border: 2px solid #E6E6E6;
+  border-radius: 24px;
+  background-color: #f5cac3;
   text-align: center;
 }
 

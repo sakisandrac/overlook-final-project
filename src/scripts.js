@@ -11,13 +11,15 @@ import './images/junior suite.jpg';
 import './images/page-logo.png';
 import './images/room1.jpg';
 import './images/room2.jpg';
-import  { newBooking, toDashboard, searchBookingsHandler, renderFilteredResults, bookNowHandler, reserveNowHandler, loadDashboard, loginHandler,closeButtonHandler } from './domUpdates';
+import { newBooking, toDashboard, searchBookingsHandler, renderFilteredResults, bookNowHandler, reserveNowHandler, loadDashboard, loginHandler,closeButtonHandler } from './domUpdates';
 import { getBookings, getRooms, getCustomerInfo } from './apiCalls';
-import  { getUserId } from './login'
+import { getUserId } from './login'
 
 // QUERY SELECTORS
 const newBookingNav = document.querySelector('#newBooking');
+const newBookingsBtn = document.querySelector('#newBookingsBtn');
 const dashboardNav = document.querySelector('#dashboardNav');
+const dashboardBtn = document.querySelector('#dashboardBtn');
 const dashboardView = document.querySelector('#dashboardView');
 const newBookingsView = document.querySelector('#newBookingsView');
 const searchDates = document.querySelector('#searchDates');
@@ -36,6 +38,7 @@ const navBox = document.querySelector("#navBox");
 const pastBookingsContainer = document.querySelector('#pastBookingsContainer');
 const totalSpent = document.querySelector('#totalSpent');
 const filterButtons = document.querySelector('#filterButtons');
+const allFilterBtns = document.querySelectorAll('.filter-btn');
 const individualBookingView = document.querySelector('#individualBookingView');
 const singleImg = document.querySelector('.single-img');
 const roomNumber = document.querySelector('.roomNumber');
@@ -66,11 +69,15 @@ loginBtn.addEventListener('click', (e) => {
   loginHandler();
 });
 newBookingNav.addEventListener('click', newBooking);
+newBookingsBtn.addEventListener('click', newBooking);
 dashboardNav.addEventListener('click', () => {
   toDashboard(allBookings, allRooms, currentUser);
 });
-searchBtn.addEventListener('click', () => {
-  searchBookingsHandler(allBookings, allRooms, currentUser);
+dashboardBtn.addEventListener('click', () => {
+  toDashboard(allBookings, allRooms, currentUser);
+});
+searchBtn.addEventListener('click', (e) => {
+  searchBookingsHandler(allBookings, allRooms, currentUser, e);
 });
 filterButtons.addEventListener('click', (e) => {
   renderFilteredResults(e, allBookings, allRooms, currentUser)
@@ -83,7 +90,7 @@ individualBookingView.addEventListener('click', (e) => {
   closeButtonHandler(e, allBookings, allRooms, currentUser);
 });
 
-export { dashboardView, newBookingsView, searchDates,results, resultsMsg, logInView, usernameInput, passwordInput, loginMsg, allBookings, userMsg, currentBookingsContainer, navBox, pastBookingsContainer, totalSpent, filterButtons, individualBookingView, singleImg,roomNumber, roomType, roomCost, currentBookingsMsg, confirmationMsg, allRooms, getAllData}
+export { newBookingNav, dashboardNav, dashboardView, newBookingsView, searchDates,results, resultsMsg, logInView, usernameInput, passwordInput, loginMsg, allBookings, userMsg, currentBookingsContainer, navBox, pastBookingsContainer, totalSpent, filterButtons, individualBookingView, singleImg,roomNumber, roomType, roomCost, currentBookingsMsg, confirmationMsg, allRooms, allFilterBtns, getAllData}
 
 
 
