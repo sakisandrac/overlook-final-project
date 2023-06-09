@@ -26,7 +26,7 @@ const searchDates = document.querySelector('#searchDates');
 const searchBtn =  document.querySelector('#searchBtn');
 const results = document.querySelector('#results');
 const resultsMsg = document.querySelector('#resultsMsg');
-const loginBtn = document.querySelector('#loginBtn');
+const form = document.querySelector('form');
 const logInView = document.querySelector('#logInView');
 const usernameInput = document.querySelector('#usernameInput');
 const passwordInput = document.querySelector('#passwordInput');
@@ -64,7 +64,7 @@ const getAllData = (loginResults) => {
 }
 
 // EVENT LISTENERS
-loginBtn.addEventListener('click', (e) => {
+form.addEventListener('submit', (e) => {
   e.preventDefault();
   loginHandler();
 });

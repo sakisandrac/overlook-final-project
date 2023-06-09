@@ -192,10 +192,11 @@ const renderFilteredResults = (e, allBookings, allRooms, currentUser) => {
   }
 }
 
-const renderIndividualBooking = (selectedRoom, message) => {
+const renderIndividualBooking = (e, selectedRoom, message) => {
   toggleHidden('remove', [individualBookingView]);
   individualBookingView.show();
   clearView([individualBookingView]);
+
   individualBookingView.innerHTML += `
     <article class="individual-booking">
       <img class="single-img" src="./images/${selectedRoom.roomType}.jpg" alt="hotel room image">
@@ -209,7 +210,7 @@ const renderIndividualBooking = (selectedRoom, message) => {
           <p class="card-booking-text roomType">${selectedRoom.roomType[0].toUpperCase()}${selectedRoom.roomType.substring(1)} with ${selectedRoom.numBeds} ${selectedRoom.bedSize} sized beds</p>
           <p class="card-booking-text roomNumber">Room Number: ${selectedRoom.number}</p>
           <p class="card-booking-text roomCost" id="${selectedRoom.number}">Cost Per Night: $${selectedRoom.costPerNight}</p>
-          <button class="reserve bookBtn" id="${selectedRoom.number}">Reserve Now</button>
+          <button class="reserve bookBtn ${e.target.classList[0] === 'reserve' ? 'hidden' : ''}" id="${selectedRoom.number}">Reserve Now</button>
           <p class="confirmation-message">${message ? message : ''}</p>
           <button class="close">Go Back</button>
         </div>
@@ -224,7 +225,7 @@ const bookNowHandler = (e, allRooms) => {
     toggleHidden('remove', [individualBookingView]);
 
     const selectedRoom = matchIndividualRoom(e.target.nextElementSibling.id, allRooms);
-    renderIndividualBooking(selectedRoom[0]);
+    renderIndividualBooking(e, selectedRoom[0]);
   };
 }
 
@@ -236,7 +237,7 @@ const reserveNowHandler = (e, currentUser, allRooms) => {
       if (data.newBooking) {
         const selectedRoom = matchIndividualRoom(data.newBooking.roomNumber, allRooms)[0];
         const message = `Thank you for booking! Your confirmation number is ${data.newBooking.id}`;
-        renderIndividualBooking(selectedRoom, message);
+        renderIndividualBooking(e, selectedRoom, message);
         getAllData();
       } else {
         confirmationMsg.innerText = data;
