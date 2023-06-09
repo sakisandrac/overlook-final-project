@@ -76,6 +76,12 @@ searchBtn.addEventListener('click', () => {
 filterButtons.addEventListener('click', (e) => {
   renderFilteredResults(e, allBookings, allRooms, currentUser)
 });
+filterButtons.addEventListener('keyup', (e) => {
+  if (e.key === 'Enter') {
+  renderFilteredResults(e, allBookings, allRooms, currentUser);
+  clearFilters(e, allBookings, allRooms, currentUser);
+  }
+});
 newBookingsView.addEventListener('click', (e) => {
   bookNowHandler(e, allRooms);
 });
