@@ -201,6 +201,12 @@ ul {
   text-align: center;
 }
 
+.clear-btn {
+  background: #E6E6E6;
+  border-radius: 15px;
+  padding: 10px;
+}
+
 .card-container {
   display: flex;
   flex-wrap: wrap;

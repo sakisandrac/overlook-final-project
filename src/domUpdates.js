@@ -1,6 +1,6 @@
 import { searchResultsMsg, getAvailableRooms, filterBookings, matchIndividualRoom } from './newBookings';
 import { matchUserBookedRooms, getPastBookings, getCurrentBookings } from './user-bookings';
-import { allFilterBtns, newBookingNav, dashboardNav, dashboardView, newBookingsView, searchDates,results, resultsMsg, logInView, usernameInput, passwordInput, loginMsg, userMsg, currentBookingsContainer, navBox, pastBookingsContainer, totalSpent, filterButtons, individualBookingView, currentBookingsMsg, confirmationMsg, getAllData } from './scripts';
+import { newBookingNav, dashboardNav, dashboardView, newBookingsView, searchDates,results, resultsMsg, logInView, usernameInput, passwordInput, loginMsg, userMsg, currentBookingsContainer, navBox, pastBookingsContainer, totalSpent, filterButtons, individualBookingView, currentBookingsMsg, confirmationMsg, getAllData } from './scripts';
 import { calculateSpending } from './calculations';
 import { getDate, setMonth, setDay } from './get-dates';
 import { postNewBooking, createPostData } from './apiCalls';
@@ -133,9 +133,9 @@ const renderDashboardBookings = (currentUser) => {
 // BOOKINGS PAGE
 const renderBookings = (bookedRooms, allRooms) => {
   clearView([results]);
-    let res = getAvailableRooms(bookedRooms, allRooms);
-      displayResultsText(searchResultsMsg(res));
-      renderCards(res);
+    let rooms = getAvailableRooms(bookedRooms, allRooms);
+      displayResultsText(searchResultsMsg(rooms));
+      renderCards(rooms);
 }
 
 const displayResultsText = (text) => {
@@ -153,10 +153,11 @@ const renderFilterButtons = (e) => {
   filterButtons.innerHTML += `
   <div class="filter-flex">
     <label for="filterButtons">Filter By Room Type:</label>
-    <li class="filter-btn ${e.target.id === 'singleroom' ? 'filter-selected' : ''}" id="singleroom">Single Room</li>
-    <li class="filter-btn ${e.target.id === 'juniorsuite' ? 'filter-selected' : ''}"id="juniorsuite">Junior Suite</li>
-    <li class="filter-btn ${e.target.id === 'residentialsuite' ? 'filter-selected' : ''}" id="residentialsuite">Residential Suite</li>
-    <li class="filter-btn ${e.target.id === 'suite' ? 'filter-selected' : ''}" id="suite">Suite</li>
+    <li tabIndex='0' class="clear-btn">Clear Filters</li>
+    <li tabIndex='0' role="button" class="filter-btn ${e.target.id === 'singleroom' ? 'filter-selected' : ''}" id="singleroom">Single Room</li>
+    <li tabIndex='0' role="button" class="filter-btn ${e.target.id === 'juniorsuite' ? 'filter-selected' : ''}"id="juniorsuite">Junior Suite</li>
+    <li tabIndex='0' role="button" class="filter-btn ${e.target.id === 'residentialsuite' ? 'filter-selected' : ''}" id="residentialsuite">Residential Suite</li>
+    <li tabIndex='0' role="button" class="filter-btn ${e.target.id === 'suite' ? 'filter-selected' : ''}" id="suite">Suite</li>
   </div>`
 }
 
@@ -186,9 +187,15 @@ const filterByRoomType = (bookingResults, allRooms, type, currentUser, e) => {
 const renderFilteredResults = (e, allBookings, allRooms, currentUser) => {
   if(e.target.classList.contains('filter-btn')) {
     renderFilterButtons(e);
-    let search = filterByRoomType(allBookings, allRooms, e, currentUser, e)
+    let search = filterByRoomType(allBookings, allRooms, e, currentUser, e);
     clearView([results]);
     renderCards(search, allRooms);
+  }
+}
+
+const clearFilters = (e, allBookings, allRooms, currentUser) => {
+  if (e.target.classList.contains('clear-btn')) {
+    searchBookingsHandler(allBookings, allRooms, currentUser, e);
   }
 }
 
@@ -268,4 +275,4 @@ const toggleHidden = (type, views) => {
   })
 }
 
-export { closeButtonHandler, newBooking, toDashboard, clearView, toggleHidden, displayResultsText, renderBookings, renderCards, searchBookingsHandler, renderFilteredResults, bookNowHandler, getDate,reserveNowHandler, checkLoginSuccess, updateUserBookings, checkInputValues, checkPassowrdMsg, checkLoginResults, loadDashboard, loginHandler }
+export { closeButtonHandler, newBooking, toDashboard, clearView, toggleHidden, displayResultsText, renderBookings, renderCards, searchBookingsHandler, renderFilteredResults, bookNowHandler, getDate,reserveNowHandler, checkLoginSuccess, updateUserBookings, checkInputValues, checkPassowrdMsg, checkLoginResults, loadDashboard, loginHandler, clearFilters }
