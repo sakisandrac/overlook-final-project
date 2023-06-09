@@ -11,7 +11,7 @@ import './images/junior suite.jpg';
 import './images/page-logo.png';
 import './images/room1.jpg';
 import './images/room2.jpg';
-import { clearFilters, newBooking, toDashboard, searchBookingsHandler, renderFilteredResults, bookNowHandler, reserveNowHandler, loadDashboard, loginHandler,closeButtonHandler } from './domUpdates';
+import { clearFilters, newBooking, toDashboard, searchBookingsHandler, renderFilteredResults, bookNowHandler, reserveNowHandler, loadDashboard, loginHandler,closeButtonHandler, loadWithoutLogin } from './domUpdates';
 import { getBookings, getRooms, getCustomerInfo } from './apiCalls';
 import { getUserId } from './login'
 
@@ -50,22 +50,23 @@ let allRooms;
 let currentUser;
 
 // START FUNCTION
-const getAllData = (loginResults) => {
-    Promise.all([getBookings(), getRooms(), getCustomerInfo(getUserId(usernameInput.value))])
+const getAllData = (e) => {
+    Promise.all([getBookings(), getRooms(), getCustomerInfo(getUserId('customer50'))])
     .then((data) => {
       allBookings = data[0];
       allRooms = data[1];
       currentUser = data[2];
 
-      loadDashboard(loginResults, currentUser, allBookings, allRooms);
-    });
+      if(!e) {
+        loadWithoutLogin(currentUser, allBookings, allRooms);
+    }
+  })
 }
 
 // EVENT LISTENERS
-form.addEventListener('submit', (e) => {
-  e.preventDefault();
-  loginHandler();
-});
+window.addEventListener('load', () => {
+  getAllData();
+})
 newBookingNav.addEventListener('click', newBooking);
 newBookingsBtn.addEventListener('click', newBooking);
 dashboardNav.addEventListener('click', () => {

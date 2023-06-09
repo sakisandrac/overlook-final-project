@@ -11,7 +11,7 @@ const newBooking = () => {
   disablePreviousDates();
   searchDates.value = '';
   clearView([filterButtons, results, resultsMsg]);
-  toggleHidden('add', [dashboardView, logInView, individualBookingView]);
+  toggleHidden('add', [dashboardView, individualBookingView]);
   toggleHidden('remove', [newBookingsView]);
   dashboardNav.classList.remove('selected');
   newBookingNav.classList.add('selected');
@@ -71,6 +71,12 @@ const updateUserBookings = (currentUser, allBookings, allRooms) => {
 }
 
 // DASHBOARD 
+const loadWithoutLogin = (currentUser, allBookings, allRooms) => {
+  toggleHidden('remove', [dashboardView, navBox]);
+  userMsg.innerHTML = `${currentUser.name}`;
+  toDashboard(allBookings, allRooms, currentUser)
+}
+
 const loadDashboard = (loginResults, currentUser, allBookings, allRooms) => {
   if(loginResults) {
     checkLoginSuccess(loginResults, currentUser);
@@ -245,7 +251,7 @@ const reserveNowHandler = (e, currentUser, allRooms) => {
         const selectedRoom = matchIndividualRoom(data.newBooking.roomNumber, allRooms)[0];
         const message = `Thank you for booking! Your confirmation number is ${data.newBooking.id}`;
         renderIndividualBooking(e, selectedRoom, message);
-        getAllData();
+        getAllData(e);
       } else {
         confirmationMsg.innerText = data;
       };
@@ -275,4 +281,4 @@ const toggleHidden = (type, views) => {
   })
 }
 
-export { closeButtonHandler, newBooking, toDashboard, clearView, toggleHidden, displayResultsText, renderBookings, renderCards, searchBookingsHandler, renderFilteredResults, bookNowHandler, getDate,reserveNowHandler, checkLoginSuccess, updateUserBookings, checkInputValues, checkPassowrdMsg, checkLoginResults, loadDashboard, loginHandler, clearFilters }
+export { closeButtonHandler, newBooking, toDashboard, clearView, toggleHidden, displayResultsText, renderBookings, renderCards, searchBookingsHandler, renderFilteredResults, bookNowHandler, getDate,reserveNowHandler, checkLoginSuccess, updateUserBookings, checkInputValues, checkPassowrdMsg, checkLoginResults, loadDashboard, loginHandler, clearFilters, loadWithoutLogin }
