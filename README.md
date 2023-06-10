@@ -27,7 +27,7 @@ This was my final project for Mod 2 in the Turing School of Software Engineering
   - Run the commant `npm start` to start the server
   - Enter the command: control + c to stop the server
   
-3. Go to the browser and type "localhost:8080" to view the application. You can also view the application here: [come back and put link!] 
+3. Go to the browser and type "localhost:8080" to view the application. You can also view the application <a href="https://sakisandrac.github.io/overlook-final-project/">HERE</a> 
 
 4. Use the username "customer50" and password "overlook2021" in the log in page to enter the site.
 
