@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@100;300&display=swap" rel="stylesheet">
+  <title>Overlook</title>
+</head>
+<body>
+  <nav>
+    <div id="navBox" class="nav-flexbox hidden">
+      <div class="icon-flexbox">
+          <button class="icon-button" id="dashboardBtn">
+            <img class= "icon" src="./images/home.png" alt="icon to view bookings">
+          </button>
+          <label for="my bookings" id="dashboardNav" class="nav-text selected">My Dashboard</label>
+      </div>
+      <div class="icon-flexbox">
+        <button class="icon-button" id="newBookingsBtn">
+          <img class= "icon" src="./images/search.png" alt="icon to search bookings">
+        </button>
+        <label for="new booking" id="newBooking" class="nav-text">New Booking</label>
+        <p id="errorMsg"><!-- error message will go here if any --></p>
+      </div>
+    </div>
+    <div class="user-flexbox">
+      <img src="./images/user.png" alt="user icon" class= "userLogo">
+      <span id="userMsg" for="username">Please Log-In</span>
+    </div>
+  </nav>
+  <main>
+    <div class="login" id="logInView">
+      <img src="./images/page-logo.png" alt="logo for overlook booking website" id="pageLogo">
+      <section class="login">
+        <h1 id="loginMsg">Please Log In To Continue</h1>
+        <form>
+          <label for="usernameInput" class="hidden">Username</label>
+          <input class="login-input" type="text" id="usernameInput" placeholder="enter username"></input>
+          <label for="passwordInput" class="hidden">Password</label>
+          <input class="login-input" type="password" id="passwordInput" placeholder="enter password">
+          <button id="loginBtn">Submit</button>
+        </form>
+      </section>
+    </div>
+    <section id="dashboardView" class="hidden">
+      <h1 id="welcomeMsg">Welcome to your Dashboard!</h1>
+        <h2 id="totalSpent"></h2>
+        <h2>Current Bookings</h2>
+          <p id="currentBookingsMsg"></p>
+        <section class="bookings-display">
+          <section id="currentBookingsContainer" class="scroll">
+            <!-- CURRENT BOOKINGS WILL GO HERE -->
+          </section>
+        </section>
+      <h2>Past Bookings</h2>
+      <section class="bookings-display">
+        <section id="pastBookingsContainer" class="scroll"></section>
+          <!-- PAST BOOKINGS WILL GO HERE -->
+        </section>
+    </section>
+    <section id="newBookingsView" class="hidden">
+      <h1>Book A New Room</h1>
+      <label for="searchDates">Search Dates : </label>
+        <input type="date" placeholder="search for dates" id="searchDates">
+        <button id="searchBtn">Submit</button>
+      <h2 id="resultsMsg">
+        <!-- RESULTS MSG WILL GO HERE -->
+      </h2>
+        <ul id="filterButtons">
+          <!-- BUTTONS WILL BE RENDERED HERE -->
+        </ul>
+      </div>
+      <dialog id="individualBookingView" class="hidden">
+        <!-- INDIVIDUAL BOOKING WILL GO HERE -->
+        <p class="confirmation-message"></p>
+      </dialog>
+      <section id="results" class="card-container">
+        <!-- RESULTS WILL GO HERE -->
+      </section>
+    </section>
+  </main>
+  <script src="bundle.js"></script>
+</body>
+</html>
