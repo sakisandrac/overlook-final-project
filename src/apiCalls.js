@@ -3,7 +3,7 @@ const getBookings = () => {
   .then(res => res.json())
   .catch((err) => {
     console.log(err)
-    return document.querySelector('#errorMsg').innerText = `Error please try refreshing page`;
+    return document.querySelector('#errorMsg').innerText = `Error please try refreshing page (${err})`;
   });
 }
 
@@ -12,7 +12,7 @@ const getRooms = () => {
   .then(res => res.json())
   .catch((err) => {
     console.log(err)
-    return document.querySelector('#errorMsg').innerText = `Error please try refreshing page`;
+    return document.querySelector('#errorMsg').innerText = `Error please try refreshing page (${err})`;
   });
 }
 
@@ -22,7 +22,7 @@ const getCustomerInfo = (id) => {
   .then((data) => data)
   .catch((err) => {
     console.log(err)
-    return document.querySelector('#errorMsg').innerText = `Error please try refreshing page`;
+    return document.querySelector('#errorMsg').innerText = `Error please try refreshing page (${err})`;
   });
 }
 
@@ -46,7 +46,7 @@ const postNewBooking = (data) => {
     .then((json) => json)
     .catch((err) => {
       console.log(err);
-      return document.querySelector('#errorMsg').innerText = `Error please try refreshing page`;
+      return document.querySelector('#errorMsg').innerText = `Error please try refreshing page (${err})`;
     });
 }
 
