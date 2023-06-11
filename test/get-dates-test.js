@@ -13,7 +13,7 @@ describe('Get Dates', () => {
 
   describe('setDay', () => {
     it('should return the day in double digit form', () => {
-      expect(setDay(today).length).to.equal(2);
+      expect(setDay(today).toString().length).to.equal(2);
     });
   });
 
