@@ -113,6 +113,7 @@ const renderUserBookings = (bookings, view) => {
 
 const checkCurrentBookings = (userCurrentBookings, currentBookingsContainer, currentUser) => {
   if(Array.isArray(userCurrentBookings)) {
+    currentBookingsMsg.innerText = '';
     renderUserBookings(userCurrentBookings, currentBookingsContainer);
   } else {
     currentBookingsMsg.innerText = getCurrentBookings(currentUser);

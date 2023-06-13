@@ -1,8 +1,26 @@
-import { checkCredentials, matchPassword, matchUser } from '../src/login';
+import { checkCredentials, matchPassword, matchUser, userLogins, getUserId } from '../src/login';
 import chai from 'chai';
 const expect = chai.expect;
 
 describe('User Login', () => {
+  describe('userLogins', () => {
+    it('should return a user object based on id passed in', () => {
+      expect(userLogins(50)).to.deep.equal({customer50: { username: 'customer50', password: 'overlook2021'}});
+    });
+    it('should be undefined if no id is passed in', () => {
+      expect(userLogins()).to.be.undefined;
+    });
+  });
+  
+  describe('getUserId', () => {
+    it('should return a user id based on username', () => {
+      expect(getUserId('customer50')).to.equal(50);
+    });
+    it('should be undefined if no username is passed in', () => {
+      expect(getUserId()).to.be.undefined;
+    });
+  });
+
   describe('checkCredentials', () => {
     it('should be able to check if there are valid username and password inputs', () => {
       expect(checkCredentials('customer50', 'overlook2021')).to.be.true;

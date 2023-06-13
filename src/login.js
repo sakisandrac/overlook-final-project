@@ -1,4 +1,13 @@
-import { userLogins } from './data/userLogins';
+const userLogins = (num) => {
+  if (num) {
+    return {
+      [`customer${num}`]: {
+        username: `customer${num}`,
+        password: 'overlook2021'
+      },
+    }
+  }
+}
 
 const checkCredentials = (username, password) => {
   if(username && password) {
@@ -9,22 +18,26 @@ const checkCredentials = (username, password) => {
 }
 
 const matchUser = (username, password) => {
-  if (userLogins[username]) {
-  return matchPassword(username, password);
+  const customerId = getUserId(username);
+
+  if (customerId > 1 && customerId <= 50) {
+  return matchPassword(customerId, password);
   } else {
     return 'Username not found';
   };
 }
 
-const matchPassword = (username, password) => {
-  if (password === userLogins[username].password) {
+const matchPassword = (id, password) => {
+  if (password === userLogins(id)[`customer${id}`].password) {
     return true;
   };
 }
 
 const getUserId = (username) => {
-  return userLogins[username].id;
+  if (username) {
+    return parseInt(username.split('customer')[1]);
+  }
 }
 
-export { checkCredentials, matchPassword, matchUser, getUserId }
+export { checkCredentials, matchPassword, matchUser, getUserId, userLogins }
 
