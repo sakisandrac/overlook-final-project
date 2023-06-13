@@ -16,8 +16,8 @@ describe('User Login', () => {
     it('should return a user id based on username', () => {
       expect(getUserId('customer50')).to.equal(50);
     });
-    it('should be undefined if no username is passed in', () => {
-      expect(getUserId()).to.be.undefined;
+    it('should be undefined if wrong username is passed in', () => {
+      expect(getUserId('customer2020')).to.be.undefined;
     });
   });
 
