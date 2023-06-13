@@ -18,7 +18,7 @@ const setDay = (today) => {
   if (today.getDate().toString().length < 2) {
     return `0${today.getDate()}`;
   } else {
-    return today.getDate();
+    return today.getDate().toString();
   }
 }
 
