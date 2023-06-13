@@ -20,7 +20,7 @@ const checkCredentials = (username, password) => {
 const matchUser = (username, password) => {
   const customerId = getUserId(username);
 
-  if (customerId > 1 && customerId <= 50) {
+  if (customerId > 0 && customerId <= 50) {
   return matchPassword(customerId, password);
   } else {
     return 'Username not found';
@@ -34,7 +34,7 @@ const matchPassword = (id, password) => {
 }
 
 const getUserId = (username) => {
-  if (username) {
+  if (username.length === 10 || username.length === 9) {
     return parseInt(username.split('customer')[1]);
   }
 }
