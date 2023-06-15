@@ -842,6 +842,7 @@ const renderUserBookings = (bookings, view) => {
 
 const checkCurrentBookings = (userCurrentBookings, currentBookingsContainer, currentUser) => {
   if(Array.isArray(userCurrentBookings)) {
+    _scripts__WEBPACK_IMPORTED_MODULE_2__.currentBookingsMsg.innerText = '';
     renderUserBookings(userCurrentBookings, currentBookingsContainer);
   } else {
     _scripts__WEBPACK_IMPORTED_MODULE_2__.currentBookingsMsg.innerText = (0,_user_bookings__WEBPACK_IMPORTED_MODULE_1__.getCurrentBookings)(currentUser);
@@ -1153,7 +1154,7 @@ const setDay = (today) => {
   if (today.getDate().toString().length < 2) {
     return `0${today.getDate()}`;
   } else {
-    return today.getDate();
+    return today.getDate().toString();
   }
 }
 
@@ -1180,30 +1181,30 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "postNewBooking": () => (/* binding */ postNewBooking)
 /* harmony export */ });
 const getBookings = () => {
-  return fetch('http://localhost:3001/api/v1/bookings')
+  return fetch('https://overlook-api-nu.vercel.app/api/v1/bookings')
   .then(res => res.json())
   .catch((err) => {
     console.log(err)
-    return document.querySelector('#errorMsg').innerText = `Error please try refreshing page`;
+    return document.querySelector('#errorMsg').innerText = `Error please try refreshing page (${err})`;
   });
 }
 
 const getRooms = () => {
-  return fetch('http://localhost:3001/api/v1/rooms')
+  return fetch('https://overlook-api-nu.vercel.app/api/v1/rooms')
   .then(res => res.json())
   .catch((err) => {
     console.log(err)
-    return document.querySelector('#errorMsg').innerText = `Error please try refreshing page`;
+    return document.querySelector('#errorMsg').innerText = `Error please try refreshing page (${err})`;
   });
 }
 
 const getCustomerInfo = (id) => {
-  return fetch(`http://localhost:3001/api/v1/customers/${id}`)
+  return fetch(`https://overlook-api-nu.vercel.app/api/v1/customers/${id}`)
   .then((res) => res.json())
   .then((data) => data)
   .catch((err) => {
     console.log(err)
-    return document.querySelector('#errorMsg').innerText = `Error please try refreshing page`;
+    return document.querySelector('#errorMsg').innerText = `Error please try refreshing page (${err})`;
   });
 }
 
@@ -1216,7 +1217,7 @@ const createPostData = (userID, date, roomNumber) => {
 }
 
 const postNewBooking = (data) => {
-  return fetch('http://localhost:3001/api/v1/bookings', {
+  return fetch('https://overlook-api-nu.vercel.app/api/v1/bookings', {
     method: 'POST',
     body: JSON.stringify(data),
     headers: {
@@ -1227,7 +1228,7 @@ const postNewBooking = (data) => {
     .then((json) => json)
     .catch((err) => {
       console.log(err);
-      return document.querySelector('#errorMsg').innerText = `Error please try refreshing page`;
+      return document.querySelector('#errorMsg').innerText = `Error please try refreshing page (${err})`;
     });
 }
 
@@ -1244,10 +1245,19 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "checkCredentials": () => (/* binding */ checkCredentials),
 /* harmony export */   "matchPassword": () => (/* binding */ matchPassword),
 /* harmony export */   "matchUser": () => (/* binding */ matchUser),
-/* harmony export */   "getUserId": () => (/* binding */ getUserId)
+/* harmony export */   "getUserId": () => (/* binding */ getUserId),
+/* harmony export */   "userLogins": () => (/* binding */ userLogins)
 /* harmony export */ });
-/* harmony import */ var _data_userLogins__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(24);
-
+const userLogins = (num) => {
+  if (num) {
+    return {
+      [`customer${num}`]: {
+        username: `customer${num}`,
+        password: 'overlook2021'
+      },
+    }
+  }
+}
 
 const checkCredentials = (username, password) => {
   if(username && password) {
@@ -1258,47 +1268,28 @@ const checkCredentials = (username, password) => {
 }
 
 const matchUser = (username, password) => {
-  if (_data_userLogins__WEBPACK_IMPORTED_MODULE_0__.userLogins[username]) {
-  return matchPassword(username, password);
+  const customerId = getUserId(username);
+
+  if (customerId > 0 && customerId <= 50) {
+  return matchPassword(customerId, password);
   } else {
     return 'Username not found';
   };
 }
 
-const matchPassword = (username, password) => {
-  if (password === _data_userLogins__WEBPACK_IMPORTED_MODULE_0__.userLogins[username].password) {
+const matchPassword = (id, password) => {
+  if (password === userLogins(id)[`customer${id}`].password) {
     return true;
   };
 }
 
 const getUserId = (username) => {
-  return _data_userLogins__WEBPACK_IMPORTED_MODULE_0__.userLogins[username].id;
-}
-
-
-
-
-
-/***/ }),
-/* 24 */
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "userLogins": () => (/* binding */ userLogins)
-/* harmony export */ });
-const userLogins = {
-  customer50: {
-    username: 'customer50',
-    password: 'overlook2021',
-    id: 50,
-  },
-  q: {
-    username: 'q',
-    password: '1',
-    id: 50,
+  if (username.length === 10 || username.length === 9) {
+    return parseInt(username.split('customer')[1]);
   }
 }
+
+
 
 
 
