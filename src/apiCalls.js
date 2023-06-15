@@ -1,5 +1,5 @@
 const getBookings = () => {
-  return fetch('http://localhost:3001/api/v1/bookings')
+  return fetch('https://overlook-api-nu.vercel.app/api/v1/bookings')
   .then(res => res.json())
   .catch((err) => {
     console.log(err)
@@ -8,7 +8,7 @@ const getBookings = () => {
 }
 
 const getRooms = () => {
-  return fetch('http://localhost:3001/api/v1/rooms')
+  return fetch('https://overlook-api-nu.vercel.app/api/v1/rooms')
   .then(res => res.json())
   .catch((err) => {
     console.log(err)
@@ -17,7 +17,7 @@ const getRooms = () => {
 }
 
 const getCustomerInfo = (id) => {
-  return fetch(`http://localhost:3001/api/v1/customers/${id}`)
+  return fetch(`https://overlook-api-nu.vercel.app/api/v1/customers/${id}`)
   .then((res) => res.json())
   .then((data) => data)
   .catch((err) => {
@@ -35,7 +35,7 @@ const createPostData = (userID, date, roomNumber) => {
 }
 
 const postNewBooking = (data) => {
-  return fetch('http://localhost:3001/api/v1/bookings', {
+  return fetch('https://overlook-api-nu.vercel.app/api/v1/bookings', {
     method: 'POST',
     body: JSON.stringify(data),
     headers: {
