@@ -180,7 +180,6 @@ ul {
 .filter-flex {
   display: flex;
   justify-content: space-between;
-  min-width: 800px;
 }
 
 .filter-btn {
@@ -300,4 +299,84 @@ ul {
 
 .hidden {
   display: none;
+}
+
+@media (max-width: 600px) {
+  #pageLogo {
+    width: 300px;
+    object-fit: cover;
+    padding: 10px;
+  }
+  
+  .login {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 300px;
+    padding: 20px;
+  }
+
+  #loginMsg {
+    font-size: 1.3rem;
+  }
+
+  input {
+    text-align: center;
+    height: 40px;
+    width: 100px;
+    margin: 5px;
+    border: 2px solid #E6E6E6;
+    border-radius: 24px;
+    background-color: #FAFAF5;
+  }
+
+  nav {
+    width: 100%;
+    margin: 0;
+  }
+
+  #welcomeMsg {
+    font-size: 1.3rem;
+  }
+
+  h2 {
+    font-size: 1rem;
+    margin-left: 40px;
+  }
+
+  #totalSpent {
+    margin-left: 40px;
+  }
+
+  .scroll {
+    width: 400px;
+    height: 400px;
+    display: flex;
+    flex-wrap: nowrap;
+    overflow-x: scroll;
+    white-space: nowrap;
+  }
+
+  #newBookingsView {
+    width: 100%;
+  }
+
+  .filter-flex {
+    display: flex;
+    flex-wrap: wrap;
+    max-width: 400px;
+    min-width: none;
+    justify-content: center;
+  }
+
+  .filter-btn, .clear-btn {
+    width: 70px;
+    font-size: .7rem;
+    padding: 5px;
+  }
+
+  .hidden {
+    display: none;
+  }
 }
