@@ -469,7 +469,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_1___default()((_node_modules_css_loader_dist_runtime_cssWithMappingToString_js__WEBPACK_IMPORTED_MODULE_0___default()));
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "html {\n  height: 100%;\n}\n\nbody {\n  background-color: #f8f2e9;\n  margin: 0;\n  height: 100%;\n  font-family: 'Raleway', sans-serif;\n}\n\nnav {\n  background-color: white;\n  height: 70px;\n  margin: 0;\n  color: black;\n  font-size: .75rem;\n  display: flex;\n  justify-content: space-between;\n}\n\n.nav-flexbox {\n  height: 70px;\n  display: flex;\n  align-items: flex-end;\n}\n\n.icon-flexbox {\n  display: flex;\n  justify-content: flex-start;\n  align-items: center;\n  padding: 5px;\n}\n\n.selected {\n  text-decoration: underline overline #f5cac3;\n  text-decoration-thickness: 5px;\n}\n\n.icon {\n  width:20px;\n  padding: 8px;\n}\n\n.icon-button {\n  background-color: #f5cac3;\n  border: none;\n  border-radius: 50%;\n  margin: 10px;\n}\n\n.userLogo {\n  width:20px;\n  padding: 0 5px;\n}\n\n.user-flexbox {\n  color: rgb(105, 91, 74);\n  display: flex;\n  justify-content: flex-start;\n  align-items: flex-end;\n  padding: 15px;\n  margin: 10px;\n}\n\n.nav-text:hover,\nbutton:hover,\nli:hover {\n  cursor: pointer;\n}\n\n#errorMsg {\n  color: red;\n  font-size: 20px;\n  margin-left: 15px;\n}\n\n/* LOGIN PAGE */\n#logInView {\n  height: 600px;\n}\n\n#pageLogo {\n  height: 300px;\n  margin: 0 50px;\n}\n\n.login {\n  display: flex;\n  flex-direction: column;\n  justify-content: center;\n}\n\ninput {\n  text-align: center;\n  height: 40px;\n  width: 200px;\n  margin: 20px;\n  border: 2px solid #E6E6E6;\n  border-radius: 24px;\n  background-color: #FAFAF5;\n}\n\n#loginMsg {\n  margin-top: 0;\n  font-size: 1.75rem;\n}\n\nform {\n  display: flex;\n  justify-content: center;\n  align-items: center;\n}\n\n#loginBtn {\n  width: 100px;\n  height: 45px;\n  border: none;\n  border-radius: 24px;\n  background-color: #f5cac3;\n}\n\n/* DASHBOARD VIEW */\nmain {\n  display: flex;\n  justify-content: center;\n  padding: 10px 50px;\n  height: 100%;\n}\n\nh1 {\n  text-align: center;\n  font-size: 2rem;\n}\n\nh2 {\n  font-size: 1.3rem;\n}\n\n.bookings-display {\n  margin-bottom: 40px;\n  display: flex;\n}\n\n.card {\n  background: #FAFAF5;\n  border: 2px solid #E6E6E6;\n  border-radius: 24px;\n  margin: 20px;\n}\n\n.card-img {\n  width: 300px;\n  height: 200px;\n  border-top-right-radius: 24px;\n  border-top-left-radius: 24px;\n}\n\n.card-text-wrapper {\n  padding: 10px;\n}\n\n.card-past-text-wrapper {\n  padding: 5px;\n}\n\n/* BOOKINGS VIEW */\n#searchBtn {\n  width: 100px;\n  border: none;\n  border-radius: 24px;\n  background-color: #f5cac3;\n  padding: 12px;\n}\n\nul {\n  list-style: none;\n}\n\n.filter-flex {\n  display: flex;\n  justify-content: space-between;\n  min-width: 800px;\n}\n\n.filter-btn {\n  width: 150px;\n  padding: 10px;\n  border: 2px solid #E6E6E6;\n  border-radius: 24px;\n  background-color: #FAFAF5;\n  text-align: center;\n}\n\n.filter-selected {\n  width: 150px;\n  padding: 10px;\n  border: 2px solid #E6E6E6;\n  border-radius: 24px;\n  background-color: #f5cac3;\n  text-align: center;\n}\n\n.clear-btn {\n  background: #E6E6E6;\n  border-radius: 15px;\n  padding: 10px;\n}\n\n.card-container {\n  display: flex;\n  flex-wrap: wrap;\n  justify-content: center;\n}\n\n.card-booking-text {\n  margin: 5px;\n}\n\n.scroll {\n  width:800px;\n  height: 400px;\n  display: flex;\n  flex-wrap: nowrap;\n  overflow-x: scroll;\n  white-space: nowrap;\n}\n\n/* INDIVIDUAL BOOKINGS */\n#individualBookingView {\n  text-align: center;\n}\n\n.individual-booking {\n  display: flex;\n  width: 700px;\n  height: 550px;\n  padding: 0;\n}\n\n.single-img {\n  height: 550px;\n  max-width: 400px;\n  object-fit: cover;\n}\n\n.single-card-main-wrapper {\n  display: flex;\n  flex-direction: column;\n  align-items: center;\n  width: 300px;\n  padding-right: 5px;\n}\n\n.single-card-text-wrapper {\n  display: flex;\n  flex-direction: column;\n  font-size: 1.10rem;\n  align-items: center;\n  margin-top: 15px;\n  padding-bottom: 15px;\n}\n\n.small-img {\n  object-fit: cover;\n  padding-left: 5px;\n  max-width: 140px;\n}\n\n.small-img-wrapper {\n  display: flex;\n}\n\n.roomType {\n  text-align: center;\n  font-size: 1.4rem;\n}\n\n.confirmation-message {\n  font-size: 1.3rem;\n  margin-bottom: 9px;\n}\n.roomCost {\n  margin-bottom: 20px;\n}\n\n.bookBtn {\n  padding: 10px;\n  border: none;\n  border-radius: 24px;\n  background-color: #f5cac3;\n}\n\n.close {\n  padding: 5px;\n  border: none;\n  border-radius: 24px;\n  background-color: #dfdfdf;\n}\n\n.hidden {\n  display: none;\n}", "",{"version":3,"sources":["webpack://./src/css/styles.css"],"names":[],"mappings":"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","sourcesContent":["html {\n  height: 100%;\n}\n\nbody {\n  background-color: #f8f2e9;\n  margin: 0;\n  height: 100%;\n  font-family: 'Raleway', sans-serif;\n}\n\nnav {\n  background-color: white;\n  height: 70px;\n  margin: 0;\n  color: black;\n  font-size: .75rem;\n  display: flex;\n  justify-content: space-between;\n}\n\n.nav-flexbox {\n  height: 70px;\n  display: flex;\n  align-items: flex-end;\n}\n\n.icon-flexbox {\n  display: flex;\n  justify-content: flex-start;\n  align-items: center;\n  padding: 5px;\n}\n\n.selected {\n  text-decoration: underline overline #f5cac3;\n  text-decoration-thickness: 5px;\n}\n\n.icon {\n  width:20px;\n  padding: 8px;\n}\n\n.icon-button {\n  background-color: #f5cac3;\n  border: none;\n  border-radius: 50%;\n  margin: 10px;\n}\n\n.userLogo {\n  width:20px;\n  padding: 0 5px;\n}\n\n.user-flexbox {\n  color: rgb(105, 91, 74);\n  display: flex;\n  justify-content: flex-start;\n  align-items: flex-end;\n  padding: 15px;\n  margin: 10px;\n}\n\n.nav-text:hover,\nbutton:hover,\nli:hover {\n  cursor: pointer;\n}\n\n#errorMsg {\n  color: red;\n  font-size: 20px;\n  margin-left: 15px;\n}\n\n/* LOGIN PAGE */\n#logInView {\n  height: 600px;\n}\n\n#pageLogo {\n  height: 300px;\n  margin: 0 50px;\n}\n\n.login {\n  display: flex;\n  flex-direction: column;\n  justify-content: center;\n}\n\ninput {\n  text-align: center;\n  height: 40px;\n  width: 200px;\n  margin: 20px;\n  border: 2px solid #E6E6E6;\n  border-radius: 24px;\n  background-color: #FAFAF5;\n}\n\n#loginMsg {\n  margin-top: 0;\n  font-size: 1.75rem;\n}\n\nform {\n  display: flex;\n  justify-content: center;\n  align-items: center;\n}\n\n#loginBtn {\n  width: 100px;\n  height: 45px;\n  border: none;\n  border-radius: 24px;\n  background-color: #f5cac3;\n}\n\n/* DASHBOARD VIEW */\nmain {\n  display: flex;\n  justify-content: center;\n  padding: 10px 50px;\n  height: 100%;\n}\n\nh1 {\n  text-align: center;\n  font-size: 2rem;\n}\n\nh2 {\n  font-size: 1.3rem;\n}\n\n.bookings-display {\n  margin-bottom: 40px;\n  display: flex;\n}\n\n.card {\n  background: #FAFAF5;\n  border: 2px solid #E6E6E6;\n  border-radius: 24px;\n  margin: 20px;\n}\n\n.card-img {\n  width: 300px;\n  height: 200px;\n  border-top-right-radius: 24px;\n  border-top-left-radius: 24px;\n}\n\n.card-text-wrapper {\n  padding: 10px;\n}\n\n.card-past-text-wrapper {\n  padding: 5px;\n}\n\n/* BOOKINGS VIEW */\n#searchBtn {\n  width: 100px;\n  border: none;\n  border-radius: 24px;\n  background-color: #f5cac3;\n  padding: 12px;\n}\n\nul {\n  list-style: none;\n}\n\n.filter-flex {\n  display: flex;\n  justify-content: space-between;\n  min-width: 800px;\n}\n\n.filter-btn {\n  width: 150px;\n  padding: 10px;\n  border: 2px solid #E6E6E6;\n  border-radius: 24px;\n  background-color: #FAFAF5;\n  text-align: center;\n}\n\n.filter-selected {\n  width: 150px;\n  padding: 10px;\n  border: 2px solid #E6E6E6;\n  border-radius: 24px;\n  background-color: #f5cac3;\n  text-align: center;\n}\n\n.clear-btn {\n  background: #E6E6E6;\n  border-radius: 15px;\n  padding: 10px;\n}\n\n.card-container {\n  display: flex;\n  flex-wrap: wrap;\n  justify-content: center;\n}\n\n.card-booking-text {\n  margin: 5px;\n}\n\n.scroll {\n  width:800px;\n  height: 400px;\n  display: flex;\n  flex-wrap: nowrap;\n  overflow-x: scroll;\n  white-space: nowrap;\n}\n\n/* INDIVIDUAL BOOKINGS */\n#individualBookingView {\n  text-align: center;\n}\n\n.individual-booking {\n  display: flex;\n  width: 700px;\n  height: 550px;\n  padding: 0;\n}\n\n.single-img {\n  height: 550px;\n  max-width: 400px;\n  object-fit: cover;\n}\n\n.single-card-main-wrapper {\n  display: flex;\n  flex-direction: column;\n  align-items: center;\n  width: 300px;\n  padding-right: 5px;\n}\n\n.single-card-text-wrapper {\n  display: flex;\n  flex-direction: column;\n  font-size: 1.10rem;\n  align-items: center;\n  margin-top: 15px;\n  padding-bottom: 15px;\n}\n\n.small-img {\n  object-fit: cover;\n  padding-left: 5px;\n  max-width: 140px;\n}\n\n.small-img-wrapper {\n  display: flex;\n}\n\n.roomType {\n  text-align: center;\n  font-size: 1.4rem;\n}\n\n.confirmation-message {\n  font-size: 1.3rem;\n  margin-bottom: 9px;\n}\n.roomCost {\n  margin-bottom: 20px;\n}\n\n.bookBtn {\n  padding: 10px;\n  border: none;\n  border-radius: 24px;\n  background-color: #f5cac3;\n}\n\n.close {\n  padding: 5px;\n  border: none;\n  border-radius: 24px;\n  background-color: #dfdfdf;\n}\n\n.hidden {\n  display: none;\n}"],"sourceRoot":""}]);
+___CSS_LOADER_EXPORT___.push([module.id, "html {\n  height: 100%;\n}\n\nbody {\n  background-color: #f8f2e9;\n  margin: 0;\n  height: 100%;\n  font-family: 'Raleway', sans-serif;\n}\n\nnav {\n  background-color: white;\n  height: 70px;\n  margin: 0;\n  color: black;\n  font-size: .75rem;\n  display: flex;\n  justify-content: space-between;\n}\n\n.nav-flexbox {\n  height: 70px;\n  display: flex;\n  align-items: flex-end;\n}\n\n.icon-flexbox {\n  display: flex;\n  justify-content: flex-start;\n  align-items: center;\n  padding: 5px;\n}\n\n.selected {\n  text-decoration: underline overline #f5cac3;\n  text-decoration-thickness: 5px;\n}\n\n.icon {\n  width:20px;\n  padding: 8px;\n}\n\n.icon-button {\n  background-color: #f5cac3;\n  border: none;\n  border-radius: 50%;\n  margin: 10px;\n}\n\n.userLogo {\n  width:20px;\n  padding: 0 5px;\n}\n\n.user-flexbox {\n  color: rgb(105, 91, 74);\n  display: flex;\n  justify-content: flex-start;\n  align-items: flex-end;\n  padding: 15px;\n  margin: 10px;\n}\n\n.nav-text:hover,\nbutton:hover,\nli:hover {\n  cursor: pointer;\n}\n\n#errorMsg {\n  color: red;\n  font-size: 20px;\n  margin-left: 15px;\n}\n\n/* LOGIN PAGE */\n#logInView {\n  height: 600px;\n}\n\n#pageLogo {\n  height: 300px;\n  margin: 0 50px;\n}\n\n.login {\n  display: flex;\n  flex-direction: column;\n  justify-content: center;\n}\n\ninput {\n  text-align: center;\n  height: 40px;\n  width: 200px;\n  margin: 20px;\n  border: 2px solid #E6E6E6;\n  border-radius: 24px;\n  background-color: #FAFAF5;\n}\n\n#loginMsg {\n  margin-top: 0;\n  font-size: 1.75rem;\n}\n\nform {\n  display: flex;\n  justify-content: center;\n  align-items: center;\n}\n\n#loginBtn {\n  width: 100px;\n  height: 45px;\n  border: none;\n  border-radius: 24px;\n  background-color: #f5cac3;\n}\n\n/* DASHBOARD VIEW */\nmain {\n  display: flex;\n  justify-content: center;\n  padding: 10px 50px;\n  height: 100%;\n}\n\nh1 {\n  text-align: center;\n  font-size: 2rem;\n}\n\nh2 {\n  font-size: 1.3rem;\n}\n\n.bookings-display {\n  margin-bottom: 40px;\n  display: flex;\n}\n\n.card {\n  background: #FAFAF5;\n  border: 2px solid #E6E6E6;\n  border-radius: 24px;\n  margin: 20px;\n}\n\n.card-img {\n  width: 300px;\n  height: 200px;\n  border-top-right-radius: 24px;\n  border-top-left-radius: 24px;\n}\n\n.card-text-wrapper {\n  padding: 10px;\n}\n\n.card-past-text-wrapper {\n  padding: 5px;\n}\n\n/* BOOKINGS VIEW */\n#searchBtn {\n  width: 100px;\n  border: none;\n  border-radius: 24px;\n  background-color: #f5cac3;\n  padding: 12px;\n}\n\nul {\n  list-style: none;\n}\n\n.filter-flex {\n  display: flex;\n  justify-content: space-between;\n}\n\n.filter-btn {\n  width: 150px;\n  padding: 10px;\n  border: 2px solid #E6E6E6;\n  border-radius: 24px;\n  background-color: #FAFAF5;\n  text-align: center;\n}\n\n.filter-selected {\n  width: 150px;\n  padding: 10px;\n  border: 2px solid #E6E6E6;\n  border-radius: 24px;\n  background-color: #f5cac3;\n  text-align: center;\n}\n\n.clear-btn {\n  background: #E6E6E6;\n  border-radius: 15px;\n  padding: 10px;\n}\n\n.card-container {\n  display: flex;\n  flex-wrap: wrap;\n  justify-content: center;\n}\n\n.card-booking-text {\n  margin: 5px;\n}\n\n.scroll {\n  width:800px;\n  height: 400px;\n  display: flex;\n  flex-wrap: nowrap;\n  overflow-x: scroll;\n  white-space: nowrap;\n}\n\n/* INDIVIDUAL BOOKINGS */\n#individualBookingView {\n  text-align: center;\n}\n\n.individual-booking {\n  display: flex;\n  width: 700px;\n  height: 550px;\n  padding: 0;\n}\n\n.single-img {\n  height: 550px;\n  max-width: 400px;\n  object-fit: cover;\n}\n\n.single-card-main-wrapper {\n  display: flex;\n  flex-direction: column;\n  align-items: center;\n  width: 300px;\n  padding-right: 5px;\n}\n\n.single-card-text-wrapper {\n  display: flex;\n  flex-direction: column;\n  font-size: 1.10rem;\n  align-items: center;\n  margin-top: 15px;\n  padding-bottom: 15px;\n}\n\n.small-img {\n  object-fit: cover;\n  padding-left: 5px;\n  max-width: 140px;\n}\n\n.small-img-wrapper {\n  display: flex;\n}\n\n.roomType {\n  text-align: center;\n  font-size: 1.4rem;\n}\n\n.confirmation-message {\n  font-size: 1.3rem;\n  margin-bottom: 9px;\n}\n.roomCost {\n  margin-bottom: 20px;\n}\n\n.bookBtn {\n  padding: 10px;\n  border: none;\n  border-radius: 24px;\n  background-color: #f5cac3;\n}\n\n.close {\n  padding: 5px;\n  border: none;\n  border-radius: 24px;\n  background-color: #dfdfdf;\n}\n\n.hidden {\n  display: none;\n}\n\n@media (max-width: 600px) {\n  #pageLogo {\n    width: 300px;\n    object-fit: cover;\n    padding: 10px;\n  }\n  \n  .login {\n    display: flex;\n    flex-direction: column;\n    justify-content: center;\n    align-items: center;\n    width: 300px;\n    padding: 20px;\n  }\n\n  #loginMsg {\n    font-size: 1.3rem;\n  }\n\n  input {\n    text-align: center;\n    height: 40px;\n    width: 100px;\n    margin: 5px;\n    border: 2px solid #E6E6E6;\n    border-radius: 24px;\n    background-color: #FAFAF5;\n  }\n\n  nav {\n    width: 100%;\n    margin: 0;\n  }\n\n  #welcomeMsg {\n    font-size: 1.3rem;\n  }\n\n  h2 {\n    font-size: 1rem;\n    margin-left: 40px;\n  }\n\n  #totalSpent {\n    margin-left: 40px;\n  }\n\n  .scroll {\n    width: 400px;\n    height: 400px;\n    display: flex;\n    flex-wrap: nowrap;\n    overflow-x: scroll;\n    white-space: nowrap;\n  }\n\n  #newBookingsView {\n    width: 100%;\n  }\n\n  .filter-flex {\n    display: flex;\n    flex-wrap: wrap;\n    max-width: 400px;\n    min-width: none;\n    justify-content: center;\n  }\n\n  .filter-btn, .clear-btn {\n    width: 70px;\n    font-size: .7rem;\n    padding: 5px;\n  }\n\n  .hidden {\n    display: none;\n  }\n}", "",{"version":3,"sources":["webpack://./src/css/styles.css"],"names":[],"mappings":"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","sourcesContent":["html {\n  height: 100%;\n}\n\nbody {\n  background-color: #f8f2e9;\n  margin: 0;\n  height: 100%;\n  font-family: 'Raleway', sans-serif;\n}\n\nnav {\n  background-color: white;\n  height: 70px;\n  margin: 0;\n  color: black;\n  font-size: .75rem;\n  display: flex;\n  justify-content: space-between;\n}\n\n.nav-flexbox {\n  height: 70px;\n  display: flex;\n  align-items: flex-end;\n}\n\n.icon-flexbox {\n  display: flex;\n  justify-content: flex-start;\n  align-items: center;\n  padding: 5px;\n}\n\n.selected {\n  text-decoration: underline overline #f5cac3;\n  text-decoration-thickness: 5px;\n}\n\n.icon {\n  width:20px;\n  padding: 8px;\n}\n\n.icon-button {\n  background-color: #f5cac3;\n  border: none;\n  border-radius: 50%;\n  margin: 10px;\n}\n\n.userLogo {\n  width:20px;\n  padding: 0 5px;\n}\n\n.user-flexbox {\n  color: rgb(105, 91, 74);\n  display: flex;\n  justify-content: flex-start;\n  align-items: flex-end;\n  padding: 15px;\n  margin: 10px;\n}\n\n.nav-text:hover,\nbutton:hover,\nli:hover {\n  cursor: pointer;\n}\n\n#errorMsg {\n  color: red;\n  font-size: 20px;\n  margin-left: 15px;\n}\n\n/* LOGIN PAGE */\n#logInView {\n  height: 600px;\n}\n\n#pageLogo {\n  height: 300px;\n  margin: 0 50px;\n}\n\n.login {\n  display: flex;\n  flex-direction: column;\n  justify-content: center;\n}\n\ninput {\n  text-align: center;\n  height: 40px;\n  width: 200px;\n  margin: 20px;\n  border: 2px solid #E6E6E6;\n  border-radius: 24px;\n  background-color: #FAFAF5;\n}\n\n#loginMsg {\n  margin-top: 0;\n  font-size: 1.75rem;\n}\n\nform {\n  display: flex;\n  justify-content: center;\n  align-items: center;\n}\n\n#loginBtn {\n  width: 100px;\n  height: 45px;\n  border: none;\n  border-radius: 24px;\n  background-color: #f5cac3;\n}\n\n/* DASHBOARD VIEW */\nmain {\n  display: flex;\n  justify-content: center;\n  padding: 10px 50px;\n  height: 100%;\n}\n\nh1 {\n  text-align: center;\n  font-size: 2rem;\n}\n\nh2 {\n  font-size: 1.3rem;\n}\n\n.bookings-display {\n  margin-bottom: 40px;\n  display: flex;\n}\n\n.card {\n  background: #FAFAF5;\n  border: 2px solid #E6E6E6;\n  border-radius: 24px;\n  margin: 20px;\n}\n\n.card-img {\n  width: 300px;\n  height: 200px;\n  border-top-right-radius: 24px;\n  border-top-left-radius: 24px;\n}\n\n.card-text-wrapper {\n  padding: 10px;\n}\n\n.card-past-text-wrapper {\n  padding: 5px;\n}\n\n/* BOOKINGS VIEW */\n#searchBtn {\n  width: 100px;\n  border: none;\n  border-radius: 24px;\n  background-color: #f5cac3;\n  padding: 12px;\n}\n\nul {\n  list-style: none;\n}\n\n.filter-flex {\n  display: flex;\n  justify-content: space-between;\n}\n\n.filter-btn {\n  width: 150px;\n  padding: 10px;\n  border: 2px solid #E6E6E6;\n  border-radius: 24px;\n  background-color: #FAFAF5;\n  text-align: center;\n}\n\n.filter-selected {\n  width: 150px;\n  padding: 10px;\n  border: 2px solid #E6E6E6;\n  border-radius: 24px;\n  background-color: #f5cac3;\n  text-align: center;\n}\n\n.clear-btn {\n  background: #E6E6E6;\n  border-radius: 15px;\n  padding: 10px;\n}\n\n.card-container {\n  display: flex;\n  flex-wrap: wrap;\n  justify-content: center;\n}\n\n.card-booking-text {\n  margin: 5px;\n}\n\n.scroll {\n  width:800px;\n  height: 400px;\n  display: flex;\n  flex-wrap: nowrap;\n  overflow-x: scroll;\n  white-space: nowrap;\n}\n\n/* INDIVIDUAL BOOKINGS */\n#individualBookingView {\n  text-align: center;\n}\n\n.individual-booking {\n  display: flex;\n  width: 700px;\n  height: 550px;\n  padding: 0;\n}\n\n.single-img {\n  height: 550px;\n  max-width: 400px;\n  object-fit: cover;\n}\n\n.single-card-main-wrapper {\n  display: flex;\n  flex-direction: column;\n  align-items: center;\n  width: 300px;\n  padding-right: 5px;\n}\n\n.single-card-text-wrapper {\n  display: flex;\n  flex-direction: column;\n  font-size: 1.10rem;\n  align-items: center;\n  margin-top: 15px;\n  padding-bottom: 15px;\n}\n\n.small-img {\n  object-fit: cover;\n  padding-left: 5px;\n  max-width: 140px;\n}\n\n.small-img-wrapper {\n  display: flex;\n}\n\n.roomType {\n  text-align: center;\n  font-size: 1.4rem;\n}\n\n.confirmation-message {\n  font-size: 1.3rem;\n  margin-bottom: 9px;\n}\n.roomCost {\n  margin-bottom: 20px;\n}\n\n.bookBtn {\n  padding: 10px;\n  border: none;\n  border-radius: 24px;\n  background-color: #f5cac3;\n}\n\n.close {\n  padding: 5px;\n  border: none;\n  border-radius: 24px;\n  background-color: #dfdfdf;\n}\n\n.hidden {\n  display: none;\n}\n\n@media (max-width: 600px) {\n  #pageLogo {\n    width: 300px;\n    object-fit: cover;\n    padding: 10px;\n  }\n  \n  .login {\n    display: flex;\n    flex-direction: column;\n    justify-content: center;\n    align-items: center;\n    width: 300px;\n    padding: 20px;\n  }\n\n  #loginMsg {\n    font-size: 1.3rem;\n  }\n\n  input {\n    text-align: center;\n    height: 40px;\n    width: 100px;\n    margin: 5px;\n    border: 2px solid #E6E6E6;\n    border-radius: 24px;\n    background-color: #FAFAF5;\n  }\n\n  nav {\n    width: 100%;\n    margin: 0;\n  }\n\n  #welcomeMsg {\n    font-size: 1.3rem;\n  }\n\n  h2 {\n    font-size: 1rem;\n    margin-left: 40px;\n  }\n\n  #totalSpent {\n    margin-left: 40px;\n  }\n\n  .scroll {\n    width: 400px;\n    height: 400px;\n    display: flex;\n    flex-wrap: nowrap;\n    overflow-x: scroll;\n    white-space: nowrap;\n  }\n\n  #newBookingsView {\n    width: 100%;\n  }\n\n  .filter-flex {\n    display: flex;\n    flex-wrap: wrap;\n    max-width: 400px;\n    min-width: none;\n    justify-content: center;\n  }\n\n  .filter-btn, .clear-btn {\n    width: 70px;\n    font-size: .7rem;\n    padding: 5px;\n  }\n\n  .hidden {\n    display: none;\n  }\n}"],"sourceRoot":""}]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -842,6 +842,7 @@ const renderUserBookings = (bookings, view) => {
 
 const checkCurrentBookings = (userCurrentBookings, currentBookingsContainer, currentUser) => {
   if(Array.isArray(userCurrentBookings)) {
+    _scripts__WEBPACK_IMPORTED_MODULE_2__.currentBookingsMsg.innerText = '';
     renderUserBookings(userCurrentBookings, currentBookingsContainer);
   } else {
     _scripts__WEBPACK_IMPORTED_MODULE_2__.currentBookingsMsg.innerText = (0,_user_bookings__WEBPACK_IMPORTED_MODULE_1__.getCurrentBookings)(currentUser);
@@ -1153,7 +1154,7 @@ const setDay = (today) => {
   if (today.getDate().toString().length < 2) {
     return `0${today.getDate()}`;
   } else {
-    return today.getDate();
+    return today.getDate().toString();
   }
 }
 
@@ -1180,30 +1181,30 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "postNewBooking": () => (/* binding */ postNewBooking)
 /* harmony export */ });
 const getBookings = () => {
-  return fetch('http://localhost:3001/api/v1/bookings')
+  return fetch('https://overlook-api-nu.vercel.app/api/v1/bookings')
   .then(res => res.json())
   .catch((err) => {
     console.log(err)
-    return document.querySelector('#errorMsg').innerText = `Error please try refreshing page`;
+    return document.querySelector('#errorMsg').innerText = `Error please try refreshing page (${err})`;
   });
 }
 
 const getRooms = () => {
-  return fetch('http://localhost:3001/api/v1/rooms')
+  return fetch('https://overlook-api-nu.vercel.app/api/v1/rooms')
   .then(res => res.json())
   .catch((err) => {
     console.log(err)
-    return document.querySelector('#errorMsg').innerText = `Error please try refreshing page`;
+    return document.querySelector('#errorMsg').innerText = `Error please try refreshing page (${err})`;
   });
 }
 
 const getCustomerInfo = (id) => {
-  return fetch(`http://localhost:3001/api/v1/customers/${id}`)
+  return fetch(`https://overlook-api-nu.vercel.app/api/v1/customers/${id}`)
   .then((res) => res.json())
   .then((data) => data)
   .catch((err) => {
     console.log(err)
-    return document.querySelector('#errorMsg').innerText = `Error please try refreshing page`;
+    return document.querySelector('#errorMsg').innerText = `Error please try refreshing page (${err})`;
   });
 }
 
@@ -1216,7 +1217,7 @@ const createPostData = (userID, date, roomNumber) => {
 }
 
 const postNewBooking = (data) => {
-  return fetch('http://localhost:3001/api/v1/bookings', {
+  return fetch('https://overlook-api-nu.vercel.app/api/v1/bookings', {
     method: 'POST',
     body: JSON.stringify(data),
     headers: {
@@ -1227,7 +1228,7 @@ const postNewBooking = (data) => {
     .then((json) => json)
     .catch((err) => {
       console.log(err);
-      return document.querySelector('#errorMsg').innerText = `Error please try refreshing page`;
+      return document.querySelector('#errorMsg').innerText = `Error please try refreshing page (${err})`;
     });
 }
 
@@ -1244,10 +1245,19 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "checkCredentials": () => (/* binding */ checkCredentials),
 /* harmony export */   "matchPassword": () => (/* binding */ matchPassword),
 /* harmony export */   "matchUser": () => (/* binding */ matchUser),
-/* harmony export */   "getUserId": () => (/* binding */ getUserId)
+/* harmony export */   "getUserId": () => (/* binding */ getUserId),
+/* harmony export */   "userLogins": () => (/* binding */ userLogins)
 /* harmony export */ });
-/* harmony import */ var _data_userLogins__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(24);
-
+const userLogins = (num) => {
+  if (num) {
+    return {
+      [`customer${num}`]: {
+        username: `customer${num}`,
+        password: 'overlook2021'
+      },
+    }
+  }
+}
 
 const checkCredentials = (username, password) => {
   if(username && password) {
@@ -1258,47 +1268,28 @@ const checkCredentials = (username, password) => {
 }
 
 const matchUser = (username, password) => {
-  if (_data_userLogins__WEBPACK_IMPORTED_MODULE_0__.userLogins[username]) {
-  return matchPassword(username, password);
+  const customerId = getUserId(username);
+
+  if (customerId > 0 && customerId <= 50) {
+  return matchPassword(customerId, password);
   } else {
     return 'Username not found';
   };
 }
 
-const matchPassword = (username, password) => {
-  if (password === _data_userLogins__WEBPACK_IMPORTED_MODULE_0__.userLogins[username].password) {
+const matchPassword = (id, password) => {
+  if (password === userLogins(id)[`customer${id}`].password) {
     return true;
   };
 }
 
 const getUserId = (username) => {
-  return _data_userLogins__WEBPACK_IMPORTED_MODULE_0__.userLogins[username].id;
-}
-
-
-
-
-
-/***/ }),
-/* 24 */
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "userLogins": () => (/* binding */ userLogins)
-/* harmony export */ });
-const userLogins = {
-  customer50: {
-    username: 'customer50',
-    password: 'overlook2021',
-    id: 50,
-  },
-  q: {
-    username: 'q',
-    password: '1',
-    id: 50,
+  if (username.length === 10 || username.length === 9) {
+    return parseInt(username.split('customer')[1]);
   }
 }
+
+
 
 
 

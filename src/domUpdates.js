@@ -153,7 +153,7 @@ const renderFilterButtons = (e) => {
   clearView([filterButtons]);
   filterButtons.innerHTML += `
   <div class="filter-flex">
-    <label for="filterButtons">Filter By Room Type:</label>
+    <label class="filter-label" for="filterButtons">Filter By Room Type:</label>
     <li tabIndex='0' class="clear-btn">Clear Filters</li>
     <li tabIndex='0' role="button" class="filter-btn ${e.target.id === 'singleroom' ? 'filter-selected' : ''}" id="singleroom">Single Room</li>
     <li tabIndex='0' role="button" class="filter-btn ${e.target.id === 'juniorsuite' ? 'filter-selected' : ''}"id="juniorsuite">Junior Suite</li>
